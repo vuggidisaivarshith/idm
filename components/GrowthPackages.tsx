@@ -2,12 +2,16 @@
 
 import React from 'react';
 import { MONTHLY_PACKAGES, getWhatsAppUrl } from '@/lib/constants';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer from '@/components/animations/StaggerContainer';
+import { motion } from 'framer-motion';
+import { fadeUpVariants } from '@/lib/animations/variants';
 
 export default function GrowthPackages() {
   return (
     <section id="pricing" className="py-24 bg-white text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-        <div className="max-w-3xl mb-16">
+        <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4">
             Transparent Monthly Retainers
           </div>
@@ -20,13 +24,14 @@ export default function GrowthPackages() {
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             Select the growth package engineered for your business stage. Clear monthly pricing with direct WhatsApp communication and active agency support.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 4 Plans Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {MONTHLY_PACKAGES.map((pkg) => (
-            <div
+            <motion.div
               key={pkg.id}
+              variants={fadeUpVariants}
               className={`aurora-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative card-3d-tilt ${
                 pkg.highlight
                   ? 'border-primarypurple/50 ring-2 ring-primarypurple/20 shadow-soft-lg scale-[1.02] bg-gradient-to-b from-sectionsoft/60 to-white'
@@ -93,9 +98,9 @@ export default function GrowthPackages() {
                   WhatsApp Enquiry &rarr;
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

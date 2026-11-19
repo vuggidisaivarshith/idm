@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
+import ScrollReveal from '@/components/animations/ScrollReveal';
 
 export default function ContactLocationSection() {
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Agency Details */}
-          <div className="lg:col-span-5 space-y-6">
+          <ScrollReveal variant="fade-right" className="lg:col-span-5 space-y-6">
             <div className="badge-aurora">
               Let&apos;s Talk Growth
             </div>
@@ -89,10 +90,11 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                 </a>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Marketing Consultation Form */}
-          <div className="lg:col-span-7 aurora-card p-8 sm:p-10 shadow-soft">
+          <ScrollReveal variant="fade-left" className="lg:col-span-7">
+            <div className="aurora-card p-8 sm:p-10 shadow-soft">
             <h3 className="text-2xl font-heading font-bold text-textprimary mb-1">
               Request Your Marketing Consultation
             </h3>
@@ -265,7 +267,8 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                 </div>
               </form>
             )}
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

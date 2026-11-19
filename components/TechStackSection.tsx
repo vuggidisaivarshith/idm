@@ -1,6 +1,10 @@
 'use client';
 
 import React from 'react';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer from '@/components/animations/StaggerContainer';
+import { motion } from 'framer-motion';
+import { fadeUpVariants } from '@/lib/animations/variants';
 
 const technologies = [
   { name: 'Next.js & React', category: 'Frontend', desc: 'High-speed, server-rendered and SEO-optimized web applications with sub-second loads.' },
@@ -17,7 +21,7 @@ export default function TechStackSection() {
   return (
     <section id="tech" className="py-24 bg-pagebg text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="max-w-3xl mb-16">
+        <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
             Engineering & Infrastructure
           </div>
@@ -30,13 +34,14 @@ export default function TechStackSection() {
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             We avoid slow page builders. We engineer lightweight, conversion-focused websites, robust mobile applications, and reliable business automation systems.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Tech Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {technologies.map((t) => (
-            <div
+            <motion.div
               key={t.name}
+              variants={fadeUpVariants}
               className="aurora-card p-6 card-3d-tilt group"
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block">
@@ -48,9 +53,9 @@ export default function TechStackSection() {
               <p className="text-xs text-textsecondary mt-2 leading-relaxed">
                 {t.desc}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

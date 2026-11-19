@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { getWhatsAppUrl } from '@/lib/constants';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer from '@/components/animations/StaggerContainer';
+import { motion } from 'framer-motion';
+import { fadeUpVariants } from '@/lib/animations/variants';
 
 interface ServiceItem {
   id: string;
@@ -261,7 +265,7 @@ export default function ServicesSection() {
     <section id="services" className="py-24 bg-white text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
-        <div className="max-w-3xl mb-16">
+        <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4">
             Interactive Capabilities
           </div>
@@ -274,13 +278,14 @@ export default function ServicesSection() {
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             From creative social media management to high-converting performance ads and intelligent business automation, we build cohesive digital growth engines for businesses.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 6 Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
-            <div
+            <motion.div
               key={service.id}
+              variants={fadeUpVariants}
               className="aurora-card p-7 flex flex-col justify-between group hover:border-primarypurple/40 relative card-3d-tilt"
             >
               <div>
@@ -329,9 +334,9 @@ export default function ServicesSection() {
                   Consult on WhatsApp &rarr;
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

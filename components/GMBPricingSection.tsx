@@ -2,12 +2,16 @@
 
 import React from 'react';
 import { GMB_SERVICES, getWhatsAppUrl } from '@/lib/constants';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import StaggerContainer from '@/components/animations/StaggerContainer';
+import { motion } from 'framer-motion';
+import { fadeUpVariants } from '@/lib/animations/variants';
 
 export default function GMBPricingSection() {
   return (
     <section id="gmb" className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="max-w-3xl mb-16">
+        <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
             Specialized GMB Services
           </div>
@@ -20,13 +24,14 @@ export default function GMBPricingSection() {
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             Protect and optimize your most valuable local acquisition asset. We provide structured compliance guidance, reinstatement support, and verified map setup at transparent rates.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* 4 GMB Packages Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {GMB_SERVICES.map((gmb) => (
-            <div
+            <motion.div
               key={gmb.id}
+              variants={fadeUpVariants}
               className={`aurora-card p-6 flex flex-col justify-between transition-all duration-300 relative card-3d-tilt ${
                 gmb.highlight
                   ? 'border-primarypurple/40 ring-2 ring-primarypurple/15 shadow-soft-lg scale-[1.02]'
@@ -73,9 +78,9 @@ export default function GMBPricingSection() {
                   {gmb.ctaText}
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

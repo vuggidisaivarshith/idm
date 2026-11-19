@@ -4,6 +4,8 @@ import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
 import SocialMediaShowcase from '@/components/SocialMediaShowcase';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import MagneticButton from '@/components/animations/MagneticButton';
 
 // Dynamic import with SSR false for Three.js 3D Canvas
 const TechCanvas = dynamic(() => import('@/components/TechCanvas'), {
@@ -28,56 +30,70 @@ export default function Hero() {
           {/* Left Column: Hero Copy & Actions */}
           <div className="lg:col-span-6 space-y-6">
             {/* Agency Positioning Badge */}
-            <div className="badge-aurora shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-primarypurple animate-pulse inline-block" />
-              <span>Glossy Aurora • Creative Marketing & Technology</span>
-            </div>
+            <ScrollReveal variant="fade-down" delay={0.1}>
+              <div className="badge-aurora shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-primarypurple animate-pulse inline-block" />
+                <span>Glossy Aurora • Creative Marketing & Technology</span>
+              </div>
+            </ScrollReveal>
 
             {/* Primary Headline */}
-            <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-heading font-extralight tracking-tight leading-[1.08] text-textprimary">
-              We Build Brands. <br />
-              <span className="font-extrabold text-gradient-aurora">
-                Create Demand. Drive Growth.
-              </span>
-            </h1>
+            <ScrollReveal variant="fade-up" delay={0.2}>
+              <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-heading font-extralight tracking-tight leading-[1.08] text-textprimary">
+                We Build Brands. <br />
+                <span className="font-extrabold text-gradient-aurora">
+                  Create Demand. Drive Growth.
+                </span>
+              </h1>
+            </ScrollReveal>
 
             {/* Supporting Copy */}
-            <p className="text-base sm:text-lg text-textsecondary max-w-xl font-normal leading-relaxed">
-              Creative marketing, powerful campaigns and intelligent technology to help ambitious businesses grow.
-            </p>
+            <ScrollReveal variant="fade-up" delay={0.3}>
+              <p className="text-base sm:text-lg text-textsecondary max-w-xl font-normal leading-relaxed">
+                Creative marketing, powerful campaigns and intelligent technology to help ambitious businesses grow.
+              </p>
+            </ScrollReveal>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
-                href="#contact"
-                className="btn-aurora-primary"
-              >
-                Get Your Growth Strategy
-              </a>
-              <a
-                href="/portfolio"
-                className="btn-aurora-secondary"
-              >
-                Explore Our Work
-              </a>
-              <a
-                href={getWhatsAppUrl('Hi IDM Smart Tech, I would like to get a growth strategy for my business.')}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primarypurple hover:text-royalblue transition-colors px-2 py-3"
-              >
-                Chat on WhatsApp &rarr;
-              </a>
-            </div>
+            <ScrollReveal variant="fade-up" delay={0.4}>
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <MagneticButton maxDistance={6}>
+                  <a
+                    href="#contact"
+                    className="btn-aurora-primary"
+                  >
+                    Get Your Growth Strategy
+                  </a>
+                </MagneticButton>
+                <MagneticButton maxDistance={6}>
+                  <a
+                    href="/portfolio"
+                    className="btn-aurora-secondary"
+                  >
+                    Explore Our Work
+                  </a>
+                </MagneticButton>
+                <a
+                  href={getWhatsAppUrl('Hi IDM Smart Tech, I would like to get a growth strategy for my business.')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primarypurple hover:text-royalblue transition-colors px-2 py-3"
+                >
+                  Chat on WhatsApp &rarr;
+                </a>
+              </div>
+            </ScrollReveal>
 
             {/* Specialized Channels Badge Strip */}
-            <div className="pt-6 border-t border-bordercolor/80 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-textsecondary">
-              <span className="font-semibold text-textprimary uppercase tracking-wider text-[11px]">Core Channels:</span>
-              <span className="flex items-center gap-1.5 font-medium">📸 Instagram Growth</span>
-              <span className="flex items-center gap-1.5 font-medium">🎬 High-Hook Reels</span>
-              <span className="flex items-center gap-1.5 font-medium">🎯 Meta & Google Ads</span>
-              <span className="flex items-center gap-1.5 font-medium">📍 Google Maps Local</span>
-            </div>
+            <ScrollReveal variant="fade-up" delay={0.5}>
+              <div className="pt-6 border-t border-bordercolor/80 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-textsecondary">
+                <span className="font-semibold text-textprimary uppercase tracking-wider text-[11px]">Core Channels:</span>
+                <span className="flex items-center gap-1.5 font-medium">📸 Instagram Growth</span>
+                <span className="flex items-center gap-1.5 font-medium">🎬 High-Hook Reels</span>
+                <span className="flex items-center gap-1.5 font-medium">🎯 Meta & Google Ads</span>
+                <span className="flex items-center gap-1.5 font-medium">📍 Google Maps Local</span>
+              </div>
+            </ScrollReveal>
           </div>
 
           {/* Right Column: Layered Cinematic 3D Scene + Social Media Showcase */}
@@ -90,17 +106,19 @@ export default function Hero() {
             </div>
 
             {/* Overlay Layer: Interactive 3D Social Media Showcase Cards */}
-            <div className="relative z-20 w-full pointer-events-auto">
+            <ScrollReveal variant="scale" delay={0.3} className="relative z-20 w-full pointer-events-auto">
               <SocialMediaShowcase />
-            </div>
+            </ScrollReveal>
 
             {/* Bottom Floating Agency Location Pill */}
-            <div className="hidden sm:flex absolute -bottom-3 left-6 z-30 aurora-card px-3.5 py-1.5 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-brandmint inline-block" />
-              <span className="text-[11px] font-semibold text-textprimary">
-                📍 {COMPANY_INFO.city}
-              </span>
-            </div>
+            <ScrollReveal variant="fade-up" delay={0.5} className="hidden sm:flex absolute -bottom-3 left-6 z-30">
+              <div className="aurora-card px-3.5 py-1.5 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-2 flex">
+                <span className="w-2 h-2 rounded-full bg-brandmint inline-block" />
+                <span className="text-[11px] font-semibold text-textprimary">
+                  📍 {COMPANY_INFO.city}
+                </span>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

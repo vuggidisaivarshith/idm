@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
+import ScrollReveal from '@/components/animations/ScrollReveal';
+import MagneticButton from '@/components/animations/MagneticButton';
 
 const platforms = [
   { name: 'Instagram', label: 'Reels, Carousels & Grid Strategy', icon: '📸' },
@@ -16,11 +18,11 @@ export default function SocialProofSection() {
     <section className="py-20 bg-white text-textprimary border-t border-bordercolor relative">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         {/* Platform Ecosystem Strip */}
-        <div className="text-center max-w-xl mx-auto mb-10">
+        <ScrollReveal variant="fade-up" className="text-center max-w-xl mx-auto mb-10">
           <p className="text-xs uppercase font-bold tracking-widest text-textsecondary">
             Platforms & Growth Channels We Specialize In
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
           {platforms.map((p) => (
@@ -38,36 +40,42 @@ export default function SocialProofSection() {
         </div>
 
         {/* Agency Consultation Card (Genuine & Transparent) */}
-        <div className="aurora-card p-8 sm:p-10 bg-sectionsoft/40 border border-primarypurple/20 text-center max-w-3xl mx-auto shadow-sm">
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-primarypurple/20 text-[11px] font-bold text-primarypurple mb-4">
-            Direct Agency Partnership
+        <ScrollReveal variant="scale">
+          <div className="aurora-card p-8 sm:p-10 bg-sectionsoft/40 border border-primarypurple/20 text-center max-w-3xl mx-auto shadow-sm">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-primarypurple/20 text-[11px] font-bold text-primarypurple mb-4">
+              Direct Agency Partnership
+            </div>
+
+            <h3 className="text-xl sm:text-2xl font-heading font-bold text-textprimary mb-3">
+              Looking for a Tailored Marketing Strategy?
+            </h3>
+
+            <p className="text-sm text-textsecondary max-w-xl mx-auto leading-relaxed mb-6">
+              Every business has unique goals and target audiences. Connect directly with our agency team in Shamshabad, Hyderabad to review your existing digital footprint and explore growth opportunities.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <MagneticButton maxDistance={6}>
+                <a
+                  href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule an introductory marketing consultation for my business.')}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-aurora-primary py-2.5 px-6 text-xs"
+                >
+                  Chat on WhatsApp &rarr;
+                </a>
+              </MagneticButton>
+              <MagneticButton maxDistance={6}>
+                <a
+                  href={`tel:${COMPANY_INFO.phoneClean}`}
+                  className="btn-aurora-secondary py-2.5 px-6 text-xs"
+                >
+                  Call {COMPANY_INFO.phone}
+                </a>
+              </MagneticButton>
+            </div>
           </div>
-
-          <h3 className="text-xl sm:text-2xl font-heading font-bold text-textprimary mb-3">
-            Looking for a Tailored Marketing Strategy?
-          </h3>
-
-          <p className="text-sm text-textsecondary max-w-xl mx-auto leading-relaxed mb-6">
-            Every business has unique goals and target audiences. Connect directly with our agency team in Shamshabad, Hyderabad to review your existing digital footprint and explore growth opportunities.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule an introductory marketing consultation for my business.')}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-aurora-primary py-2.5 px-6 text-xs"
-            >
-              Chat on WhatsApp &rarr;
-            </a>
-            <a
-              href={`tel:${COMPANY_INFO.phoneClean}`}
-              className="btn-aurora-secondary py-2.5 px-6 text-xs"
-            >
-              Call {COMPANY_INFO.phone}
-            </a>
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
