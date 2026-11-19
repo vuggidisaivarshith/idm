@@ -48,10 +48,13 @@ export const metadata: Metadata = {
   },
 };
 
+import SmoothScroll from '@/components/SmoothScroll';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}>
       <body className="bg-pagebg text-textprimary antialiased min-h-screen flex flex-col font-body">
+        <SmoothScroll />
         {children}
       </body>
     </html>

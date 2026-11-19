@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PORTFOLIO_CATEGORIES, PORTFOLIO_ITEMS, PortfolioItem } from '@/data/portfolio';
 import { getWhatsAppUrl } from '@/lib/constants';
 
@@ -89,16 +90,23 @@ export default function PortfolioSection() {
         </div>
 
         {/* Horizontal Scrolling Track on Desktop / Grid on Mobile */}
-        <div
+        <motion.div
+          layout
           ref={scrollContainerRef}
           className="flex lg:overflow-x-auto lg:pb-8 lg:snap-x lg:snap-mandatory gap-6 no-scrollbar flex-col lg:flex-row"
         >
-          {filteredItems.map((item) => (
-            <div
-              key={item.id}
-              className="lg:min-w-[370px] lg:max-w-[390px] w-full lg:snap-start aurora-card overflow-hidden flex flex-col justify-between group relative card-3d-tilt"
-            >
-              <div>
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((item) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                key={item.id}
+                className="lg:min-w-[370px] lg:max-w-[390px] w-full lg:snap-start aurora-card overflow-hidden flex flex-col justify-between group relative card-3d-tilt"
+              >
+                <div>
                 {/* Visual Image Container with Zoom & Gradient Reveal */}
                 <div className="relative h-60 w-full overflow-hidden bg-slate-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -158,14 +166,15 @@ export default function PortfolioSection() {
                   href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to see recent case studies and work samples for: ${item.title}.`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-pagebg border border-bordercolor text-textprimary hover:bg-gradient-to-r hover:from-primarypurple hover:to-royalblue hover:text-white hover:border-transparent transition-all shadow-2xs"
+                  className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-pagebg border border-bordercolor text-textprimary hover:bg-gradient-to-r hover:from-primarypurple hover:to-royalblue hover:text-white hover:border-transparent transition-all duration-300 shadow-2xs"
                 >
                   Request Samples on WhatsApp &rarr;
                 </a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

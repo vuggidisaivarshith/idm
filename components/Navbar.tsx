@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
 import { SERVICES_LIST } from '@/data/services';
 
@@ -131,38 +132,44 @@ export default function Navbar() {
             </button>
 
             {/* Dropdown Menu Panel */}
-            {servicesDropdownOpen && (
-              <div
-                onMouseLeave={() => setServicesDropdownOpen(false)}
-                className="absolute top-full left-0 mt-2 w-[540px] p-4 bg-white rounded-2xl border border-bordercolor shadow-card-hover grid grid-cols-2 gap-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-              >
-                <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
-                  <span>Our Agency Capabilities</span>
-                  <Link href="/services" className="text-primarypurple hover:underline lowercase font-normal">
-                    view all services &rarr;
-                  </Link>
-                </div>
-                {SERVICES_LIST.map((svc) => (
-                  <Link
-                    key={svc.slug}
-                    href={`/services/${svc.slug}`}
-                    className="p-2.5 rounded-xl hover:bg-sectionsoft/60 transition-colors flex items-start space-x-2.5 group"
-                  >
-                    <span className="text-lg p-1.5 rounded-lg bg-pagebg group-hover:bg-white border border-bordercolor/60 shrink-0">
-                      {svc.icon}
-                    </span>
-                    <div>
-                      <p className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
-                        {svc.shortTitle}
-                      </p>
-                      <p className="text-[10px] text-textsecondary line-clamp-1">
-                        {svc.category}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <AnimatePresence>
+              {servicesDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  onMouseLeave={() => setServicesDropdownOpen(false)}
+                  className="absolute top-full left-0 mt-2 w-[540px] p-4 bg-white rounded-2xl border border-bordercolor shadow-card-hover grid grid-cols-2 gap-2 z-50"
+                >
+                  <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
+                    <span>Our Agency Capabilities</span>
+                    <Link href="/services" className="text-primarypurple hover:underline lowercase font-normal">
+                      view all services &rarr;
+                    </Link>
+                  </div>
+                  {SERVICES_LIST.map((svc) => (
+                    <Link
+                      key={svc.slug}
+                      href={`/services/${svc.slug}`}
+                      className="p-2.5 rounded-xl hover:bg-sectionsoft/60 transition-all duration-200 flex items-start space-x-2.5 group hover:translate-x-0.5"
+                    >
+                      <span className="text-lg p-1.5 rounded-lg bg-pagebg group-hover:bg-white border border-bordercolor/60 shrink-0 transition-colors">
+                        {svc.icon}
+                      </span>
+                      <div>
+                        <p className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
+                          {svc.shortTitle}
+                        </p>
+                        <p className="text-[10px] text-textsecondary line-clamp-1">
+                          {svc.category}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <Link
@@ -256,66 +263,74 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden fixed inset-0 top-[65px] bg-white z-40 p-6 overflow-y-auto animate-in slide-in-from-top duration-200 flex flex-col justify-between">
-          <div className="space-y-4">
-            <p className="text-xs uppercase font-bold text-textsecondary tracking-widest">
-              Navigation
-            </p>
-            <div className="flex flex-col space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-base font-heading font-bold py-2.5 px-3 rounded-xl transition-colors ${
-                    pathname === link.href
-                      ? 'bg-sectionsoft text-primarypurple'
-                      : 'text-textprimary hover:bg-pagebg'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Mobile Services Section */}
-            <div className="pt-4 border-t border-bordercolor">
-              <p className="text-xs uppercase font-bold text-textsecondary tracking-widest mb-3">
-                Core Services
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="xl:hidden fixed inset-0 top-[65px] bg-white z-40 p-6 overflow-y-auto flex flex-col justify-between"
+          >
+            <div className="space-y-4">
+              <p className="text-xs uppercase font-bold text-textsecondary tracking-widest">
+                Navigation
               </p>
-              <div className="grid grid-cols-2 gap-2">
-                {SERVICES_LIST.map((svc) => (
+              <div className="flex flex-col space-y-1">
+                {navLinks.map((link) => (
                   <Link
-                    key={svc.slug}
-                    href={`/services/${svc.slug}`}
-                    className="p-2.5 rounded-xl bg-pagebg border border-bordercolor text-xs font-semibold text-textprimary hover:border-primarypurple"
+                    key={link.href}
+                    href={link.href}
+                    className={`text-base font-heading font-bold py-2.5 px-3 rounded-xl transition-all duration-200 ${
+                      pathname === link.href
+                        ? 'bg-sectionsoft text-primarypurple'
+                        : 'text-textprimary hover:bg-pagebg hover:translate-x-1'
+                    }`}
                   >
-                    <span className="mr-1">{svc.icon}</span> {svc.shortTitle}
+                    {link.label}
                   </Link>
                 ))}
               </div>
-            </div>
-          </div>
 
-          {/* Bottom Actions */}
-          <div className="pt-6 border-t border-bordercolor space-y-3 mt-6">
-            <Link
-              href="/contact"
-              className="w-full btn-aurora-primary py-3 block text-center"
-            >
-              Get Your Growth Strategy
-            </Link>
-            <a
-              href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule a marketing consultation.')}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-brandmint/10 text-brandmint border border-brandmint/30 hover:bg-brandmint hover:text-white transition-all"
-            >
-              Chat on WhatsApp &rarr;
-            </a>
-          </div>
-        </div>
-      )}
+              {/* Mobile Services Section */}
+              <div className="pt-4 border-t border-bordercolor">
+                <p className="text-xs uppercase font-bold text-textsecondary tracking-widest mb-3">
+                  Core Services
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {SERVICES_LIST.map((svc) => (
+                    <Link
+                      key={svc.slug}
+                      href={`/services/${svc.slug}`}
+                      className="p-2.5 rounded-xl bg-pagebg border border-bordercolor text-xs font-semibold text-textprimary hover:border-primarypurple hover:bg-white transition-all duration-200"
+                    >
+                      <span className="mr-1">{svc.icon}</span> {svc.shortTitle}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-6 border-t border-bordercolor space-y-3 mt-6">
+              <Link
+                href="/contact"
+                className="w-full btn-aurora-primary py-3 block text-center"
+              >
+                Get Your Growth Strategy
+              </Link>
+              <a
+                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule a marketing consultation.')}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-brandmint/10 text-brandmint border border-brandmint/30 hover:bg-brandmint hover:text-white transition-all duration-200"
+              >
+                Chat on WhatsApp &rarr;
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
