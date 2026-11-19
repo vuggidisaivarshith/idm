@@ -12,7 +12,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ['services', 'gmb', 'pricing', 'tech', 'contact'];
+      const sections = ['services', 'portfolio', 'process', 'pricing', 'contact'];
       const scrollPosition = window.scrollY + 100;
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -41,9 +41,9 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#services', label: 'Services', id: 'services' },
-    { href: '#gmb', label: 'GMB & Local SEO', id: 'gmb' },
-    { href: '#pricing', label: 'Growth Packages', id: 'pricing' },
-    { href: '#tech', label: 'Tech & Apps', id: 'tech' },
+    { href: '#portfolio', label: 'Creative Work', id: 'portfolio' },
+    { href: '#process', label: 'How We Grow', id: 'process' },
+    { href: '#pricing', label: 'Packages', id: 'pricing' },
     { href: '#contact', label: 'Contact', id: 'contact' },
   ];
 
@@ -58,15 +58,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#" className="flex items-center space-x-3 group" aria-label="IDM Smart Tech Home">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-brandcyan flex items-center justify-center shadow-md shadow-primarypurple/20 group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center shadow-md shadow-primarypurple/20 group-hover:scale-105 transition-transform">
             <span className="text-white font-heading font-extrabold text-base tracking-tighter">IDM</span>
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-heading font-bold tracking-tight text-textprimary flex items-center gap-1.5">
               IDM SMART TECH
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-sectionsoft text-primarypurple font-semibold border border-primarypurple/20">AI</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-sectionsoft text-primarypurple font-semibold border border-primarypurple/20">SMMA</span>
             </span>
-            <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">Digital Marketing & Tech • Hyderabad</span>
+            <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">Creative & Digital Growth • Hyderabad</span>
           </div>
         </a>
 
@@ -84,7 +84,7 @@ export default function Navbar() {
             >
               {link.label}
               {activeSection === link.id && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primarypurple to-brandcyan rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primarypurple via-royalblue to-softpink rounded-full" />
               )}
             </a>
           ))}
@@ -100,12 +100,10 @@ export default function Navbar() {
             <span aria-hidden="true">📞</span> {COMPANY_INFO.phone}
           </a>
           <a
-            href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to discuss digital growth and technology services for my business.')}
-            target="_blank"
-            rel="noreferrer"
+            href="#contact"
             className="btn-aurora-primary py-2.5 px-5 text-xs"
           >
-            Chat on WhatsApp
+            Get Growth Strategy
           </a>
         </div>
 
@@ -148,12 +146,12 @@ export default function Navbar() {
                 Call: {COMPANY_INFO.phone}
               </a>
               <a
-                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to get a consultation.')}
+                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to get a growth strategy for my business.')}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full text-center py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm"
               >
-                Instant WhatsApp Chat
+                Chat on WhatsApp
               </a>
             </div>
           </nav>

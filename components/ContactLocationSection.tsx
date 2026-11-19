@@ -8,7 +8,10 @@ export default function ContactLocationSection() {
     name: '',
     phone: '',
     email: '',
-    service: 'Starter Growth (₹4,999/mo)',
+    businessName: '',
+    industry: 'Retail & E-Commerce',
+    service: 'Social Media Management (Instagram/Facebook)',
+    budget: '₹10,000 - ₹25,000 / month',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
@@ -17,13 +20,21 @@ export default function ContactLocationSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 6000);
+      setTimeout(() => setSubmitted(false), 7000);
     }, 600);
   };
+
+  const prefilledWhatsAppMessage = `Hello IDM Smart Tech,
+Name: ${formData.name || 'Not provided'}
+Business: ${formData.businessName || 'Not provided'}
+Industry: ${formData.industry}
+Service: ${formData.service}
+Budget: ${formData.budget}
+Message: ${formData.message || 'I would like to discuss my marketing strategy.'}`;
 
   return (
     <section id="contact" className="py-24 bg-white text-textprimary relative border-t border-bordercolor">
@@ -32,21 +43,21 @@ export default function ContactLocationSection() {
           {/* Agency Details */}
           <div className="lg:col-span-5 space-y-6">
             <div className="badge-aurora">
-              Get in Touch
+              Let&apos;s Talk Growth
             </div>
             <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight leading-tight text-textprimary">
-              Ready to Accelerate <br />
+              Ready to Make Your Brand <br />
               <span className="font-extrabold text-gradient-aurora">
-                Your Revenue?
+                Impossible to Ignore?
               </span>
             </h2>
             <p className="text-textsecondary text-base leading-relaxed">
-              Book a free consultation or discuss your Google Business Profile, paid ads, or web/app project directly with our Shamshabad team.
+              Book a creative marketing consultation or connect directly with our agency team in Shamshabad, Hyderabad to architect your next viral campaign.
             </p>
 
             <div className="space-y-4 pt-4">
               <div className="aurora-card p-5">
-                <p className="text-xs uppercase tracking-wider text-primarypurple font-bold">Hyderabad Office Location</p>
+                <p className="text-xs uppercase tracking-wider text-primarypurple font-bold">Hyderabad Office Headquarters</p>
                 <p className="text-sm font-semibold text-textprimary mt-1 leading-relaxed">
                   {COMPANY_INFO.address}
                 </p>
@@ -80,19 +91,21 @@ export default function ContactLocationSection() {
             </div>
           </div>
 
-          {/* Inquiry Form */}
+          {/* Marketing Consultation Form */}
           <div className="lg:col-span-7 aurora-card p-8 sm:p-10 shadow-soft">
-            <h3 className="text-2xl font-heading font-bold text-textprimary mb-2">Request a Free Growth Audit</h3>
+            <h3 className="text-2xl font-heading font-bold text-textprimary mb-1">
+              Request Your Marketing Consultation
+            </h3>
             <p className="text-sm text-textsecondary mb-8">
-              Fill out this quick form or reach out via WhatsApp for a direct response from our local team.
+              Share details about your brand. We will formulate a tailored strategy and reach out on WhatsApp within 30 minutes.
             </p>
 
             {submitted ? (
               <div className="p-8 text-center rounded-2xl bg-sectionsoft border border-primarypurple/30">
                 <span className="text-4xl" aria-hidden="true">🚀</span>
-                <h4 className="text-xl font-heading font-bold text-textprimary mt-3">Audit Request Received!</h4>
+                <h4 className="text-xl font-heading font-bold text-textprimary mt-3">Consultation Request Received!</h4>
                 <p className="text-sm text-textsecondary mt-1">
-                  Thank you! An IDM Smart Tech growth specialist will contact you via WhatsApp/Phone shortly.
+                  Thank you! An IDM Smart Tech marketing strategist will review your brand details and connect via WhatsApp shortly.
                 </p>
               </div>
             ) : (
@@ -100,7 +113,7 @@ export default function ContactLocationSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contact-name" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
-                      Your Name / Business Name *
+                      Your Name *
                     </label>
                     <input
                       id="contact-name"
@@ -108,13 +121,13 @@ export default function ContactLocationSection() {
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Ramesh Kumar"
+                      placeholder="e.g. Rahul Sharma"
                       className="aurora-input w-full text-sm"
                     />
                   </div>
                   <div>
                     <label htmlFor="contact-phone" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
-                      WhatsApp / Phone Number *
+                      WhatsApp Number *
                     </label>
                     <input
                       id="contact-phone"
@@ -130,6 +143,20 @@ export default function ContactLocationSection() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
+                    <label htmlFor="contact-business" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
+                      Business Name *
+                    </label>
+                    <input
+                      id="contact-business"
+                      required
+                      type="text"
+                      value={formData.businessName}
+                      onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                      placeholder="e.g. Zen Lifestyle Cafe"
+                      className="aurora-input w-full text-sm"
+                    />
+                  </div>
+                  <div>
                     <label htmlFor="contact-email" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
                       Email Address (Optional)
                     </label>
@@ -138,13 +165,36 @@ export default function ContactLocationSection() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="name@business.com"
+                      placeholder="rahul@business.com"
                       className="aurora-input w-full text-sm"
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="contact-industry" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
+                      Your Industry *
+                    </label>
+                    <select
+                      id="contact-industry"
+                      value={formData.industry}
+                      onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
+                      className="aurora-input w-full text-sm bg-white"
+                    >
+                      <option value="Retail & E-Commerce">Retail & D2C E-Commerce</option>
+                      <option value="Healthcare & Clinics">Healthcare, Doctors & Clinics</option>
+                      <option value="Restaurants & Hospitality">Restaurants, Cafes & Food</option>
+                      <option value="Real Estate & Construction">Real Estate & Construction</option>
+                      <option value="Education & Coaching">Education, Colleges & Coaching</option>
+                      <option value="Fitness & Wellness">Fitness, Gyms & Wellness</option>
+                      <option value="B2B & IT Services">B2B, SaaS & IT Services</option>
+                      <option value="Other Industry">Other Industry</option>
+                    </select>
+                  </div>
                   <div>
                     <label htmlFor="contact-service" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
-                      Primary Service Needed *
+                      Primary Service Required *
                     </label>
                     <select
                       id="contact-service"
@@ -152,30 +202,46 @@ export default function ContactLocationSection() {
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                       className="aurora-input w-full text-sm bg-white"
                     >
-                      <option value="Starter Growth (₹4,999/mo)">Starter Growth Plan (₹4,999/month)</option>
-                      <option value="Growth (₹6,999/mo)">Growth Plan (₹6,999/month)</option>
-                      <option value="Ultimate Growth (₹9,999/mo)">Ultimate Growth Plan (₹9,999/month)</option>
-                      <option value="Pro Plan (₹16,999/mo)">Pro Plan (₹16,999/month - Leads Gen)</option>
-                      <option value="GMB Creation (₹4,000)">Google Business Profile Creation (₹4,000)</option>
-                      <option value="GMB Reinstatement (₹2,999)">GMB Suspension Reinstatement (₹2,999)</option>
-                      <option value="GMB Video Verification (₹2,999)">GMB Video Verification Guidance (₹2,999)</option>
-                      <option value="GMB Number Update (₹2,999)">GMB Phone / Address Update Fix (₹2,999)</option>
-                      <option value="Web & Mobile App Development">Web & Mobile App Engineering</option>
-                      <option value="AI Automation & Custom Software">AI Automation & Custom CRM/ERP</option>
+                      <option value="Social Media Management (Instagram/Facebook)">Social Media Management (Instagram/FB)</option>
+                      <option value="Content Creation & Viral Reels">Content Creation & Reels Video</option>
+                      <option value="Performance Marketing (Meta & Google Ads)">Performance Marketing (Paid Ads)</option>
+                      <option value="Local SEO & Google Business Profile">Local SEO & Google Business Profile</option>
+                      <option value="High-Speed Website / Landing Page">High-Speed Website / Landing Page</option>
+                      <option value="Starter Growth Package (₹4,999/mo)">Starter Growth Package (₹4,999/mo)</option>
+                      <option value="Pro Plan (₹16,999/mo)">Pro Plan (₹16,999/mo - Leads Gen)</option>
+                      <option value="AI Automation & Custom Software">AI Automation & Custom Software</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
+                  <label htmlFor="contact-budget" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
+                    Monthly Marketing Budget (Optional)
+                  </label>
+                  <select
+                    id="contact-budget"
+                    value={formData.budget}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                    className="aurora-input w-full text-sm bg-white"
+                  >
+                    <option value="₹5,000 - ₹10,000 / month">₹5,000 - ₹10,000 / month</option>
+                    <option value="₹10,000 - ₹25,000 / month">₹10,000 - ₹25,000 / month</option>
+                    <option value="₹25,000 - ₹50,000 / month">₹25,000 - ₹50,000 / month</option>
+                    <option value="₹50,000+ / month">₹50,000+ / month</option>
+                    <option value="Looking for One-Time Project">Looking for One-Time Project</option>
+                  </select>
+                </div>
+
+                <div>
                   <label htmlFor="contact-message" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
-                    Current Challenges / Business Goals
+                    Current Challenges & Goals
                   </label>
                   <textarea
                     id="contact-message"
                     rows={3}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell us about your business, current website or GMB issue, and what targets you want to achieve..."
+                    placeholder="Tell us about your brand targets, current Instagram page or ad challenges..."
                     className="aurora-input w-full text-sm resize-none"
                   />
                 </div>
@@ -186,15 +252,15 @@ export default function ContactLocationSection() {
                     disabled={isSubmitting}
                     className="flex-1 btn-aurora-primary py-3.5 text-xs uppercase tracking-wider disabled:opacity-50"
                   >
-                    {isSubmitting ? 'Sending Request...' : 'Submit Growth Request'}
+                    {isSubmitting ? 'Submitting...' : 'Submit Marketing Request'}
                   </button>
                   <a
-                    href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to consult regarding ${formData.service}.`)}
+                    href={getWhatsAppUrl(prefilledWhatsAppMessage)}
                     target="_blank"
                     rel="noreferrer"
                     className="px-6 py-3.5 rounded-full bg-brandmint text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all flex items-center justify-center gap-1.5 shadow-sm"
                   >
-                    <span aria-hidden="true">💬</span> WhatsApp Instant
+                    <span aria-hidden="true">💬</span> Direct WhatsApp Chat
                   </a>
                 </div>
               </form>

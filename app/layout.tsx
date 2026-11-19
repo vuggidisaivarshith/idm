@@ -18,29 +18,30 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'IDM Smart Tech | AI Digital Marketing & Technology Agency | Hyderabad',
+    default: 'IDM Smart Tech | Social Media Marketing Agency (SMMA) & Growth Agency | Hyderabad',
     template: '%s | IDM Smart Tech',
   },
   description:
-    'IDM Smart Tech is an AI-powered digital marketing & technology agency in Shamshabad, Hyderabad. Specializing in Google Business Profile (GMB) services, local SEO, paid ads, web/app development, and AI automation. Growth packages from ₹4,999/month.',
+    'IDM Smart Tech is a premier Social Media Marketing Agency (SMMA) and creative digital growth agency based in Shamshabad, Hyderabad. Specializing in Instagram management, viral Reels, Meta & Google Ads, creative content, local SEO, and monthly growth packages from ₹4,999.',
   keywords: [
     'IDM Smart Tech',
-    'Digital Marketing Agency Hyderabad',
-    'GMB Services Hyderabad',
-    'Google Business Profile Verification',
-    'Local SEO Shamshabad',
-    'Web Development Hyderabad',
-    'AI Marketing Agency India',
-    'App Development Hyderabad',
+    'SMMA Hyderabad',
+    'Social Media Marketing Agency Hyderabad',
+    'Instagram Marketing Agency',
+    'Reels Production Agency',
+    'Digital Marketing Agency Shamshabad',
+    'Meta Ads Agency Hyderabad',
+    'Local SEO Hyderabad',
+    'Growth Marketing India',
   ],
   metadataBase: new URL('https://idm-inky.vercel.app'),
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     siteName: 'IDM Smart Tech',
-    title: 'IDM Smart Tech | AI Digital Marketing & Technology Agency',
+    title: 'IDM Smart Tech | Creative Social Media Marketing & Growth Agency',
     description:
-      'AI-powered digital marketing, Google Business Profile services, web & app development, and growth packages from ₹4,999/month. Based in Shamshabad, Hyderabad.',
+      'We Make Brands Impossible to Ignore. Creative social media management, powerful content, performance marketing, and digital growth solutions based in Shamshabad, Hyderabad.',
   },
   robots: {
     index: true,

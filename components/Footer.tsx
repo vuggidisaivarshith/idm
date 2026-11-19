@@ -11,32 +11,32 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-brandcyan flex items-center justify-center font-heading font-black text-white text-base shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center font-heading font-black text-white text-base shadow-sm">
                 IDM
               </div>
               <span className="font-heading font-bold text-xl tracking-tight text-textprimary">IDM SMART TECH</span>
             </div>
             <p className="text-sm text-textsecondary max-w-sm leading-relaxed">
-              Hyderabad’s premier AI-powered digital marketing and modern technology agency. Delivering measurable ROI through local SEO, Google Ads, custom web/app development, and business automations.
+              Hyderabad’s premier Social Media Marketing Agency (SMMA) & Creative Growth Partner. We make brands impossible to ignore through scroll-stopping content, performance ads, local SEO, and custom digital experiences.
             </p>
             <div className="pt-2 text-xs text-primarypurple font-semibold">
               📍 {COMPANY_INFO.city}, {COMPANY_INFO.state} — {COMPANY_INFO.pincode}
             </div>
           </div>
 
-          {/* Core Services */}
+          {/* Navigation & Creative */}
           <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">GMB & Local SEO</h4>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">Creative & Growth</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-textsecondary">
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">New GMB Creation (₹4,000)</a></li>
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Profile Reinstatement (₹2,999)</a></li>
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Video Verification (₹2,999)</a></li>
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Phone Number Fixes (₹2,999)</a></li>
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Google Maps 3-Pack Ranking</a></li>
+              <li><a href="#services" className="hover:text-primarypurple transition-colors">Social Media Management</a></li>
+              <li><a href="#services" className="hover:text-primarypurple transition-colors">Content & Reels Production</a></li>
+              <li><a href="#portfolio" className="hover:text-primarypurple transition-colors">Creative Portfolio</a></li>
+              <li><a href="#process" className="hover:text-primarypurple transition-colors">Our 4-Step Process</a></li>
+              <li><a href="#services" className="hover:text-primarypurple transition-colors">Performance Meta & Google Ads</a></li>
             </ul>
           </div>
 
-          {/* Growth Packages */}
+          {/* Packages & SEO */}
           <div>
             <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">Growth Packages</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-textsecondary">
@@ -44,7 +44,7 @@ export default function Footer() {
               <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Growth Plan (₹6,999/mo)</a></li>
               <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Ultimate Growth (₹9,999/mo)</a></li>
               <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Pro Plan (₹16,999/mo)</a></li>
-              <li><a href="#services" className="hover:text-primarypurple transition-colors">AI WhatsApp Automation</a></li>
+              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Google Business Profile Fixes</a></li>
             </ul>
           </div>
 
@@ -69,11 +69,11 @@ export default function Footer() {
         </div>
 
         <div className="pt-8 border-t border-bordercolor flex flex-col sm:flex-row items-center justify-between text-xs text-textsecondary gap-4">
-          <p>© {new Date().getFullYear()} IDM Smart Tech. All Rights Reserved. Based in Shamshabad, Hyderabad.</p>
+          <p>© {new Date().getFullYear()} IDM Smart Tech. All Rights Reserved. Creative SMMA based in Shamshabad, Hyderabad.</p>
           <div className="flex space-x-6">
             <a href={COMPANY_INFO.website} target="_blank" rel="noreferrer" className="hover:text-primarypurple transition-colors">Official Domain</a>
             <a href={COMPANY_INFO.instagram} target="_blank" rel="noreferrer" className="hover:text-primarypurple transition-colors">Instagram</a>
-            <a href="#contact" className="hover:text-primarypurple transition-colors">Request Free Audit</a>
+            <a href="#contact" className="hover:text-primarypurple transition-colors">Request Growth Strategy</a>
           </div>
         </div>
       </div>

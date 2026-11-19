@@ -1,36 +1,46 @@
-# IDM Smart Tech – AI Digital Marketing & Technology Agency
+# IDM Smart Tech — Social Media Marketing Agency (SMMA) & Growth Agency
 
-A modern, responsive, and 3D-animated web application for **IDM Smart Tech**—an AI-powered digital marketing and technology agency based in Shamshabad, Hyderabad.
+A premium, creative Next.js web application for **IDM Smart Tech**—a Social Media Marketing, Creative Content, and Digital Growth Agency based in Shamshabad, Hyderabad.
 
-## 🚀 Key Services & Features
+## ✨ Brand Positioning & Services
 
-- **Google Business Profile (GMB) & Local SEO**:
-  - GMB Creation (₹4,000)
-  - Profile Reinstatement & Suspension Fixes (₹2,999)
-  - Live Video Verification Assistance (₹2,999)
-  - Phone Number & Address Update Solutions (₹2,999)
-  - Google Maps Top 3-Pack Local Ranking Strategy
-- **Growth Packages**:
-  - **Starter Growth**: ₹4,999/month (Weekly GMB optimization, geo-tagged posts, social creatives, rank reporting)
-  - **Pro Scale Marketing**: ₹12,999/month (Paid ads management, high-velocity lead gen, top 3-pack local push)
-  - **Enterprise Domination**: ₹24,999/month (Full funnel AI automation, CRM integration, omni-channel campaigns)
-- **Web, Mobile Apps & Software**:
-  - Modern web apps built on Next.js, React, and Tailwind CSS
-  - Native & cross-platform mobile apps (Flutter, React Native)
-  - Custom cloud CRM & ERP tools tailored for Indian businesses
-- **Interactive 3D AI Tech Orb**:
-  - 3D cybernetic core with particle depth and dynamic rotation using Three.js & React Three Fiber
-- **Instant WhatsApp Integration**:
-  - Direct WhatsApp lead capture (+91 85198 37818) & floating chat button
+- **Tagline**: *"Creative Strategies. Smarter Marketing. Bigger Growth."*
+- **Hero**: *"We Make Brands Impossible to Ignore."*
+- **Location**: Shamshabad, Hyderabad, Telangana, India
+- **Direct WhatsApp / Call**: `+91 85198 37818`
+
+### Core Capabilities
+1. **Social Media Management**: Instagram & Facebook page growth, content calendars, community engagement.
+2. **Content Creation & Viral Reels**: High-retention Reels, aesthetic carousel posts, graphic design, and brand identity assets.
+3. **Performance Marketing**: Meta Ads (Instagram/FB) & Google Ads lead funnels engineered for high-intent client acquisition.
+4. **SEO & Local Visibility**: Google Business Profile verification, suspension recovery, and Google Maps 3-Pack local ranking.
+5. **Website & Landing Pages**: Modern mobile-first Next.js websites and high-converting landing pages.
+6. **AI & Business Automation**: 24/7 AI-powered WhatsApp auto-responders, CRM workflows, and custom business tools.
+
+### Creative Portfolio (Centerpiece)
+Interactive campaign gallery with 7 category filters:
+- All Work
+- Social Media Posts
+- Instagram Campaigns
+- Reels & Videos
+- Paid Advertising
+- Branding
+- Website Projects
+
+### Transparent Growth Packages
+- **Starter Growth**: ₹4,999/month
+- **Growth**: ₹6,999/month
+- **Ultimate Growth**: ₹9,999/month
+- **Pro Plan**: ₹16,999/month (*Growth & Leads Generation*)
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Next.js 14 (App Router, TypeScript)
-- **Styling**: Tailwind CSS
-- **3D Graphics**: Three.js & React Three Fiber (`@react-three/drei`)
-- **Location**: Shamshabad, Hyderabad, Telangana — 501218
+- **Styling**: Tailwind CSS (Creative Aurora Light Theme)
+- **Design Tokens**: `#F8FAFF` background, Space Grotesk headings, Inter body
+- **Icons & Visuals**: Responsive social media mockups, interactive campaign filters, direct WhatsApp conversion
 
-## 💻 Local Development
+## 🚀 Running Locally
 
 ```bash
 git clone https://github.com/vuggidisaivarshith/idm.git
@@ -39,4 +49,4 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.

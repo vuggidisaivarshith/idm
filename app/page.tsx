@@ -1,9 +1,12 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import SocialProofSection from '@/components/SocialProofSection';
 import ServicesSection from '@/components/ServicesSection';
-import GMBPricingSection from '@/components/GMBPricingSection';
+import PortfolioSection from '@/components/PortfolioSection';
+import GrowthProcess from '@/components/GrowthProcess';
 import GrowthPackages from '@/components/GrowthPackages';
+import GMBPricingSection from '@/components/GMBPricingSection';
 import TechStackSection from '@/components/TechStackSection';
 import ContactLocationSection from '@/components/ContactLocationSection';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
@@ -14,9 +17,12 @@ export default function Home() {
     <main className="min-h-screen bg-pagebg text-textprimary selection:bg-primarypurple/20 selection:text-primarypurple">
       <Navbar />
       <Hero />
+      <SocialProofSection />
       <ServicesSection />
-      <GMBPricingSection />
+      <PortfolioSection />
+      <GrowthProcess />
       <GrowthPackages />
+      <GMBPricingSection />
       <TechStackSection />
       <ContactLocationSection />
       <FloatingWhatsApp />
