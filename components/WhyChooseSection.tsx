@@ -109,7 +109,21 @@ const advantageCards: AdvantageCard[] = [
 ];
 
 export default function WhyChooseSection() {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
+
+  const toggleFlip = (idx: number) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [idx]: !prev[idx],
+    }));
+  };
+
+  const handleHover = (idx: number, isHovered: boolean) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [idx]: isHovered,
+    }));
+  };
 
   const whatsappConsultationUrl = getWhatsAppUrl(
     'Hello IDM Smart Tech, I would like to learn more about your operational approach and grow my business.'
@@ -140,117 +154,153 @@ export default function WhyChooseSection() {
           </h2>
 
           <p className="text-textsecondary text-base sm:text-lg mt-5 leading-relaxed max-w-2xl mx-auto font-normal">
-            We operate as an agile, high-standard digital growth unit. Direct founder attention, transparent fixed retainers, unified creative production, and production-grade engineering.
+            We operate as an agile, high-standard digital growth unit. Hover or tap any card to flip and explore our verified operational proof points.
           </p>
         </ScrollReveal>
 
-        {/* 4 Cards: 2x2 on Desktop / Tablet, 1 col on Mobile */}
+        {/* 4 3D Flippable Cards: 2x2 Grid */}
         <StaggerContainer staggerDelay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-5xl mx-auto">
             {advantageCards.map((card, idx) => {
-              const isHovered = activeCard === idx;
-              return (
-                <motion.div key={card.id} variants={fadeUpVariants} className="h-full">
-                  <div
-                    onMouseEnter={() => setActiveCard(idx)}
-                    onMouseLeave={() => setActiveCard(null)}
-                    onClick={() => setActiveCard(activeCard === idx ? null : idx)}
-                    className={`rounded-3xl bg-white/95 backdrop-blur-md border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative cursor-pointer overflow-hidden card-3d-tilt ${
-                      isHovered
-                        ? 'border-primarypurple/50 shadow-[0_20px_40px_-10px_rgba(105,87,245,0.15),inset_0_1px_1px_rgba(255,255,255,1)] -translate-y-1.5 ring-1 ring-primarypurple/20'
-                        : 'border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 hover:border-primarypurple/30'
-                    }`}
-                  >
-                    {/* Top reflective gradient bar */}
-                    <div
-                      className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${card.gradient} transition-opacity duration-300 ${
-                        isHovered ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    />
+              const isFlipped = !!flippedCards[idx];
 
-                    <div>
-                      {/* Step Number & Emblem */}
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
-                          {card.number}
+              return (
+                <motion.div
+                  key={card.id}
+                  variants={fadeUpVariants}
+                  className="h-[410px] sm:h-[390px] w-full [perspective:1200px]"
+                  onMouseEnter={() => handleHover(idx, true)}
+                  onMouseLeave={() => handleHover(idx, false)}
+                >
+                  <motion.div
+                    className="relative w-full h-full cursor-pointer"
+                    style={{ transformStyle: 'preserve-3d' }}
+                    animate={{ rotateY: isFlipped ? 180 : 0 }}
+                    transition={{ duration: 0.65, ease: [0.23, 1, 0.32, 1] }}
+                    onClick={() => toggleFlip(idx)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`${card.title} - Click or press Enter to flip card`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleFlip(idx);
+                      }
+                    }}
+                  >
+                    {/* ==================== FRONT FACE ==================== */}
+                    <div
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                      }}
+                      className="absolute inset-0 w-full h-full rounded-3xl bg-white/95 backdrop-blur-md border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 p-7 sm:p-8 flex flex-col justify-between overflow-hidden group hover:border-primarypurple/40 hover:shadow-soft-lg transition-colors"
+                    >
+                      {/* Top gradient reflective highlight bar */}
+                      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
+
+                      <div>
+                        {/* Step Number & Emblem */}
+                        <div className="flex items-center justify-between mb-5">
+                          <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                            {card.number}
+                          </span>
+
+                          <div
+                            className={`w-12 h-12 rounded-2xl ${card.iconBg} border flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
+                          >
+                            {card.icon}
+                          </div>
+                        </div>
+
+                        {/* Badge */}
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block mb-3">
+                          {card.badge}
                         </span>
 
-                        <div
-                          className={`w-12 h-12 rounded-2xl ${card.iconBg} border flex items-center justify-center transition-all duration-300 ${
-                            isHovered ? 'scale-110 rotate-2 shadow-xs' : 'shadow-2xs'
-                          }`}
-                        >
-                          {card.icon}
-                        </div>
-                      </div>
+                        {/* Heading 1st (Always visible) */}
+                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors duration-200 mb-3 leading-snug">
+                          {card.title}
+                        </h3>
 
-                      {/* Badge */}
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block mb-2">
-                        {card.badge}
-                      </span>
-
-                      {/* Heading 1st (Always visible) */}
-                      <h3
-                        className={`text-xl font-heading font-bold transition-colors duration-200 mb-2 leading-snug ${
-                          isHovered ? 'text-primarypurple' : 'text-textprimary'
-                        }`}
-                      >
-                        {card.title}
-                      </h3>
-
-                      {/* Details and Description (Revealed on hover / tap) */}
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-out ${
-                          isHovered
-                            ? 'max-h-80 opacity-100 mt-3 pt-3 border-t border-bordercolor/80'
-                            : 'max-h-0 opacity-0 mt-0 pt-0'
-                        }`}
-                      >
-                        <p className="text-xs text-textsecondary leading-relaxed mb-3">
+                        {/* Summary */}
+                        <p className="text-xs sm:text-sm text-textsecondary leading-relaxed line-clamp-3">
                           {card.summary}
                         </p>
+                      </div>
 
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-textprimary mb-2">
-                          Operational Advantages:
-                        </p>
-                        <div className="space-y-2">
+                      {/* Footer with Flip Action Indicator */}
+                      <div className="pt-4 border-t border-bordercolor/80 flex items-center justify-between text-xs">
+                        <span className="text-textsecondary font-medium">Agency Advantage</span>
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sectionsoft/80 border border-primarypurple/20 text-primarypurple font-bold text-[11px] shadow-2xs group-hover:bg-primarypurple group-hover:text-white transition-all duration-200">
+                          <span>Flip Details</span>
+                          <span className="text-sm leading-none animate-spin-slow">↻</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* ==================== BACK FACE ==================== */}
+                    <div
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg)',
+                      }}
+                      className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-sectionsoft/40 to-white backdrop-blur-md border border-primarypurple/40 shadow-soft-xl ring-1 ring-primarypurple/20 p-7 sm:p-8 flex flex-col justify-between overflow-hidden"
+                    >
+                      {/* Top gradient reflective highlight bar */}
+                      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
+
+                      <div>
+                        {/* Header Row: Badge & Flip Back cue */}
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-primarypurple bg-white px-2.5 py-1 rounded-full border border-primarypurple/25 shadow-2xs">
+                            Verified Advantages
+                          </span>
+
+                          <span className="text-[11px] font-semibold text-textsecondary/80 flex items-center gap-1 hover:text-primarypurple transition-colors">
+                            <span>↺ Flip Back</span>
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h4 className="text-base sm:text-lg font-heading font-extrabold text-textprimary mb-4 leading-tight">
+                          {card.title}
+                        </h4>
+
+                        {/* Operational Advantages List */}
+                        <div className="space-y-2.5">
                           {card.operationalDetails.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-textsecondary">
-                              <span className="w-3.5 h-3.5 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5" aria-hidden="true">
+                            <div key={pIdx} className="flex items-start space-x-2.5 text-xs text-textsecondary">
+                              <span
+                                className="w-4 h-4 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5"
+                                aria-hidden="true"
+                              >
                                 ✓
                               </span>
-                              <span className="leading-tight">{point}</span>
+                              <span className="leading-snug text-textprimary font-medium">{point}</span>
                             </div>
                           ))}
                         </div>
                       </div>
 
-                      {/* Idle Hint */}
-                      <div
-                        className={`transition-opacity duration-200 mt-3 ${
-                          isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
-                        }`}
-                      >
-                        <span className="text-[10px] text-textsecondary/80 font-medium flex items-center gap-1">
-                          <span>Hover to reveal operational details</span>
+                      {/* Footer on Back */}
+                      <div className="pt-4 border-t border-bordercolor flex items-center justify-between text-xs">
+                        <a
+                          href={whatsappConsultationUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="font-bold text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1"
+                        >
+                          <span>Consult on This</span>
                           <span>&rarr;</span>
-                        </span>
+                        </a>
+
+                        <span className="text-[11px] text-textsecondary/70">Tap card to return</span>
                       </div>
                     </div>
-
-                    {/* Footer */}
-                    <div className="pt-4 mt-5 border-t border-bordercolor/80 flex items-center justify-between text-xs font-semibold text-textsecondary">
-                      <span>Agency Advantage</span>
-                      <span
-                        className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
-                          isHovered ? 'text-primarypurple translate-x-1' : 'text-textsecondary'
-                        }`}
-                      >
-                        <span>{card.title}</span>
-                        <span>&rarr;</span>
-                      </span>
-                    </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}

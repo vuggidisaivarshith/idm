@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ScrollReveal from '@/components/animations/ScrollReveal';
+import { motion, useScroll, useSpring, useMotionValueEvent } from 'framer-motion';
 
 const journeySteps = [
   {
@@ -53,29 +54,29 @@ const journeySteps = [
 
 export default function GrowthProcess() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [activeStep, setActiveStep] = useState<number | null>(null);
+  const [currentProgress, setCurrentProgress] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+  // Live Framer Motion scroll tracker targeted directly at this section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 75%', 'end 70%'],
+  });
 
-      const start = windowHeight;
-      const end = -rect.height;
-      const current = rect.top;
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 400,
+    damping: 38,
+    restDelta: 0.001,
+  });
 
-      const progress = Math.min(Math.max((start - current) / (start - end), 0), 1);
-      setScrollProgress(progress);
-    };
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    setCurrentProgress(latest);
+  });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Thresholds for the 5 stage milestone dots
+  const stepThresholds = [0.05, 0.25, 0.5, 0.75, 0.95];
 
-  const renderCard = (s: typeof journeySteps[0], idx: number) => {
+  const renderCard = (s: (typeof journeySteps)[0], idx: number) => {
     const isHovered = activeStep === idx;
     return (
       <div
@@ -197,28 +198,35 @@ export default function GrowthProcess() {
           </p>
         </ScrollReveal>
 
-        {/* Animated Connecting Line on Desktop */}
-        <div className="hidden lg:block relative w-full mb-10 px-8">
-          <div className="w-full h-1 bg-white/80 rounded-full overflow-hidden shadow-2xs border border-bordercolor/60">
-            <div
-              className="h-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-all duration-300 ease-out rounded-full"
-              style={{ width: `${Math.min(Math.max(scrollProgress * 115, 6), 100)}%` }}
+        {/* Live Synchronized Connecting Line on Desktop */}
+        <div className="hidden lg:block relative w-full mb-12 px-6">
+          <div className="w-full h-2 bg-white rounded-full overflow-hidden shadow-2xs border border-bordercolor/70 relative">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan rounded-full origin-left"
+              style={{ scaleX: smoothProgress }}
             />
           </div>
-          {/* Milestone Dots */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-8 pointer-events-none">
-            {journeySteps.map((_, i) => {
-              const reached = scrollProgress > i * (1 / 5);
+
+          {/* Milestone Dots in Live Sync with Scroll Progress */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-6 pointer-events-none">
+            {journeySteps.map((s, i) => {
+              const reached = currentProgress >= stepThresholds[i] || activeStep === i;
               return (
                 <div
                   key={i}
-                  className={`w-5 h-5 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+                  className={`w-6 h-6 rounded-full border-2 transition-all duration-300 flex items-center justify-center pointer-events-auto cursor-pointer ${
                     reached
-                      ? 'bg-primarypurple border-white shadow-sm shadow-primarypurple/50 scale-110'
-                      : 'bg-white border-bordercolor'
+                      ? 'bg-primarypurple border-white shadow-md shadow-primarypurple/40 scale-125'
+                      : 'bg-white border-bordercolor hover:border-primarypurple/50'
                   }`}
+                  onClick={() => setActiveStep(activeStep === i ? null : i)}
+                  title={`Stage 0${i + 1}: ${s.title}`}
                 >
-                  <div className={`w-1.5 h-1.5 rounded-full ${reached ? 'bg-white' : 'bg-bordercolor'}`} />
+                  <div
+                    className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                      reached ? 'bg-white animate-pulse' : 'bg-bordercolor'
+                    }`}
+                  />
                 </div>
               );
             })}
