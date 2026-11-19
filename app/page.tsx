@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import AgencyPartnershipSection from '@/components/AgencyPartnershipSection';
 import ServicesSection from '@/components/ServicesSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import PortfolioSection from '@/components/PortfolioSection';
@@ -16,18 +17,19 @@ import ContactLocationSection from '@/components/ContactLocationSection';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
-import CursorFollower from '@/components/CursorFollower';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-pagebg text-textprimary selection:bg-primarypurple/20 selection:text-primarypurple relative">
       <ScrollProgress />
-      <CursorFollower />
       {/* 1. Premium Navigation */}
       <Navbar />
 
       {/* 2. Cinematic 3D Hero */}
       <Hero />
+
+      {/* 2.5 Five Premium Agency Partnership Value Cards */}
+      <AgencyPartnershipSection />
 
       {/* 3. Service Categories */}
       <ServicesSection />

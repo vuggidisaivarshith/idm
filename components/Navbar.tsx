@@ -43,31 +43,36 @@ export default function Navbar() {
     }
   }, [mobileMenuOpen]);
 
-  // Close mobile menu on route change
+  // Close mobile menu and dropdown on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setServicesDropdownOpen(false);
   }, [pathname]);
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
+  const navItems = [
+    { href: '/', label: 'Home', isExact: true },
     { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services', isDropdown: true },
     { href: '/pricing', label: 'Pricing' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/industries', label: 'Industries' },
     { href: '/blog', label: 'Blog' },
-    { href: '/faq', label: 'FAQ' },
     { href: '/contact', label: 'Contact' },
   ];
 
-  const isServicesActive = pathname.startsWith('/services');
+  const checkIsActive = (item: typeof navItems[0]) => {
+    if (item.isExact) return pathname === '/';
+    if (item.isDropdown) return pathname.startsWith('/services');
+    if (item.href === '/blog') return pathname.startsWith('/blog');
+    return pathname === item.href || pathname.startsWith(item.href + '/');
+  };
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'glass-navbar py-3 shadow-sm'
-          : 'bg-pagebg/85 backdrop-blur-md py-4 sm:py-5 border-b border-bordercolor/60'
+          ? 'bg-pagebg/90 backdrop-blur-xl py-3 border-b border-bordercolor/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)]'
+          : 'bg-pagebg/75 backdrop-blur-md py-4 sm:py-5 border-b border-bordercolor/50'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
@@ -89,143 +94,121 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden xl:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold text-textsecondary">
-          <Link
-            href="/"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Home
-          </Link>
+        {/* Desktop Glossy Pill-Shaped Navigation Bar */}
+        <nav
+          aria-label="Main Navigation"
+          className="hidden xl:flex items-center p-1.5 rounded-full bg-white/80 backdrop-blur-xl border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_4px_16px_rgba(16,28,50,0.06),0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-bordercolor/70 relative"
+        >
+          {navItems.map((item) => {
+            const isActive = checkIsActive(item);
 
-          <Link
-            href="/about"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/about'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            About
-          </Link>
+            if (item.isDropdown) {
+              return (
+                <div key={item.label} className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+                    onMouseEnter={() => setServicesDropdownOpen(true)}
+                    aria-expanded={servicesDropdownOpen}
+                    className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-colors duration-200 flex items-center gap-1.5 group outline-none ${
+                      isActive ? 'text-white' : 'text-textsecondary hover:text-textprimary'
+                    }`}
+                  >
+                    {/* Active Sliding Glossy Indicator */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="glossyNavIndicator"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan shadow-[0_2px_10px_rgba(105,87,245,0.32),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
 
-          {/* Services Dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-              onMouseEnter={() => setServicesDropdownOpen(true)}
-              aria-expanded={servicesDropdownOpen}
-              className={`px-3 py-2 rounded-full transition-all flex items-center gap-1 ${
-                isServicesActive
-                  ? 'text-primarypurple bg-sectionsoft font-bold'
-                  : 'hover:text-primarypurple hover:bg-pagebg'
-              }`}
-            >
-              <span>Services</span>
-              <span className={`text-[10px] transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`}>
-                ▼
-              </span>
-            </button>
+                    {/* Inactive Hover Shine */}
+                    {!isActive && (
+                      <span className="absolute inset-0 rounded-full bg-sectionsoft/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    )}
 
-            {/* Dropdown Menu Panel */}
-            <AnimatePresence>
-              {servicesDropdownOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                  onMouseLeave={() => setServicesDropdownOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-[540px] p-4 bg-white rounded-2xl border border-bordercolor shadow-card-hover grid grid-cols-2 gap-2 z-50"
-                >
-                  <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
-                    <span>Our Agency Capabilities</span>
-                    <Link href="/services" className="text-primarypurple hover:underline lowercase font-normal">
-                      view all services &rarr;
-                    </Link>
-                  </div>
-                  {SERVICES_LIST.map((svc) => (
-                    <Link
-                      key={svc.slug}
-                      href={`/services/${svc.slug}`}
-                      className="p-2.5 rounded-xl hover:bg-sectionsoft/60 transition-all duration-200 flex items-start space-x-2.5 group hover:translate-x-0.5"
+                    <span className="relative z-10 font-medium">Services</span>
+                    <span
+                      className={`relative z-10 text-[9px] transition-transform duration-200 ${
+                        servicesDropdownOpen ? 'rotate-180' : ''
+                      }`}
                     >
-                      <span className="text-lg p-1.5 rounded-lg bg-pagebg group-hover:bg-white border border-bordercolor/60 shrink-0 transition-colors">
-                        {svc.icon}
-                      </span>
-                      <div>
-                        <p className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
-                          {svc.shortTitle}
-                        </p>
-                        <p className="text-[10px] text-textsecondary line-clamp-1">
-                          {svc.category}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                      ▼
+                    </span>
+                  </button>
 
-          <Link
-            href="/pricing"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/pricing'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Pricing
-          </Link>
+                  {/* Dropdown Menu Panel */}
+                  <AnimatePresence>
+                    {servicesDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                        onMouseLeave={() => setServicesDropdownOpen(false)}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] p-4 bg-white/95 backdrop-blur-2xl rounded-2xl border border-white/80 shadow-[0_12px_36px_rgba(16,28,50,0.12),inset_0_1px_1px_rgba(255,255,255,1)] grid grid-cols-2 gap-2 z-50 ring-1 ring-bordercolor/80"
+                      >
+                        <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor/70 flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
+                          <span>Our Agency Capabilities</span>
+                          <Link
+                            href="/services"
+                            className="text-primarypurple hover:underline lowercase font-normal"
+                          >
+                            view all services &rarr;
+                          </Link>
+                        </div>
+                        {SERVICES_LIST.map((svc) => (
+                          <Link
+                            key={svc.slug}
+                            href={`/services/${svc.slug}`}
+                            className="p-2.5 rounded-xl hover:bg-sectionsoft/70 transition-all duration-200 flex items-start space-x-2.5 group hover:translate-x-0.5"
+                          >
+                            <span className="text-lg p-1.5 rounded-lg bg-pagebg group-hover:bg-white border border-bordercolor/60 shrink-0 transition-colors">
+                              {svc.icon}
+                            </span>
+                            <div>
+                              <p className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
+                                {svc.shortTitle}
+                              </p>
+                              <p className="text-[10px] text-textsecondary line-clamp-1">
+                                {svc.category}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
 
-          <Link
-            href="/portfolio"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/portfolio'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Portfolio
-          </Link>
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-colors duration-200 group outline-none ${
+                  isActive ? 'text-white' : 'text-textsecondary hover:text-textprimary'
+                }`}
+              >
+                {/* Active Sliding Glossy Indicator */}
+                {isActive && (
+                  <motion.div
+                    layoutId="glossyNavIndicator"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan shadow-[0_2px_10px_rgba(105,87,245,0.32),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
 
-          <Link
-            href="/industries"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/industries'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Industries
-          </Link>
+                {/* Inactive Hover Shine */}
+                {!isActive && (
+                  <span className="absolute inset-0 rounded-full bg-sectionsoft/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                )}
 
-          <Link
-            href="/blog"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname.startsWith('/blog')
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Blog
-          </Link>
-
-          <Link
-            href="/contact"
-            className={`px-3 py-2 rounded-full transition-all relative ${
-              pathname === '/contact'
-                ? 'text-primarypurple bg-sectionsoft font-bold'
-                : 'hover:text-primarypurple hover:bg-pagebg'
-            }`}
-          >
-            Contact
-          </Link>
+                <span className="relative z-10 font-medium">{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Action Buttons */}
@@ -266,30 +249,34 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -16 }}
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -16 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="xl:hidden fixed inset-0 top-[65px] bg-white z-40 p-6 overflow-y-auto flex flex-col justify-between"
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="xl:hidden fixed inset-0 top-[65px] bg-white/95 backdrop-blur-2xl z-40 p-6 overflow-y-auto flex flex-col justify-between"
           >
             <div className="space-y-4">
               <p className="text-xs uppercase font-bold text-textsecondary tracking-widest">
                 Navigation
               </p>
               <div className="flex flex-col space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-base font-heading font-bold py-2.5 px-3 rounded-xl transition-all duration-200 ${
-                      pathname === link.href
-                        ? 'bg-sectionsoft text-primarypurple'
-                        : 'text-textprimary hover:bg-pagebg hover:translate-x-1'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  const isActive = checkIsActive(item);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`text-base font-heading font-bold py-2.5 px-3 rounded-xl transition-all duration-200 flex items-center justify-between ${
+                        isActive
+                          ? 'bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm'
+                          : 'text-textprimary hover:bg-pagebg hover:translate-x-1'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && <span className="text-xs font-normal">Active</span>}
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* Mobile Services Section */}
