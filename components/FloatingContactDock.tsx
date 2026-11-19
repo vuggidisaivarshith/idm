@@ -75,9 +75,9 @@ export default function FloatingContactDock() {
 
         {/* ================= 3. QUERY CHATBOT WITH AVATAR ================= */}
         <div className="relative group">
-          {/* Callout speech bubble above avatar (Never overlaps Email or WhatsApp buttons) */}
+          {/* Callout speech bubble centered directly above avatar with pointer tail */}
           {!chatOpen && (
-            <div className="hidden sm:flex flex-col items-center absolute bottom-full mb-2.5 right-0 pointer-events-none">
+            <div className="hidden sm:flex flex-col items-center absolute bottom-full mb-3 left-1/2 -translate-x-1/2 pointer-events-none z-10">
               <span className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/30 text-textprimary text-[11px] font-bold shadow-lg shadow-primarypurple/15 whitespace-nowrap">
                 <span className="text-primarypurple">Ask IDM AI</span> 👋
               </span>
