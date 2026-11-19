@@ -1,8 +1,10 @@
 export const COMPANY_INFO = {
   name: 'IDM Smart Tech',
   legalName: 'IDM Smart Tech',
-  positioning: 'Social Media Marketing, Digital Marketing, Creative Content and AI-Powered Business Growth Agency',
-  tagline: 'Creative Strategies. Smarter Marketing. Bigger Growth.',
+  positioning: 'Creative Marketing, Digital Growth and Intelligent Technology Agency',
+  brandStatement: 'We Build Brands. Create Demand. Drive Growth.',
+  supportingMessage:
+    'From creative social media campaigns and performance marketing to search visibility, website development and intelligent automation, IDM Smart Tech helps businesses build a stronger digital presence.',
   phone: '+91 85198 37818',
   phoneClean: '918519837818',
   email: 'info@idmsmarttech.com',
@@ -12,8 +14,30 @@ export const COMPANY_INFO = {
   pincode: '501218',
   country: 'India',
   instagram: 'https://www.instagram.com/idmsmarttech/',
-  website: 'https://www.idmsmarttech.com/',
-  websiteAlt: 'https://www.idmsmarttech.in/',
+  website: 'https://idm-inky.vercel.app',
+  websiteAlt: 'https://www.idmsmarttech.com/',
+  differentiators: [
+    {
+      title: 'Creative Content & Performance Marketing',
+      desc: 'High-hook video reels, branded aesthetic post design, and laser-targeted Meta & Google Ad campaigns engineered for return on ad spend.',
+      icon: '🎯',
+    },
+    {
+      title: 'Social Media & Search Visibility',
+      desc: 'Instagram community management and strategic Google Maps 3-Pack SEO that capture nearby customers right when they are searching.',
+      icon: '📍',
+    },
+    {
+      title: 'Marketing & Technology Under One Roof',
+      desc: 'Modern Next.js web applications, custom CRM platforms, and conversion-focused landing pages built with clean code and sub-second speed.',
+      icon: '💻',
+    },
+    {
+      title: 'Lead Generation & Business Automation',
+      desc: 'Automated 24/7 WhatsApp response pipelines, instant lead notifications, and smart routing that eliminate lost customer inquiries.',
+      icon: '⚡',
+    },
+  ],
 };
 
 export interface MonthlyPackage {

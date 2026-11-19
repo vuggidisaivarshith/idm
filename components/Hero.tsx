@@ -30,20 +30,20 @@ export default function Hero() {
             {/* Agency Positioning Badge */}
             <div className="badge-aurora shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-primarypurple animate-pulse inline-block" />
-              <span>Creative 3D Aurora • Digital Growth Agency</span>
+              <span>Glossy Aurora • Creative Marketing & Technology</span>
             </div>
 
             {/* Primary Headline */}
             <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-heading font-extralight tracking-tight leading-[1.08] text-textprimary">
-              We Turn Attention <br />
+              We Build Brands. <br />
               <span className="font-extrabold text-gradient-aurora">
-                Into Business Growth.
+                Create Demand. Drive Growth.
               </span>
             </h1>
 
             {/* Supporting Copy */}
             <p className="text-base sm:text-lg text-textsecondary max-w-xl font-normal leading-relaxed">
-              Creative marketing, powerful content and intelligent technology to help ambitious brands grow.
+              Creative marketing, powerful campaigns and intelligent technology to help ambitious businesses grow.
             </p>
 
             {/* CTA Buttons */}
@@ -52,16 +52,16 @@ export default function Hero() {
                 href="#contact"
                 className="btn-aurora-primary"
               >
-                Start Your Growth Journey
+                Get Your Growth Strategy
               </a>
               <a
-                href="#portfolio"
+                href="/portfolio"
                 className="btn-aurora-secondary"
               >
                 Explore Our Work
               </a>
               <a
-                href={getWhatsAppUrl('Hi IDM Smart Tech, I would like to discuss a creative marketing and growth strategy for my brand.')}
+                href={getWhatsAppUrl('Hi IDM Smart Tech, I would like to get a growth strategy for my business.')}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primarypurple hover:text-royalblue transition-colors px-2 py-3"

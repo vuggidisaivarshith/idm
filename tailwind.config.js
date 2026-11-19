@@ -7,18 +7,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Creative Aurora Palette
+        // Glossy Aurora Palette
         auroraBg: '#F8FAFF',
         auroraWhite: '#FFFFFF',
-        auroraLavender: '#EEEAFE',
+        auroraLavender: '#F0EEFF',
+        auroraLightBlue: '#EEF5FF',
         auroraPurple: '#6957F5',
         auroraBlue: '#4385F4',
         auroraCyan: '#39BBD5',
         auroraPink: '#F18BB5',
+        auroraMint: '#22B98A',
         auroraText: '#171B2C',
         auroraMuted: '#667085',
         auroraBorder: '#E8ECF5',
-        auroraMint: '#22B98A',
 
         // Standard aliases for ease of use
         pagebg: '#F8FAFF',
@@ -26,7 +27,8 @@ module.exports = {
         textprimary: '#171B2C',
         textsecondary: '#667085',
         bordercolor: '#E8ECF5',
-        sectionsoft: '#EEEAFE',
+        sectionsoft: '#F0EEFF',
+        lightblue: '#EEF5FF',
         primarypurple: '#6957F5',
         royalblue: '#4285F4',
         brandcyan: '#39BBD5',

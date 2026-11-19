@@ -1,36 +1,39 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
+import { SERVICES_LIST } from '@/data/services';
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-
-      const sections = ['services', 'portfolio', 'process', 'pricing', 'contact'];
-      const scrollPosition = window.scrollY + 100;
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setServicesDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Prevent background scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -39,59 +42,187 @@ export default function Navbar() {
     }
   }, [mobileMenuOpen]);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setServicesDropdownOpen(false);
+  }, [pathname]);
+
   const navLinks = [
-    { href: '#services', label: 'Services', id: 'services' },
-    { href: '#portfolio', label: 'Creative Work', id: 'portfolio' },
-    { href: '#process', label: 'How We Grow', id: 'process' },
-    { href: '#pricing', label: 'Packages', id: 'pricing' },
-    { href: '#contact', label: 'Contact', id: 'contact' },
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/industries', label: 'Industries' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/faq', label: 'FAQ' },
+    { href: '/contact', label: 'Contact' },
   ];
+
+  const isServicesActive = pathname.startsWith('/services');
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-md border-b border-bordercolor py-3.5 shadow-sm'
-          : 'bg-pagebg/80 backdrop-blur-sm py-5'
+          ? 'glass-navbar py-3 shadow-sm'
+          : 'bg-pagebg/85 backdrop-blur-md py-4 sm:py-5 border-b border-bordercolor/60'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Brand Logo */}
-        <a href="#" className="flex items-center space-x-3 group" aria-label="IDM Smart Tech Home">
+        <Link href="/" className="flex items-center space-x-3 group" aria-label="IDM Smart Tech Home">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center shadow-md shadow-primarypurple/20 group-hover:scale-105 transition-transform">
             <span className="text-white font-heading font-extrabold text-base tracking-tighter">IDM</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-heading font-bold tracking-tight text-textprimary flex items-center gap-1.5">
+            <span className="text-base sm:text-lg font-heading font-bold tracking-tight text-textprimary flex items-center gap-1.5">
               IDM SMART TECH
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-sectionsoft text-primarypurple font-semibold border border-primarypurple/20">SMMA</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-sectionsoft text-primarypurple font-bold border border-primarypurple/20">
+                AGENCY
+              </span>
             </span>
-            <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">Creative & Digital Growth • Hyderabad</span>
+            <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">
+              Creative & Tech • Hyderabad
+            </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-7 text-sm font-medium text-textsecondary">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`transition-colors relative py-1 ${
-                activeSection === link.id
-                  ? 'text-primarypurple font-semibold'
-                  : 'hover:text-primarypurple'
+        <nav className="hidden xl:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold text-textsecondary">
+          <Link
+            href="/"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Home
+          </Link>
+
+          <Link
+            href="/about"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/about'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            About
+          </Link>
+
+          {/* Services Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              aria-expanded={servicesDropdownOpen}
+              className={`px-3 py-2 rounded-full transition-all flex items-center gap-1 ${
+                isServicesActive
+                  ? 'text-primarypurple bg-sectionsoft font-bold'
+                  : 'hover:text-primarypurple hover:bg-pagebg'
               }`}
             >
-              {link.label}
-              {activeSection === link.id && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primarypurple via-royalblue to-softpink rounded-full" />
-              )}
-            </a>
-          ))}
+              <span>Services</span>
+              <span className={`text-[10px] transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`}>
+                ▼
+              </span>
+            </button>
+
+            {/* Dropdown Menu Panel */}
+            {servicesDropdownOpen && (
+              <div
+                onMouseLeave={() => setServicesDropdownOpen(false)}
+                className="absolute top-full left-0 mt-2 w-[540px] p-4 bg-white rounded-2xl border border-bordercolor shadow-card-hover grid grid-cols-2 gap-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+              >
+                <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
+                  <span>Our Agency Capabilities</span>
+                  <Link href="/services" className="text-primarypurple hover:underline lowercase font-normal">
+                    view all services &rarr;
+                  </Link>
+                </div>
+                {SERVICES_LIST.map((svc) => (
+                  <Link
+                    key={svc.slug}
+                    href={`/services/${svc.slug}`}
+                    className="p-2.5 rounded-xl hover:bg-sectionsoft/60 transition-colors flex items-start space-x-2.5 group"
+                  >
+                    <span className="text-lg p-1.5 rounded-lg bg-pagebg group-hover:bg-white border border-bordercolor/60 shrink-0">
+                      {svc.icon}
+                    </span>
+                    <div>
+                      <p className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
+                        {svc.shortTitle}
+                      </p>
+                      <p className="text-[10px] text-textsecondary line-clamp-1">
+                        {svc.category}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link
+            href="/pricing"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/pricing'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Pricing
+          </Link>
+
+          <Link
+            href="/portfolio"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/portfolio'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Portfolio
+          </Link>
+
+          <Link
+            href="/industries"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/industries'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Industries
+          </Link>
+
+          <Link
+            href="/blog"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname.startsWith('/blog')
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Blog
+          </Link>
+
+          <Link
+            href="/contact"
+            className={`px-3 py-2 rounded-full transition-all relative ${
+              pathname === '/contact'
+                ? 'text-primarypurple bg-sectionsoft font-bold'
+                : 'hover:text-primarypurple hover:bg-pagebg'
+            }`}
+          >
+            Contact
+          </Link>
         </nav>
 
         {/* Action Buttons */}
-        <div className="hidden sm:flex items-center space-x-3">
+        <div className="hidden sm:flex items-center space-x-2.5">
           <a
             href={`tel:${COMPANY_INFO.phoneClean}`}
             className="px-3.5 py-2 rounded-full text-xs font-semibold tracking-wide border border-bordercolor bg-white text-textprimary hover:border-primarypurple hover:text-primarypurple transition-all flex items-center gap-1.5 shadow-2xs"
@@ -99,18 +230,18 @@ export default function Navbar() {
           >
             <span aria-hidden="true">📞</span> {COMPANY_INFO.phone}
           </a>
-          <a
-            href="#contact"
-            className="btn-aurora-primary py-2.5 px-5 text-xs"
+          <Link
+            href="/contact"
+            className="btn-aurora-primary py-2 px-4 text-xs font-heading"
           >
-            Get Growth Strategy
-          </a>
+            Get Started
+          </Link>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-xl bg-white border border-bordercolor text-textprimary hover:text-primarypurple transition-colors shadow-2xs"
+          className="xl:hidden p-2 rounded-xl bg-white border border-bordercolor text-textprimary hover:text-primarypurple transition-colors shadow-2xs"
           aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           aria-expanded={mobileMenuOpen}
         >
@@ -126,35 +257,63 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-white/98 backdrop-blur-xl border-b border-bordercolor px-6 py-6 shadow-xl max-h-[85vh] overflow-y-auto">
-          <nav className="flex flex-col space-y-4 text-base font-medium">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-textsecondary hover:text-primarypurple py-1 border-b border-bordercolor/50"
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-4 flex flex-col space-y-3">
-              <a
-                href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="w-full text-center py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-bordercolor text-textprimary bg-sectionsoft"
-              >
-                Call: {COMPANY_INFO.phone}
-              </a>
-              <a
-                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to get a growth strategy for my business.')}
-                target="_blank"
-                rel="noreferrer"
-                className="w-full text-center py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm"
-              >
-                Chat on WhatsApp
-              </a>
+        <div className="xl:hidden fixed inset-0 top-[65px] bg-white z-40 p-6 overflow-y-auto animate-in slide-in-from-top duration-200 flex flex-col justify-between">
+          <div className="space-y-4">
+            <p className="text-xs uppercase font-bold text-textsecondary tracking-widest">
+              Navigation
+            </p>
+            <div className="flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-base font-heading font-bold py-2.5 px-3 rounded-xl transition-colors ${
+                    pathname === link.href
+                      ? 'bg-sectionsoft text-primarypurple'
+                      : 'text-textprimary hover:bg-pagebg'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-          </nav>
+
+            {/* Mobile Services Section */}
+            <div className="pt-4 border-t border-bordercolor">
+              <p className="text-xs uppercase font-bold text-textsecondary tracking-widest mb-3">
+                Core Services
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {SERVICES_LIST.map((svc) => (
+                  <Link
+                    key={svc.slug}
+                    href={`/services/${svc.slug}`}
+                    className="p-2.5 rounded-xl bg-pagebg border border-bordercolor text-xs font-semibold text-textprimary hover:border-primarypurple"
+                  >
+                    <span className="mr-1">{svc.icon}</span> {svc.shortTitle}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Actions */}
+          <div className="pt-6 border-t border-bordercolor space-y-3 mt-6">
+            <Link
+              href="/contact"
+              className="w-full btn-aurora-primary py-3 block text-center"
+            >
+              Get Your Growth Strategy
+            </Link>
+            <a
+              href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule a marketing consultation.')}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-brandmint/10 text-brandmint border border-brandmint/30 hover:bg-brandmint hover:text-white transition-all"
+            >
+              Chat on WhatsApp &rarr;
+            </a>
+          </div>
         </div>
       )}
     </header>

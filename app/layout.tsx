@@ -16,30 +16,31 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'IDM Smart Tech | Social Media Marketing Agency (SMMA) & Growth Agency | Hyderabad',
+    default: 'IDM Smart Tech | Creative Marketing & Intelligent Technology Agency | Hyderabad',
     template: '%s | IDM Smart Tech',
   },
   description:
-    'IDM Smart Tech is a premier Social Media Marketing Agency (SMMA) and creative digital growth agency based in Shamshabad, Hyderabad. Specializing in Instagram management, viral Reels, Meta & Google Ads, creative content, local SEO, and monthly growth packages from ₹4,999.',
+    'We Build Brands. Create Demand. Drive Growth. From creative social media campaigns and performance marketing to search visibility, website development and intelligent automation, IDM Smart Tech helps businesses build a stronger digital presence in Shamshabad, Hyderabad.',
   keywords: [
-    'IDM Smart Tech',
-    'SMMA Hyderabad',
-    'Social Media Marketing Agency Hyderabad',
-    'Instagram Marketing Agency',
-    'Reels Production Agency',
-    'Digital Marketing Agency Shamshabad',
-    'Meta Ads Agency Hyderabad',
-    'Local SEO Hyderabad',
-    'Growth Marketing India',
+    'Digital marketing agency in Hyderabad',
+    'Social media marketing agency in Hyderabad',
+    'SEO company in Hyderabad',
+    'Local SEO services in Hyderabad',
+    'Google Business Profile services in Hyderabad',
+    'Meta Ads agency in Hyderabad',
+    'Google Ads management in Hyderabad',
+    'Website development company in Hyderabad',
+    'AI automation services in Hyderabad',
+    'IDM Smart Tech Shamshabad',
   ],
   metadataBase: new URL('https://idm-inky.vercel.app'),
   openGraph: {
     type: 'website',
     locale: 'en_IN',
     siteName: 'IDM Smart Tech',
-    title: 'IDM Smart Tech | Creative Social Media Marketing & Growth Agency',
+    title: 'IDM Smart Tech | Creative Marketing & Intelligent Technology Agency',
     description:
-      'We Make Brands Impossible to Ignore. Creative social media management, powerful content, performance marketing, and digital growth solutions based in Shamshabad, Hyderabad.',
+      'We Build Brands. Create Demand. Drive Growth. Creative social media, performance marketing, local SEO, website development, and business automation in Hyderabad.',
   },
   robots: {
     index: true,

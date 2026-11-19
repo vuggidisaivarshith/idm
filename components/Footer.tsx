@@ -1,79 +1,150 @@
-'use client';
-
 import React from 'react';
-import { COMPANY_INFO } from '@/lib/constants';
+import Link from 'next/link';
+import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
+import { SERVICES_LIST } from '@/data/services';
+import { INDUSTRIES_LIST } from '@/data/industries';
 
 export default function Footer() {
   return (
-    <footer className="bg-sectionsoft/70 text-textprimary border-t border-bordercolor py-16">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+    <footer className="bg-sectionsoft/80 text-textprimary border-t border-bordercolor pt-16 pb-12 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-14">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center space-x-3">
+            <Link href="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center font-heading font-black text-white text-base shadow-sm">
                 IDM
               </div>
-              <span className="font-heading font-bold text-xl tracking-tight text-textprimary">IDM SMART TECH</span>
-            </div>
+              <span className="font-heading font-bold text-xl tracking-tight text-textprimary">
+                IDM SMART TECH
+              </span>
+            </Link>
+
             <p className="text-sm text-textsecondary max-w-sm leading-relaxed">
-              Hyderabad’s premier Social Media Marketing Agency (SMMA) & Creative Growth Partner. We make brands impossible to ignore through scroll-stopping content, performance ads, local SEO, and custom digital experiences.
+              {COMPANY_INFO.brandStatement}
             </p>
+            <p className="text-xs text-textsecondary max-w-sm leading-relaxed">
+              {COMPANY_INFO.supportingMessage}
+            </p>
+
             <div className="pt-2 text-xs text-primarypurple font-semibold">
-              📍 {COMPANY_INFO.city}, {COMPANY_INFO.state} — {COMPANY_INFO.pincode}
+              📍 {COMPANY_INFO.address}
+            </div>
+
+            <div className="flex items-center space-x-3 pt-2">
+              <a
+                href={COMPANY_INFO.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-primarypurple hover:border-primarypurple transition-colors shadow-2xs"
+                aria-label="Instagram"
+              >
+                📸
+              </a>
+              <a
+                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to inquire about your services.')}
+                target="_blank"
+                rel="noreferrer"
+                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-brandmint hover:border-brandmint transition-colors shadow-2xs"
+                aria-label="WhatsApp"
+              >
+                💬
+              </a>
+              <a
+                href={`tel:${COMPANY_INFO.phoneClean}`}
+                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-royalblue hover:border-royalblue transition-colors shadow-2xs"
+                aria-label="Phone"
+              >
+                📞
+              </a>
             </div>
           </div>
 
-          {/* Navigation & Creative */}
+          {/* Core Services Col */}
           <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">Creative & Growth</h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-textsecondary">
-              <li><a href="#services" className="hover:text-primarypurple transition-colors">Social Media Management</a></li>
-              <li><a href="#services" className="hover:text-primarypurple transition-colors">Content & Reels Production</a></li>
-              <li><a href="#portfolio" className="hover:text-primarypurple transition-colors">Creative Portfolio</a></li>
-              <li><a href="#process" className="hover:text-primarypurple transition-colors">Our 4-Step Process</a></li>
-              <li><a href="#services" className="hover:text-primarypurple transition-colors">Performance Meta & Google Ads</a></li>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
+              Core Services
+            </h4>
+            <ul className="space-y-2 text-xs text-textsecondary">
+              {SERVICES_LIST.slice(0, 6).map((svc) => (
+                <li key={svc.slug}>
+                  <Link href={`/services/${svc.slug}`} className="hover:text-primarypurple transition-colors">
+                    {svc.shortTitle}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/services" className="text-primarypurple font-semibold hover:underline">
+                  All 10 Services &rarr;
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Packages & SEO */}
+          {/* Industries Served */}
           <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">Growth Packages</h4>
-            <ul className="space-y-2.5 text-xs sm:text-sm text-textsecondary">
-              <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Starter Growth (₹4,999/mo)</a></li>
-              <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Growth Plan (₹6,999/mo)</a></li>
-              <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Ultimate Growth (₹9,999/mo)</a></li>
-              <li><a href="#pricing" className="hover:text-primarypurple transition-colors">Pro Plan (₹16,999/mo)</a></li>
-              <li><a href="#gmb" className="hover:text-primarypurple transition-colors">Google Business Profile Fixes</a></li>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
+              Industries
+            </h4>
+            <ul className="space-y-2 text-xs text-textsecondary">
+              {INDUSTRIES_LIST.map((ind) => (
+                <li key={ind.slug}>
+                  <Link href={`/industries#${ind.slug}`} className="hover:text-primarypurple transition-colors">
+                    {ind.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Direct Contact */}
+          {/* Agency & Resources */}
           <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">Connect Directly</h4>
-            <div className="space-y-3 text-xs text-textsecondary leading-relaxed">
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
+              Company & Work
+            </h4>
+            <ul className="space-y-2 text-xs text-textsecondary">
+              <li><Link href="/about" className="hover:text-primarypurple transition-colors">About Agency</Link></li>
+              <li><Link href="/portfolio" className="hover:text-primarypurple transition-colors">Creative Portfolio</Link></li>
+              <li><Link href="/pricing" className="hover:text-primarypurple transition-colors">Growth Packages</Link></li>
+              <li><Link href="/blog" className="hover:text-primarypurple transition-colors">Marketing Insights</Link></li>
+              <li><Link href="/faq" className="hover:text-primarypurple transition-colors">Frequently Asked Questions</Link></li>
+              <li><Link href="/contact" className="hover:text-primarypurple transition-colors">Book Strategy Call</Link></li>
+            </ul>
+          </div>
+
+          {/* Legal & Local Contact */}
+          <div>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
+              Direct Contact
+            </h4>
+            <div className="space-y-2.5 text-xs text-textsecondary leading-relaxed">
               <p>
-                <strong className="text-textprimary block font-medium">Call / WhatsApp:</strong>
-                <a href={`tel:${COMPANY_INFO.phoneClean}`} className="text-primarypurple hover:underline">{COMPANY_INFO.phone}</a>
+                <strong className="text-textprimary block font-medium">Direct WhatsApp:</strong>
+                <a href={getWhatsAppUrl('Hi IDM Smart Tech')} target="_blank" rel="noreferrer" className="text-primarypurple hover:underline">
+                  {COMPANY_INFO.phone}
+                </a>
               </p>
               <p>
-                <strong className="text-textprimary block font-medium">Email:</strong>
-                <a href={`mailto:${COMPANY_INFO.email}`} className="hover:underline">{COMPANY_INFO.email}</a>
+                <strong className="text-textprimary block font-medium">Official Email:</strong>
+                <a href={`mailto:${COMPANY_INFO.email}`} className="hover:underline">
+                  {COMPANY_INFO.email}
+                </a>
               </p>
-              <p>
-                <strong className="text-textprimary block font-medium">Instagram:</strong>
-                <a href={COMPANY_INFO.instagram} target="_blank" rel="noreferrer" className="text-royalblue hover:underline">@idmsmarttech</a>
+              <p className="pt-2">
+                <Link href="/privacy-policy" className="hover:text-primarypurple block">Privacy Policy</Link>
+                <Link href="/terms-and-conditions" className="hover:text-primarypurple block mt-1">Terms & Conditions</Link>
               </p>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-bordercolor flex flex-col sm:flex-row items-center justify-between text-xs text-textsecondary gap-4">
-          <p>© {new Date().getFullYear()} IDM Smart Tech. All Rights Reserved. Creative SMMA based in Shamshabad, Hyderabad.</p>
+        {/* Bottom Strip */}
+        <div className="pt-8 border-t border-bordercolor/80 flex flex-col sm:flex-row items-center justify-between text-xs text-textsecondary gap-4">
+          <p>© {new Date().getFullYear()} IDM Smart Tech. All rights reserved. Creative Marketing & Intelligent Technology Agency — Shamshabad, Hyderabad.</p>
           <div className="flex space-x-6">
-            <a href={COMPANY_INFO.website} target="_blank" rel="noreferrer" className="hover:text-primarypurple transition-colors">Official Domain</a>
-            <a href={COMPANY_INFO.instagram} target="_blank" rel="noreferrer" className="hover:text-primarypurple transition-colors">Instagram</a>
-            <a href="#contact" className="hover:text-primarypurple transition-colors">Request Growth Strategy</a>
+            <Link href="/privacy-policy" className="hover:text-primarypurple transition-colors">Privacy</Link>
+            <Link href="/terms-and-conditions" className="hover:text-primarypurple transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-primarypurple transition-colors">Contact</Link>
           </div>
         </div>
       </div>

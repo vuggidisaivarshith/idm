@@ -92,11 +92,47 @@
 
   /* Translucent Glass Material */
   .glass-aurora {
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(232, 236, 245, 0.85);
+    box-shadow: 0 10px 36px 0 rgba(105, 87, 245, 0.08);
+  }
+
+  /* Glossy Aurora Card */
+  .glossy-card {
+    background: #FFFFFF;
+    position: relative;
+    border: 1px solid #E8ECF5;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 20px -2px rgba(23, 27, 44, 0.04), 0 1px 3px 0 rgba(23, 27, 44, 0.02);
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    overflow: hidden;
+  }
+  .glossy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 30%, rgba(105, 87, 245, 0.35) 50%, rgba(255, 255, 255, 0.9) 70%, transparent 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .glossy-card:hover {
+    box-shadow: 0 20px 40px -10px rgba(105, 87, 245, 0.14), 0 2px 6px 0 rgba(23, 27, 44, 0.04);
+    border-color: rgba(105, 87, 245, 0.35);
+    transform: translateY(-3px);
+  }
+
+  /* Glossy Navbar */
+  .glass-navbar {
+    background: rgba(255, 255, 255, 0.86);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(232, 236, 245, 0.8);
-    box-shadow: 0 8px 32px 0 rgba(105, 87, 245, 0.08);
+    border-bottom: 1px solid rgba(232, 236, 245, 0.8);
+    box-shadow: 0 4px 20px rgba(23, 27, 44, 0.03);
   }
 
   /* 3D Card Hover Tilt */
