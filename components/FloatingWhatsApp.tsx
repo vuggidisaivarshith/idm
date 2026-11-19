@@ -6,14 +6,14 @@ import { getWhatsAppUrl } from '@/lib/constants';
 export default function FloatingWhatsApp() {
   return (
     <aside aria-label="Quick WhatsApp assistance" className="fixed bottom-6 right-6 z-50 flex items-center gap-2 group">
-      <span className="hidden sm:inline-block px-3.5 py-1.5 rounded-full bg-midnight/90 border border-white/10 text-white text-xs font-medium shadow-xl backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="hidden sm:inline-block px-3.5 py-1.5 rounded-full bg-white border border-bordercolor text-textprimary text-xs font-medium shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
         Chat with Growth Expert
       </span>
       <a
         href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to enquire about your digital marketing and technology services.')}
         target="_blank"
         rel="noreferrer"
-        className="w-14 h-14 rounded-full bg-gradient-to-tr from-cyan via-blue to-purple hover:scale-110 active:scale-95 text-white flex items-center justify-center shadow-xl shadow-cyan/25 transition-transform"
+        className="w-14 h-14 rounded-full bg-gradient-to-tr from-brandmint to-royalblue hover:scale-105 active:scale-95 text-white flex items-center justify-center shadow-lg shadow-royalblue/20 transition-transform"
         aria-label="Chat with IDM Smart Tech on WhatsApp"
       >
         <svg className="w-7 h-7 fill-current" viewBox="0 0 24 24" aria-hidden="true">

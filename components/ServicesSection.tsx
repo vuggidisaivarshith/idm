@@ -72,74 +72,70 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="py-24 bg-midnight text-white relative border-t border-white/5">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-purple/10 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-0 right-10 w-80 h-80 bg-cyan/10 rounded-full blur-[130px] pointer-events-none" />
-
+    <section id="services" className="py-24 bg-white text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <div className="max-w-3xl mb-16">
-          <div className="badge-pill mb-4">
+          <div className="badge-aurora mb-4">
             Core Service Offerings
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
             Comprehensive Growth & Tech Solutions for <br />
-            <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple via-blue to-cyan">
+            <span className="font-extrabold text-gradient-aurora">
               Modern Businesses.
             </span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg mt-4 leading-relaxed">
+          <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             We unite AI technologies, search visibility, performance advertising, and custom software engineering to build sustainable growth.
           </p>
         </div>
 
         {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((item, idx) => (
             <div
               key={item.id}
-              className="glass-card p-8 hover:border-cyan/50 hover:shadow-glow-cyan/20 transition-all duration-300 flex flex-col justify-between group"
+              className="aurora-card p-8 sm:p-9 flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <span className="text-3xl p-3.5 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-105 transition-transform" aria-hidden="true">
+                  <span className="text-3xl p-3.5 rounded-2xl bg-sectionsoft border border-primarypurple/15 text-primarypurple" aria-hidden="true">
                     {item.icon}
                   </span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-cyan/10 text-cyan border border-cyan/30">
+                    <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-sectionsoft text-primarypurple border border-primarypurple/20">
                       {item.badge}
                     </span>
-                    <span className="text-xs text-slate-500 font-mono">0{idx + 1}</span>
+                    <span className="text-xs text-textsecondary font-mono">0{idx + 1}</span>
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-heading font-bold text-white group-hover:text-cyan transition-colors">
+                <h3 className="text-2xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-xs uppercase font-semibold text-purple tracking-wider mt-1 mb-3">
+                <p className="text-xs uppercase font-semibold text-royalblue tracking-wider mt-1 mb-3">
                   {item.tag}
                 </p>
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                <p className="text-sm text-textsecondary leading-relaxed mb-6">
                   {item.shortDesc}
                 </p>
 
                 {/* Features List */}
-                <div className="space-y-2.5 pt-4 border-t border-white/10">
+                <div className="space-y-2.5 pt-5 border-t border-bordercolor">
                   {item.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-300">
-                      <span className="text-cyan font-bold mt-0.5" aria-hidden="true">✓</span>
-                      <span>{feat}</span>
+                    <div key={fIdx} className="flex items-start space-x-2.5 text-xs sm:text-sm text-textsecondary">
+                      <span className="text-brandmint font-bold mt-0.5" aria-hidden="true">✓</span>
+                      <span className="text-textprimary/90">{feat}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between">
+              <div className="pt-6 mt-6 border-t border-bordercolor flex items-center justify-between">
                 <a
                   href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to consult regarding ${item.title}.`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-bold uppercase tracking-wider text-cyan hover:text-white transition-colors flex items-center gap-1.5"
+                  className="text-xs font-bold uppercase tracking-wider text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1.5"
                 >
                   Consult on WhatsApp &rarr;
                 </a>

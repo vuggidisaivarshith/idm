@@ -11,149 +11,130 @@
   }
 
   body {
-    @apply bg-midnight text-white font-body;
+    background-color: #F7F9FF;
+    color: #111827;
+    font-family: var(--font-inter), system-ui, sans-serif;
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight;
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: #667085;
   }
 
   ::selection {
-    background-color: rgba(139, 92, 246, 0.45);
-    color: #ffffff;
+    background-color: rgba(99, 91, 255, 0.18);
+    color: #635BFF;
   }
 
-  /* Accessible Focus States */
   :focus-visible {
-    outline: 2px solid #00D4FF;
-    outline-offset: 3px;
-    border-radius: 4px;
+    outline: 2px solid #635BFF;
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 }
 
 @layer components {
-  /* Glassmorphism Utilities */
-  .glass-card {
-    background: rgba(255, 255, 255, 0.025);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
+  /* Soft Aurora Card */
+  .aurora-card {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF5;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 14px rgba(17, 24, 39, 0.04);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .glass-card-hover {
-    @apply glass-card transition-all duration-300;
-  }
-  .glass-card-hover:hover {
-    border-color: rgba(0, 212, 255, 0.4);
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+  .aurora-card:hover {
+    box-shadow: 0 14px 34px rgba(99, 91, 255, 0.1);
+    border-color: rgba(99, 91, 255, 0.25);
     transform: translateY(-2px);
   }
 
-  .glass-panel {
-    background: rgba(13, 17, 30, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Badge Pill */
+  .badge-aurora {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: #EEF2FF;
+    color: #635BFF;
+    border: 1px solid rgba(99, 91, 255, 0.2);
   }
 
-  .glass-input {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+  /* Gradient Text */
+  .text-gradient-aurora {
+    background: linear-gradient(135deg, #635BFF 0%, #4385F5 50%, #20B8D5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Primary Button */
+  .btn-aurora-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #635BFF 0%, #4385F5 100%);
+    box-shadow: 0 4px 16px rgba(99, 91, 255, 0.28);
+    transition: all 0.25s ease;
+  }
+  .btn-aurora-primary:hover {
+    box-shadow: 0 8px 24px rgba(99, 91, 255, 0.38);
+    transform: translateY(-1px);
+    opacity: 0.95;
+  }
+
+  /* Secondary Button */
+  .btn-aurora-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    color: #111827;
+    background: #FFFFFF;
+    border: 1px solid #E8ECF5;
+    box-shadow: 0 2px 8px rgba(17, 24, 39, 0.03);
+    transition: all 0.25s ease;
+  }
+  .btn-aurora-secondary:hover {
+    border-color: rgba(99, 91, 255, 0.35);
+    background: #F7F9FF;
+    color: #635BFF;
+  }
+
+  /* Soft Input */
+  .aurora-input {
+    background: #FFFFFF;
+    border: 1px solid #E8ECF5;
     border-radius: 0.75rem;
-    color: #ffffff;
+    color: #111827;
+    padding: 0.75rem 1rem;
     transition: all 0.2s ease;
   }
-  .glass-input:focus {
-    border-color: #00D4FF;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  .aurora-input:focus {
+    border-color: #635BFF;
+    box-shadow: 0 0 0 3px rgba(99, 91, 255, 0.12);
     outline: none;
-  }
-
-  /* Gradient Borders */
-  .gradient-border {
-    position: relative;
-    border: 1px solid transparent;
-    background-clip: padding-box;
-  }
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, #8B5CF6, #2563EB, #00D4FF, #FF3CAC);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  /* Section badge pill */
-  .badge-pill {
-    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest;
-    background: rgba(0, 212, 255, 0.1);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    color: #00D4FF;
-  }
-
-  /* Gradient Text Utilities */
-  .text-gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-purple via-blue to-cyan;
-  }
-
-  .text-gradient-brand {
-    background: linear-gradient(135deg, #8B5CF6 0%, #2563EB 35%, #00D4FF 70%, #FF3CAC 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .text-gradient-cyan {
-    background: linear-gradient(135deg, #00D4FF 0%, #2563EB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Neon Glow Utilities */
-  .glow-purple {
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.35);
-  }
-  .glow-cyan {
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.35);
-  }
-  .glow-pink {
-    box-shadow: 0 0 30px rgba(255, 60, 172, 0.3);
-  }
-  .glow-green {
-    box-shadow: 0 0 30px rgba(0, 245, 160, 0.3);
-  }
-
-  /* Buttons */
-  .btn-primary {
-    @apply px-7 py-3.5 rounded-full font-bold text-sm tracking-wide text-white;
-    background: linear-gradient(135deg, #8B5CF6, #2563EB);
-    box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
-    transition: all 0.3s ease;
-  }
-  .btn-primary:hover {
-    box-shadow: 0 0 35px rgba(0, 212, 255, 0.45);
-    transform: translateY(-2px);
-  }
-
-  .btn-ghost {
-    @apply px-7 py-3.5 rounded-full font-medium text-sm tracking-wide text-white;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
-  }
-  .btn-ghost:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(0, 212, 255, 0.5);
   }
 }
 

@@ -12,8 +12,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Section spy
-      const sections = ['services', 'gmb', 'pricing', 'tech', 'about', 'contact'];
+      const sections = ['services', 'gmb', 'pricing', 'tech', 'contact'];
       const scrollPosition = window.scrollY + 100;
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -32,7 +31,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -53,40 +51,40 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-midnight/85 backdrop-blur-xl border-b border-white/10 py-3.5 shadow-2xl shadow-purple/10'
-          : 'bg-transparent py-5'
+          ? 'bg-white/90 backdrop-blur-md border-b border-bordercolor py-3.5 shadow-sm'
+          : 'bg-pagebg/80 backdrop-blur-sm py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
         {/* Brand Logo */}
         <a href="#" className="flex items-center space-x-3 group" aria-label="IDM Smart Tech Home">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple via-blue to-cyan flex items-center justify-center shadow-lg shadow-purple/25 group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-brandcyan flex items-center justify-center shadow-md shadow-primarypurple/20 group-hover:scale-105 transition-transform">
             <span className="text-white font-heading font-extrabold text-base tracking-tighter">IDM</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-heading font-bold tracking-tight text-white flex items-center gap-1.5">
+            <span className="text-lg font-heading font-bold tracking-tight text-textprimary flex items-center gap-1.5">
               IDM SMART TECH
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan/15 text-cyan font-semibold border border-cyan/30">AI</span>
+              <span className="text-[10px] px-1.5 py-0.5 rounded bg-sectionsoft text-primarypurple font-semibold border border-primarypurple/20">AI</span>
             </span>
-            <span className="text-[10px] tracking-wider text-slate-400 uppercase font-medium">Digital Marketing & Tech • Hyderabad</span>
+            <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">Digital Marketing & Tech • Hyderabad</span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-300">
+        <nav className="hidden lg:flex items-center space-x-7 text-sm font-medium text-textsecondary">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className={`transition-colors relative py-1 ${
                 activeSection === link.id
-                  ? 'text-cyan font-semibold'
-                  : 'hover:text-cyan'
+                  ? 'text-primarypurple font-semibold'
+                  : 'hover:text-primarypurple'
               }`}
             >
               {link.label}
               {activeSection === link.id && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple to-cyan rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primarypurple to-brandcyan rounded-full" />
               )}
             </a>
           ))}
@@ -96,7 +94,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center space-x-3">
           <a
             href={`tel:${COMPANY_INFO.phoneClean}`}
-            className="px-3.5 py-2 rounded-full text-xs font-semibold tracking-wide border border-white/15 text-slate-200 hover:border-cyan hover:text-cyan transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-full text-xs font-semibold tracking-wide border border-bordercolor bg-white text-textprimary hover:border-primarypurple hover:text-primarypurple transition-all flex items-center gap-1.5 shadow-2xs"
             aria-label="Call IDM Smart Tech"
           >
             <span aria-hidden="true">📞</span> {COMPANY_INFO.phone}
@@ -105,7 +103,7 @@ export default function Navbar() {
             href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to discuss digital growth and technology services for my business.')}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2 rounded-full text-xs font-bold tracking-wide bg-gradient-to-r from-purple via-blue to-cyan text-white hover:opacity-90 transition-all shadow-md shadow-purple/20 hover:scale-105"
+            className="btn-aurora-primary py-2.5 px-5 text-xs"
           >
             Chat on WhatsApp
           </a>
@@ -114,7 +112,7 @@ export default function Navbar() {
         {/* Mobile Hamburger Toggle */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-xl bg-white/5 border border-white/10 text-white hover:text-cyan transition-colors"
+          className="lg:hidden p-2 rounded-xl bg-white border border-bordercolor text-textprimary hover:text-primarypurple transition-colors shadow-2xs"
           aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
           aria-expanded={mobileMenuOpen}
         >
@@ -130,22 +128,22 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-full bg-midnight/95 backdrop-blur-2xl border-b border-white/10 px-6 py-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+        <div className="lg:hidden fixed inset-x-0 top-full bg-white/98 backdrop-blur-xl border-b border-bordercolor px-6 py-6 shadow-xl max-h-[85vh] overflow-y-auto">
           <nav className="flex flex-col space-y-4 text-base font-medium">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-slate-300 hover:text-cyan py-1"
+                className="text-textsecondary hover:text-primarypurple py-1 border-b border-bordercolor/50"
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-white/10 flex flex-col space-y-3">
+            <div className="pt-4 flex flex-col space-y-3">
               <a
                 href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="w-full text-center py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-cyan/40 text-cyan"
+                className="w-full text-center py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase border border-bordercolor text-textprimary bg-sectionsoft"
               >
                 Call: {COMPANY_INFO.phone}
               </a>
@@ -153,7 +151,7 @@ export default function Navbar() {
                 href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to get a consultation.')}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full text-center py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-purple to-blue text-white"
+                className="w-full text-center py-2.5 rounded-full text-xs font-bold tracking-wider uppercase bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm"
               >
                 Instant WhatsApp Chat
               </a>

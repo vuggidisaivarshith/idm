@@ -15,19 +15,19 @@ const technologies = [
 
 export default function TechStackSection() {
   return (
-    <section id="tech" className="py-24 bg-midnight text-white relative border-t border-white/5">
+    <section id="tech" className="py-24 bg-pagebg text-textprimary relative border-t border-bordercolor">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="max-w-3xl mb-16">
-          <div className="badge-pill mb-4">
+          <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
             Engineering & Infrastructure
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
             Built on Modern, <br />
-            <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple via-blue to-cyan">
+            <span className="font-extrabold text-gradient-aurora">
               Production-Grade Technologies
             </span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg mt-4 leading-relaxed">
+          <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
             We avoid slow page builders. We engineer lightweight, conversion-focused websites, robust mobile applications, and reliable business automation systems.
           </p>
         </div>
@@ -37,15 +37,15 @@ export default function TechStackSection() {
           {technologies.map((t) => (
             <div
               key={t.name}
-              className="glass-card p-6 hover:border-cyan/50 hover:shadow-glow-cyan/20 transition-all duration-300 hover:-translate-y-1 group"
+              className="aurora-card p-6 hover:-translate-y-1 group"
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-cyan bg-cyan/10 px-2 py-0.5 rounded border border-cyan/25 inline-block">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block">
                 {t.category}
               </span>
-              <h3 className="text-lg font-heading font-bold text-white mt-3 group-hover:text-cyan transition-colors">
+              <h3 className="text-lg font-heading font-bold text-textprimary mt-3 group-hover:text-primarypurple transition-colors">
                 {t.name}
               </h3>
-              <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+              <p className="text-xs text-textsecondary mt-2 leading-relaxed">
                 {t.desc}
               </p>
             </div>
