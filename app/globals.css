@@ -267,7 +267,8 @@
 /* Custom Sleek Aurora Scrollbars for AI Chat Window & Tabs */
 .chat-scroll-y {
   scrollbar-width: thin;
-  scrollbar-color: rgba(105, 87, 245, 0.4) rgba(240, 238, 255, 0.5);
+  scrollbar-color: rgba(105, 87, 245, 0.45) rgba(240, 238, 255, 0.6);
+  overscroll-behavior-y: contain;
 }
 
 .chat-scroll-y::-webkit-scrollbar {
@@ -275,19 +276,19 @@
 }
 
 .chat-scroll-y::-webkit-scrollbar-track {
-  background: rgba(240, 238, 255, 0.45);
+  background: rgba(240, 238, 255, 0.5);
   border-radius: 9999px;
   margin: 4px 0;
 }
 
 .chat-scroll-y::-webkit-scrollbar-thumb {
-  background: rgba(105, 87, 245, 0.35);
+  background: rgba(105, 87, 245, 0.45);
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .chat-scroll-y::-webkit-scrollbar-thumb:hover {
-  background: rgba(105, 87, 245, 0.65);
+  background: rgba(105, 87, 245, 0.75);
 }
 
 .chat-scroll-x {

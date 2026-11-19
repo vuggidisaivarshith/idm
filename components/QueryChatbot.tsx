@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getWhatsAppUrl } from '@/lib/constants';
 import { CHATBOT_IDENTITY, QUICK_ACTIONS } from '@/lib/chatbotKnowledge';
@@ -184,24 +184,33 @@ export default function QueryChatbot({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const chipsRef = useRef<HTMLDivElement>(null);
+  const isNearBottomRef = useRef(true);
 
-  const scrollToBottom = (smooth = true) => {
+  const scrollToBottom = useCallback((smooth = true) => {
     messagesEndRef.current?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' });
-  };
+  }, []);
 
-  const handleFeedScroll = () => {
+  const handleFeedScroll = useCallback(() => {
     const el = messagesContainerRef.current;
     if (!el) return;
     const distFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
-    setShowScrollBottom(distFromBottom > 100);
+    const isNear = distFromBottom < 80;
+    isNearBottomRef.current = isNear;
+    setShowScrollBottom(!isNear);
+  }, []);
+
+  const handleScrollToLatest = () => {
+    isNearBottomRef.current = true;
+    setShowScrollBottom(false);
+    scrollToBottom(true);
   };
 
-  const checkChipsScroll = () => {
+  const checkChipsScroll = useCallback(() => {
     const el = chipsRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 6);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 6);
-  };
+  }, []);
 
   const scrollChips = (direction: 'left' | 'right') => {
     if (!chipsRef.current) return;
@@ -210,15 +219,82 @@ export default function QueryChatbot({
     setTimeout(checkChipsScroll, 200);
   };
 
+  // Natural Mouse Wheel Scrolling inside Conversation Window
+  // - Directly scrolls el.scrollTop vertically
+  // - e.preventDefault() & e.stopPropagation() prevent background page scrolling
+  // - Leaves main page scrolling untouched when cursor is outside chat
   useEffect(() => {
-    if (isOpen) {
-      scrollToBottom();
-      setTimeout(() => {
-        inputRef.current?.focus();
+    const el = messagesContainerRef.current;
+    if (!el || !isOpen) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      const maxScroll = scrollHeight - clientHeight;
+
+      if (maxScroll <= 0) {
+        // Conversation fits within window; prevent background page scroll
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      // Scroll the chat messages feed directly
+      el.scrollTop += e.deltaY;
+
+      // Prevent propagating wheel events to the background page
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Update state for near-bottom and "Scroll to latest message" button
+      handleFeedScroll();
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+    };
+  }, [isOpen, handleFeedScroll]);
+
+  // Horizontal Wheel Scrolling for Quick Action chips
+  useEffect(() => {
+    const el = chipsRef.current;
+    if (!el || !isOpen) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0 || e.deltaX !== 0) {
+        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        el.scrollLeft += delta;
+        e.preventDefault();
+        e.stopPropagation();
         checkChipsScroll();
-      }, 300);
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+    };
+  }, [isOpen, checkChipsScroll]);
+
+  // Auto-scroll logic:
+  // - When opened, scroll to bottom and focus input
+  // - When messages change:
+  //   * If visitor was already near the bottom, smoothly auto-scroll to latest
+  //   * If visitor is reading older messages, do NOT forcibly pull them down; show "Scroll to latest message" button
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (isNearBottomRef.current) {
+      scrollToBottom(true);
+    } else {
+      setShowScrollBottom(true);
     }
-  }, [messages, isOpen]);
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+      checkChipsScroll();
+    }, 250);
+  }, [messages, isOpen, scrollToBottom, checkChipsScroll]);
 
   // Persist conversation to localStorage
   useEffect(() => {
@@ -233,6 +309,8 @@ export default function QueryChatbot({
 
   const handleResetConversation = () => {
     setMessages(INITIAL_MESSAGES);
+    isNearBottomRef.current = true;
+    setShowScrollBottom(false);
     if (typeof window !== 'undefined') {
       localStorage.removeItem('idm_chatbot_messages');
     }
@@ -261,6 +339,11 @@ export default function QueryChatbot({
     setMessages(updatedMessages);
     setInputText('');
     setIsTyping(true);
+
+    // User explicitly sent a message -> scroll into view
+    isNearBottomRef.current = true;
+    setShowScrollBottom(false);
+    setTimeout(() => scrollToBottom(true), 50);
 
     try {
       const response = await fetch('/api/chat', {
@@ -317,11 +400,12 @@ export default function QueryChatbot({
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 24, scale: 0.95 }}
           transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[410px] max-w-[420px] h-[580px] max-h-[82vh] rounded-3xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-[0_20px_60px_-12px_rgba(16,28,50,0.18),0_0_0_1px_rgba(105,87,245,0.15)] flex flex-col overflow-hidden text-textprimary"
+          onWheel={(e) => e.stopPropagation()}
+          className="fixed bottom-20 sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[410px] max-w-[420px] h-[calc(100dvh-6.5rem)] sm:h-[580px] max-h-[84vh] sm:max-h-[82dvh] rounded-3xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-[0_20px_60px_-12px_rgba(16,28,50,0.18),0_0_0_1px_rgba(105,87,245,0.15)] flex flex-col overflow-hidden text-textprimary"
           role="dialog"
           aria-label="IDM Smart Assistant Conversation Window"
         >
-          {/* ================= HEADER ================= */}
+          {/* ================= HEADER (FIXED AT TOP) ================= */}
           <div className="px-4 py-3.5 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan text-white flex items-center justify-between shadow-xs select-none shrink-0">
             <div className="flex items-center space-x-3">
               <div className="relative">
@@ -366,7 +450,7 @@ export default function QueryChatbot({
             </div>
           </div>
 
-          {/* ================= QUICK ACTION PILLS CAROUSEL (SCROLLABLE TAB STRIP) ================= */}
+          {/* ================= QUICK ACTION TOPICS STRIP (HORIZONTAL SCROLLABLE) ================= */}
           <div className="relative bg-sectionsoft/70 border-b border-bordercolor/80 shrink-0">
             {/* Scroll Left Button */}
             {canScrollLeft && (
@@ -384,11 +468,6 @@ export default function QueryChatbot({
             <div
               ref={chipsRef}
               onScroll={checkChipsScroll}
-              onWheel={(e) => {
-                if (e.deltaY !== 0) {
-                  e.currentTarget.scrollLeft += e.deltaY;
-                }
-              }}
               className="px-3 py-2 flex items-center gap-1.5 overflow-x-auto chat-scroll-x scroll-smooth select-none"
             >
               {QUICK_ACTIONS.map((action) => (
@@ -415,11 +494,16 @@ export default function QueryChatbot({
             )}
           </div>
 
-          {/* ================= MESSAGES FEED (SCROLLABLE CHAT WINDOW) ================= */}
+          {/* ================= CONVERSATION MESSAGES (INDEPENDENTLY SCROLLABLE FEED) ================= */}
           <div
             ref={messagesContainerRef}
             onScroll={handleFeedScroll}
-            className="flex-1 min-h-0 overflow-y-auto overscroll-contain chat-scroll-y p-4 space-y-3.5 text-xs relative"
+            className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden overscroll-contain chat-scroll-y p-4 space-y-3.5 text-xs relative select-text"
+            style={{
+              overscrollBehaviorY: 'contain',
+              touchAction: 'pan-y',
+              WebkitOverflowScrolling: 'touch',
+            }}
           >
             {messages.map((msg) => (
               <div
@@ -503,18 +587,19 @@ export default function QueryChatbot({
               </div>
             )}
 
-            {/* Floating Jump to Latest Button when Scrolled Up */}
+            {/* Floating "Scroll to latest message" Button when Reader is looking at older messages */}
             {showScrollBottom && (
               <div className="sticky bottom-2 left-0 right-0 flex justify-center z-30 pointer-events-none">
                 <button
-                  onClick={() => scrollToBottom(true)}
-                  className="pointer-events-auto px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/40 text-primarypurple font-bold text-[11px] shadow-lg shadow-primarypurple/15 flex items-center gap-1.5 hover:bg-sectionsoft active:scale-95 transition-all"
-                  aria-label="Scroll to latest messages"
+                  onClick={handleScrollToLatest}
+                  className="pointer-events-auto px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/40 text-primarypurple font-bold text-[11px] shadow-lg shadow-primarypurple/20 flex items-center gap-1.5 hover:bg-sectionsoft hover:scale-105 active:scale-95 transition-all"
+                  aria-label="Scroll to latest message"
+                  title="Scroll to latest message"
                 >
                   <svg className="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
-                  <span>Jump to latest</span>
+                  <span>Scroll to latest message</span>
                 </button>
               </div>
             )}
@@ -522,7 +607,7 @@ export default function QueryChatbot({
             <div ref={messagesEndRef} />
           </div>
 
-          {/* ================= INPUT FOOTER ================= */}
+          {/* ================= MESSAGE INPUT (FIXED AT BOTTOM) ================= */}
           <div className="p-3 bg-white border-t border-bordercolor flex flex-col gap-2 shrink-0">
             <form
               onSubmit={(e) => {
