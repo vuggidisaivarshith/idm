@@ -29,7 +29,7 @@ export default function FloatingContactDock() {
       >
         {/* ================= 1. EMAIL BUTTON ================= */}
         <div className="relative group">
-          <span className="hidden sm:inline-block absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
             ✉️ Email Us
           </span>
 
@@ -55,7 +55,7 @@ export default function FloatingContactDock() {
 
         {/* ================= 2. WHATSAPP BUTTON ================= */}
         <div className="relative group">
-          <span className="hidden sm:inline-block absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
             💬 WhatsApp Us
           </span>
 
@@ -75,11 +75,14 @@ export default function FloatingContactDock() {
 
         {/* ================= 3. QUERY CHATBOT WITH AVATAR ================= */}
         <div className="relative group">
-          {/* Subtle Callout speech bubble when closed */}
+          {/* Callout speech bubble above avatar (Never overlaps Email or WhatsApp buttons) */}
           {!chatOpen && (
-            <span className="hidden md:inline-block absolute right-full mr-2.5 top-1/2 -translate-y-1/2 px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/30 text-textprimary text-[11px] font-bold shadow-lg shadow-primarypurple/10 opacity-90 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              <span className="text-primarypurple">Ask IDM AI</span> 👋
-            </span>
+            <div className="hidden sm:flex flex-col items-center absolute bottom-full mb-2.5 right-0 pointer-events-none">
+              <span className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/30 text-textprimary text-[11px] font-bold shadow-lg shadow-primarypurple/15 whitespace-nowrap">
+                <span className="text-primarypurple">Ask IDM AI</span> 👋
+              </span>
+              <span className="w-2 h-2 bg-white border-r border-b border-primarypurple/30 rotate-45 -mt-1 shadow-2xs" />
+            </div>
           )}
 
           <button

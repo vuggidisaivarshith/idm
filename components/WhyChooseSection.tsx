@@ -158,9 +158,9 @@ export default function WhyChooseSection() {
           </p>
         </ScrollReveal>
 
-        {/* 4 3D Flippable Cards: 2x2 Grid */}
-        <StaggerContainer staggerDelay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-5xl mx-auto">
+        {/* 4 3D Flippable Cards: All 4 in a Single Row on Desktop */}
+        <StaggerContainer staggerDelay={0.08}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5 items-stretch max-w-7xl mx-auto">
             {advantageCards.map((card, idx) => {
               const isFlipped = !!flippedCards[idx];
 
@@ -168,7 +168,7 @@ export default function WhyChooseSection() {
                 <motion.div
                   key={card.id}
                   variants={fadeUpVariants}
-                  className="h-[410px] sm:h-[390px] w-full [perspective:1200px]"
+                  className="h-[430px] sm:h-[420px] lg:h-[430px] w-full [perspective:1200px]"
                   onMouseEnter={() => handleHover(idx, true)}
                   onMouseLeave={() => handleHover(idx, false)}
                 >
@@ -194,47 +194,47 @@ export default function WhyChooseSection() {
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden',
                       }}
-                      className="absolute inset-0 w-full h-full rounded-3xl bg-white/95 backdrop-blur-md border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 p-7 sm:p-8 flex flex-col justify-between overflow-hidden group hover:border-primarypurple/40 hover:shadow-soft-lg transition-colors"
+                      className="absolute inset-0 w-full h-full rounded-3xl bg-white/95 backdrop-blur-md border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 p-5 sm:p-6 flex flex-col justify-between overflow-hidden group hover:border-primarypurple/40 hover:shadow-soft-lg transition-colors"
                     >
                       {/* Top gradient reflective highlight bar */}
                       <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
 
                       <div>
                         {/* Step Number & Emblem */}
-                        <div className="flex items-center justify-between mb-5">
-                          <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-xl sm:text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
                             {card.number}
                           </span>
 
                           <div
-                            className={`w-12 h-12 rounded-2xl ${card.iconBg} border flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
+                            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${card.iconBg} border flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
                           >
                             {card.icon}
                           </div>
                         </div>
 
                         {/* Badge */}
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block mb-3">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-0.5 rounded-full border border-primarypurple/15 inline-block mb-2.5">
                           {card.badge}
                         </span>
 
                         {/* Heading 1st (Always visible) */}
-                        <h3 className="text-xl sm:text-2xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors duration-200 mb-3 leading-snug">
+                        <h3 className="text-base sm:text-lg font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors duration-200 mb-2 leading-snug">
                           {card.title}
                         </h3>
 
                         {/* Summary */}
-                        <p className="text-xs sm:text-sm text-textsecondary leading-relaxed line-clamp-3">
+                        <p className="text-xs text-textsecondary leading-relaxed line-clamp-4">
                           {card.summary}
                         </p>
                       </div>
 
                       {/* Footer with Flip Action Indicator */}
-                      <div className="pt-4 border-t border-bordercolor/80 flex items-center justify-between text-xs">
-                        <span className="text-textsecondary font-medium">Agency Advantage</span>
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-sectionsoft/80 border border-primarypurple/20 text-primarypurple font-bold text-[11px] shadow-2xs group-hover:bg-primarypurple group-hover:text-white transition-all duration-200">
+                      <div className="pt-3.5 border-t border-bordercolor/80 flex items-center justify-between text-xs">
+                        <span className="text-textsecondary text-[11px] font-medium">Advantage</span>
+                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sectionsoft/80 border border-primarypurple/20 text-primarypurple font-bold text-[10px] shadow-2xs group-hover:bg-primarypurple group-hover:text-white transition-all duration-200">
                           <span>Flip Details</span>
-                          <span className="text-sm leading-none animate-spin-slow">↻</span>
+                          <span className="text-xs leading-none animate-spin-slow">↻</span>
                         </div>
                       </div>
                     </div>
@@ -246,58 +246,58 @@ export default function WhyChooseSection() {
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
                       }}
-                      className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-sectionsoft/40 to-white backdrop-blur-md border border-primarypurple/40 shadow-soft-xl ring-1 ring-primarypurple/20 p-7 sm:p-8 flex flex-col justify-between overflow-hidden"
+                      className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-sectionsoft/40 to-white backdrop-blur-md border border-primarypurple/40 shadow-soft-xl ring-1 ring-primarypurple/20 p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
                     >
                       {/* Top gradient reflective highlight bar */}
                       <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
 
                       <div>
                         {/* Header Row: Badge & Flip Back cue */}
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-[10px] font-extrabold uppercase tracking-widest text-primarypurple bg-white px-2.5 py-1 rounded-full border border-primarypurple/25 shadow-2xs">
-                            Verified Advantages
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-[9px] font-extrabold uppercase tracking-wider text-primarypurple bg-white px-2 py-0.5 rounded-full border border-primarypurple/25 shadow-2xs">
+                            Verified Points
                           </span>
 
-                          <span className="text-[11px] font-semibold text-textsecondary/80 flex items-center gap-1 hover:text-primarypurple transition-colors">
-                            <span>↺ Flip Back</span>
+                          <span className="text-[10px] font-semibold text-textsecondary/80 flex items-center gap-0.5 hover:text-primarypurple transition-colors">
+                            <span>↺ Flip</span>
                           </span>
                         </div>
 
                         {/* Title */}
-                        <h4 className="text-base sm:text-lg font-heading font-extrabold text-textprimary mb-4 leading-tight">
+                        <h4 className="text-sm sm:text-base font-heading font-bold text-textprimary mb-3 leading-snug">
                           {card.title}
                         </h4>
 
                         {/* Operational Advantages List */}
-                        <div className="space-y-2.5">
+                        <div className="space-y-2">
                           {card.operationalDetails.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2.5 text-xs text-textsecondary">
+                            <div key={pIdx} className="flex items-start space-x-2 text-[11px] text-textsecondary">
                               <span
-                                className="w-4 h-4 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5"
+                                className="w-3.5 h-3.5 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5"
                                 aria-hidden="true"
                               >
                                 ✓
                               </span>
-                              <span className="leading-snug text-textprimary font-medium">{point}</span>
+                              <span className="leading-tight text-textprimary font-medium">{point}</span>
                             </div>
                           ))}
                         </div>
                       </div>
 
                       {/* Footer on Back */}
-                      <div className="pt-4 border-t border-bordercolor flex items-center justify-between text-xs">
+                      <div className="pt-3 border-t border-bordercolor flex items-center justify-between text-xs">
                         <a
                           href={whatsappConsultationUrl}
                           target="_blank"
                           rel="noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="font-bold text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1"
+                          className="font-bold text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1 text-[11px]"
                         >
-                          <span>Consult on This</span>
+                          <span>Consult</span>
                           <span>&rarr;</span>
                         </a>
 
-                        <span className="text-[11px] text-textsecondary/70">Tap card to return</span>
+                        <span className="text-[10px] text-textsecondary/70">Tap to return</span>
                       </div>
                     </div>
                   </motion.div>
