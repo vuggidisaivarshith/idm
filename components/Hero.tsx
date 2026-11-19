@@ -26,8 +26,15 @@ export default function Hero() {
       <div className="absolute top-1/3 right-10 w-[480px] h-[480px] bg-brandcyan/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[380px] h-[380px] bg-softpink/10 rounded-full blur-[130px] pointer-events-none" />
 
+      {/* 3D WebGL Canvas Layer: Liquid Aurora 3D Environment spanning the entire hero section */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
+        <Suspense fallback={null}>
+          <TechCanvas />
+        </Suspense>
+      </div>
+
       {/* Seamless bottom transition into the partnership section */}
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-pagebg via-pagebg/60 to-transparent pointer-events-none z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-pagebg via-pagebg/80 to-transparent pointer-events-none z-10" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-10 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -104,13 +111,6 @@ export default function Hero() {
 
           {/* Right Column: Layered Cinematic 3D Scene + Social Media Showcase */}
           <div className="lg:col-span-6 relative flex justify-center items-center min-h-[460px] sm:min-h-[520px]">
-            {/* 3D WebGL Canvas Layer: Liquid Aurora 3D Environment with generous safe frame */}
-            <div className="absolute -inset-8 sm:-inset-14 w-[calc(100%+4rem)] sm:w-[calc(100%+7rem)] h-[calc(100%+4rem)] sm:h-[calc(100%+7rem)] z-10 flex items-center justify-center pointer-events-none">
-              <Suspense fallback={null}>
-                <TechCanvas />
-              </Suspense>
-            </div>
-
             {/* Overlay Layer: Interactive 3D Social Media Showcase Cards */}
             <ScrollReveal variant="scale" delay={0.3} className="relative z-20 w-full pointer-events-auto">
               <SocialMediaShowcase />

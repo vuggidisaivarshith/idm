@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useMemo, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, PerspectiveCamera, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -360,25 +360,85 @@ function AuroraAtmosphereLighting() {
 }
 
 /**
+ * Responsive Camera Framing
+ * Dynamically adjusts camera frustum for desktop, tablet, and mobile breakpoints
+ */
+function ResponsiveCamera({ isMobile, isTablet }: { isMobile: boolean; isTablet: boolean }) {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    if (camera instanceof THREE.PerspectiveCamera) {
+      if (isMobile) {
+        camera.position.set(0, 0, 11.2);
+        camera.fov = 48;
+      } else if (isTablet) {
+        camera.position.set(0, 0, 10.4);
+        camera.fov = 44;
+      } else {
+        camera.position.set(0, 0, 9.6);
+        camera.fov = 42;
+      }
+      camera.updateProjectionMatrix();
+    }
+  }, [camera, isMobile, isTablet]);
+
+  return null;
+}
+
+/**
  * Main 3D Environment Scene
  * Handles mouse parallax interpolation, depth layering, and respects prefers-reduced-motion
  */
 function LiquidAuroraScene({
   isMobile,
+  isTablet,
   prefersReducedMotion,
 }: {
   isMobile: boolean;
+  isTablet: boolean;
   prefersReducedMotion: boolean;
 }) {
   const sceneGroupRef = useRef<THREE.Group>(null);
+  const { viewport, size } = useThree();
+
+  const isDesktop = size.width >= 1024;
+
+  // Responsive scene placement and scale so decorative elements never touch canvas borders
+  const { posX, posY, scale } = useMemo(() => {
+    if (isDesktop) {
+      // Desktop: Place center behind the right column (lg:col-span-6)
+      // Container is max-w-7xl (1280px) with responsive horizontal padding
+      const maxContainerWidth = 1280;
+      const containerPadding = size.width >= 1280 ? 80 : 48;
+      const actualContainerWidth = Math.min(maxContainerWidth, size.width - containerPadding);
+      // Right column center is offset from screen center by 25% of container width
+      const colOffsetPx = actualContainerWidth * 0.25;
+      const x = (colOffsetPx / size.width) * viewport.width;
+
+      // Proportional scale on desktop
+      const s = Math.min(1.0, Math.max(0.85, (size.width / 1440) * 1.0));
+      return { posX: x, posY: 0.05, scale: s };
+    } else if (isTablet) {
+      // Tablet portrait: centered horizontally, aligned behind the showcase cards
+      // Vertical offset: showcase is positioned below hero copy
+      const y = -Math.min(2.0, (200 / size.height) * viewport.height);
+      return { posX: 0, posY: y, scale: 0.8 };
+    } else {
+      // Mobile (< 768px): centered horizontally, scaled safely within mobile viewport width
+      const y = -Math.min(2.4, (230 / size.height) * viewport.height);
+      // Ensure the 3D scene diameter comfortably fits within mobile viewport width
+      const safeMobileScale = Math.min(0.62, (viewport.width * 0.75) / 3.2);
+      return { posX: 0, posY: y, scale: safeMobileScale };
+    }
+  }, [isDesktop, isTablet, size.width, size.height, viewport.width, viewport.height]);
 
   useFrame((state) => {
     if (!sceneGroupRef.current || prefersReducedMotion) return;
 
     if (!isMobile) {
       // Gentle, high-damping mouse parallax on desktop
-      const targetY = state.pointer.x * 0.22 + state.clock.elapsedTime * 0.035;
-      const targetX = -state.pointer.y * 0.14;
+      const targetY = state.pointer.x * 0.18 + state.clock.elapsedTime * 0.035;
+      const targetX = -state.pointer.y * 0.12;
 
       sceneGroupRef.current.rotation.y = THREE.MathUtils.lerp(
         sceneGroupRef.current.rotation.y,
@@ -397,52 +457,54 @@ function LiquidAuroraScene({
   });
 
   return (
-    <group ref={sceneGroupRef}>
-      <Float
-        speed={prefersReducedMotion ? 0 : 1.3}
-        rotationIntensity={prefersReducedMotion ? 0 : 0.18}
-        floatIntensity={prefersReducedMotion ? 0 : 0.38}
-      >
-        {/* Dynamic Aurora Atmospheric Lighting */}
-        <AuroraAtmosphereLighting />
+    <group position={[posX, posY, 0]} scale={[scale, scale, scale]}>
+      <group ref={sceneGroupRef}>
+        <Float
+          speed={prefersReducedMotion ? 0 : 1.3}
+          rotationIntensity={prefersReducedMotion ? 0 : 0.18}
+          floatIntensity={prefersReducedMotion ? 0 : 0.38}
+        >
+          {/* Dynamic Aurora Atmospheric Lighting */}
+          <AuroraAtmosphereLighting />
 
-        {/* Element A: Flowing Liquid 3D Ribbons */}
-        <LiquidRibbons isMobile={isMobile} />
+          {/* Element A: Flowing Liquid 3D Ribbons */}
+          <LiquidRibbons isMobile={isMobile} />
 
-        {/* Element B: 3D Orbital Rings */}
-        <OrbitalRings isMobile={isMobile} />
+          {/* Element B: 3D Orbital Rings */}
+          <OrbitalRings isMobile={isMobile} />
 
-        {/* Element C: Floating Glass Spheres */}
-        <FloatingGlassSpheres isMobile={isMobile} />
+          {/* Element C: Floating Glass Spheres */}
+          <FloatingGlassSpheres isMobile={isMobile} />
 
-        {/* Element E: Depth Particles */}
-        <Sparkles
-          count={isMobile ? 12 : 24}
-          scale={7.5}
-          size={isMobile ? 1.6 : 2.0}
-          speed={prefersReducedMotion ? 0 : 0.24}
-          opacity={0.45}
-          color="#6957F5"
-        />
-        <Sparkles
-          count={isMobile ? 10 : 20}
-          scale={8.8}
-          size={isMobile ? 1.4 : 1.8}
-          speed={prefersReducedMotion ? 0 : 0.2}
-          opacity={0.38}
-          color="#39BBD5"
-        />
-        {!isMobile && (
+          {/* Element E: Depth Particles */}
           <Sparkles
-            count={12}
-            scale={6.8}
-            size={1.6}
-            speed={prefersReducedMotion ? 0 : 0.16}
-            opacity={0.3}
-            color="#F18BB5"
+            count={isMobile ? 12 : 24}
+            scale={7.5}
+            size={isMobile ? 1.6 : 2.0}
+            speed={prefersReducedMotion ? 0 : 0.24}
+            opacity={0.45}
+            color="#6957F5"
           />
-        )}
-      </Float>
+          <Sparkles
+            count={isMobile ? 10 : 20}
+            scale={8.8}
+            size={isMobile ? 1.4 : 1.8}
+            speed={prefersReducedMotion ? 0 : 0.2}
+            opacity={0.38}
+            color="#39BBD5"
+          />
+          {!isMobile && (
+            <Sparkles
+              count={12}
+              scale={6.8}
+              size={1.6}
+              speed={prefersReducedMotion ? 0 : 0.16}
+              opacity={0.3}
+              color="#F18BB5"
+            />
+          )}
+        </Float>
+      </group>
     </group>
   );
 }
@@ -451,15 +513,18 @@ export default function TechCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Detect mobile viewport
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    // Detect viewport size
+    const checkViewport = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1024);
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
 
     // Detect prefers-reduced-motion
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -472,7 +537,7 @@ export default function TechCanvas() {
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     if (containerRef.current) {
@@ -480,7 +545,7 @@ export default function TechCanvas() {
     }
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener('resize', checkViewport);
       motionQuery.removeEventListener('change', motionListener);
       observer.disconnect();
     };
@@ -489,11 +554,11 @@ export default function TechCanvas() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-full min-h-[440px] sm:min-h-[520px] relative pointer-events-none"
+      className="w-full h-full relative pointer-events-none"
       style={{
-        // Soft radial feathering prevents hard rectangular edge cutoff at all boundaries
-        maskImage: 'radial-gradient(ellipse 90% 86% at 50% 50%, black 58%, rgba(0,0,0,0.65) 80%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 90% 86% at 50% 50%, black 58%, rgba(0,0,0,0.65) 80%, transparent 100%)',
+        // Soft outer feathering prevents hard rectangular edge cutoff at all boundaries
+        maskImage: 'radial-gradient(ellipse 95% 90% at 50% 50%, black 75%, rgba(0,0,0,0.6) 88%, transparent 100%)',
+        WebkitMaskImage: 'radial-gradient(ellipse 95% 90% at 50% 50%, black 75%, rgba(0,0,0,0.6) 88%, transparent 100%)',
       }}
     >
       {isInView && (
@@ -505,8 +570,13 @@ export default function TechCanvas() {
           }}
           dpr={isMobile ? [1, 1.25] : [1, 1.5]}
         >
-          <PerspectiveCamera makeDefault position={[0, 0, 9.4]} fov={isMobile ? 48 : 42} />
-          <LiquidAuroraScene isMobile={isMobile} prefersReducedMotion={prefersReducedMotion} />
+          <PerspectiveCamera makeDefault position={[0, 0, 9.6]} fov={isMobile ? 48 : 42} />
+          <ResponsiveCamera isMobile={isMobile} isTablet={isTablet} />
+          <LiquidAuroraScene
+            isMobile={isMobile}
+            isTablet={isTablet}
+            prefersReducedMotion={prefersReducedMotion}
+          />
         </Canvas>
       )}
     </div>
