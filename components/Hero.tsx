@@ -101,8 +101,8 @@ export default function Hero() {
 
           {/* Right Column: Layered Cinematic 3D Scene + Social Media Showcase */}
           <div className="lg:col-span-6 relative flex justify-center items-center min-h-[460px] sm:min-h-[520px]">
-            {/* 3D WebGL Canvas Layer (Floating Iridescent Glass Orb) */}
-            <div className="absolute inset-0 w-full h-full z-10 flex items-center justify-center pointer-events-none sm:pointer-events-auto">
+            {/* 3D WebGL Canvas Layer: Liquid Aurora 3D Environment */}
+            <div className="absolute -inset-6 sm:-inset-12 w-[calc(100%+3rem)] sm:w-[calc(100%+6rem)] h-[calc(100%+3rem)] sm:h-[calc(100%+6rem)] z-10 flex items-center justify-center pointer-events-none sm:pointer-events-auto overflow-visible">
               <Suspense fallback={null}>
                 <TechCanvas />
               </Suspense>
