@@ -1,31 +1,32 @@
 'use client';
 
 import React from 'react';
+import { COMPANY_INFO } from '@/lib/constants';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#04060A] text-white border-t border-white/10 py-16">
+    <footer className="bg-[#05070C] text-white border-t border-white/10 py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center font-black text-white text-base">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple via-blue to-cyan flex items-center justify-center font-heading font-black text-white text-base">
                 IDM
               </div>
-              <span className="font-bold text-xl tracking-tight text-white">IDM SMART TECH</span>
+              <span className="font-heading font-bold text-xl tracking-tight text-white">IDM SMART TECH</span>
             </div>
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               Hyderabad’s premier AI-powered digital marketing and modern technology agency. Delivering measurable ROI through local SEO, Google Ads, custom web/app development, and business automations.
             </p>
-            <div className="pt-2 text-xs text-cyan-400 font-medium">
-              📍 Shamshabad, Hyderabad, Telangana — 501218
+            <div className="pt-2 text-xs text-cyan font-medium">
+              📍 {COMPANY_INFO.city}, {COMPANY_INFO.state} — {COMPANY_INFO.pincode}
             </div>
           </div>
 
           {/* Core Services */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">GMB & Local SEO</h4>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-cyan mb-4">GMB & Local SEO</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-400">
               <li><a href="#gmb" className="hover:text-white transition">New GMB Creation (₹4,000)</a></li>
               <li><a href="#gmb" className="hover:text-white transition">Profile Reinstatement (₹2,999)</a></li>
@@ -35,33 +36,33 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Marketing & Tech */}
+          {/* Growth Packages */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">Tech & Marketing</h4>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-purple mb-4">Growth Packages</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-400">
               <li><a href="#pricing" className="hover:text-white transition">Starter Growth (₹4,999/mo)</a></li>
-              <li><a href="#services" className="hover:text-white transition">Google & Meta Ads (PPC)</a></li>
-              <li><a href="#tech" className="hover:text-white transition">Web & App Development</a></li>
-              <li><a href="#tech" className="hover:text-white transition">Custom CRM / ERP Software</a></li>
+              <li><a href="#pricing" className="hover:text-white transition">Growth Plan (₹6,999/mo)</a></li>
+              <li><a href="#pricing" className="hover:text-white transition">Ultimate Growth (₹9,999/mo)</a></li>
+              <li><a href="#pricing" className="hover:text-white transition">Pro Plan (₹16,999/mo)</a></li>
               <li><a href="#services" className="hover:text-white transition">AI WhatsApp Automation</a></li>
             </ul>
           </div>
 
           {/* Direct Contact */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">Connect Directly</h4>
+            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-pink mb-4">Connect Directly</h4>
             <div className="space-y-3 text-xs text-slate-400 leading-relaxed">
               <p>
-                <strong className="text-white block">Call / WhatsApp:</strong>
-                <a href="tel:+918519837818" className="text-cyan-400 hover:underline">+91 85198 37818</a>
+                <strong className="text-white block font-medium">Call / WhatsApp:</strong>
+                <a href={`tel:${COMPANY_INFO.phoneClean}`} className="text-cyan hover:underline">{COMPANY_INFO.phone}</a>
               </p>
               <p>
-                <strong className="text-white block">Email:</strong>
-                info@idmsmarttech.com
+                <strong className="text-white block font-medium">Email:</strong>
+                <a href={`mailto:${COMPANY_INFO.email}`} className="hover:underline">{COMPANY_INFO.email}</a>
               </p>
               <p>
-                <strong className="text-white block">Instagram:</strong>
-                <a href="https://www.instagram.com/idmsmarttech/" target="_blank" rel="noreferrer" className="text-purple-400 hover:underline">@idmsmarttech</a>
+                <strong className="text-white block font-medium">Instagram:</strong>
+                <a href={COMPANY_INFO.instagram} target="_blank" rel="noreferrer" className="text-purple hover:underline">@idmsmarttech</a>
               </p>
             </div>
           </div>
@@ -70,9 +71,9 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <p>© {new Date().getFullYear()} IDM Smart Tech. All Rights Reserved. Based in Shamshabad, Hyderabad.</p>
           <div className="flex space-x-6">
-            <a href="https://www.idmsmarttech.com/" target="_blank" rel="noreferrer" className="hover:text-white transition">Official Domain</a>
-            <a href="https://www.instagram.com/idmsmarttech/" target="_blank" rel="noreferrer" className="hover:text-white transition">Instagram</a>
-            <a href="#contact" className="hover:text-white transition">Request Audit</a>
+            <a href={COMPANY_INFO.website} target="_blank" rel="noreferrer" className="hover:text-white transition">Official Domain</a>
+            <a href={COMPANY_INFO.instagram} target="_blank" rel="noreferrer" className="hover:text-white transition">Instagram</a>
+            <a href="#contact" className="hover:text-white transition">Request Free Audit</a>
           </div>
         </div>
       </div>
