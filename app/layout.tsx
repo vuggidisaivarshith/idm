@@ -49,6 +49,7 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroll from '@/components/animations/SmoothScroll';
+import FloatingContactDock from '@/components/FloatingContactDock';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-pagebg text-textprimary antialiased min-h-screen flex flex-col font-body">
         <SmoothScroll />
         {children}
+        <FloatingContactDock />
       </body>
     </html>
   );
