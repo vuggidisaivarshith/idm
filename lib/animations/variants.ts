@@ -176,6 +176,95 @@ export const modalVariants: Variants = {
   },
 };
 
+// Blur to focus reveal for headings and highlights
+export const blurToFocusVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    filter: 'blur(8px)',
+    y: 12,
+  },
+  visible: (customDelay: number = 0) => ({
+    opacity: 1,
+    filter: 'blur(0px)',
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay: customDelay,
+      ease: EASINGS.aurora,
+    },
+  }),
+};
+
+// Line mask reveal for major headings
+export const lineRevealContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+export const lineRevealItemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: '100%',
+  },
+  visible: {
+    opacity: 1,
+    y: '0%',
+    transition: {
+      duration: 0.52,
+      ease: EASINGS.aurora,
+    },
+  },
+};
+
+// Word by word reveal for Hero headline
+export const wordRevealContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+export const wordRevealItemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+    filter: 'blur(4px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.45,
+      ease: EASINGS.aurora,
+    },
+  },
+};
+
+// Image mask clip path reveal
+export const imageMaskVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 1.06,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.65,
+      ease: EASINGS.aurora,
+    },
+  },
+};
+
 // Reduced motion fallbacks
 export const reducedMotionVariants: Variants = {
   hidden: { opacity: 0 },

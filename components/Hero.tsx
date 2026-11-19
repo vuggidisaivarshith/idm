@@ -6,6 +6,7 @@ import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
 import SocialMediaShowcase from '@/components/SocialMediaShowcase';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import MagneticButton from '@/components/animations/MagneticButton';
+import { WordReveal } from '@/components/animations/TextReveal';
 
 // Dynamic import with SSR false for Three.js 3D Canvas
 const TechCanvas = dynamic(() => import('@/components/TechCanvas'), {
@@ -37,15 +38,17 @@ export default function Hero() {
               </div>
             </ScrollReveal>
 
-            {/* Primary Headline */}
-            <ScrollReveal variant="fade-up" delay={0.2}>
-              <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-heading font-extralight tracking-tight leading-[1.08] text-textprimary">
-                We Build Brands. <br />
-                <span className="font-extrabold text-gradient-aurora">
-                  Create Demand. Drive Growth.
-                </span>
-              </h1>
-            </ScrollReveal>
+            {/* Primary Headline with Word-by-Word Reveal */}
+            <h1 className="text-4xl sm:text-6xl lg:text-[66px] font-heading font-extralight tracking-tight leading-[1.08] text-textprimary">
+              <WordReveal text="We Build Brands." delay={0.15} />
+              <br />
+              <WordReveal
+                text="Create Demand. Drive Growth."
+                delay={0.3}
+                highlightWords={['Create', 'Demand.', 'Drive', 'Growth.']}
+                highlightClassName="font-extrabold text-gradient-aurora"
+              />
+            </h1>
 
             {/* Supporting Copy */}
             <ScrollReveal variant="fade-up" delay={0.3}>
