@@ -13,11 +13,11 @@ import { getWhatsAppUrl } from '@/lib/constants';
 export const metadata: Metadata = {
   title: 'Industry Digital Marketing Solutions | IDM Smart Tech Hyderabad',
   description:
-    'Tailored digital marketing and lead generation solutions for Restaurants, Healthcare Clinics, Real Estate, Education, Retail, and Professional Services in Hyderabad.',
+    'Tailored digital marketing and lead generation solutions for Restaurants, Healthcare Clinics, Salons & Spas, Education, Retail, and Professional Services in Hyderabad.',
   keywords: [
     'Restaurant Marketing Hyderabad',
     'Clinic Digital Marketing',
-    'Real Estate Lead Generation Hyderabad',
+    'Salon and Spa Marketing Hyderabad',
     'Education Marketing Agency',
     'Retail Local SEO Hyderabad',
   ],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Industry Digital Marketing Solutions | IDM Smart Tech',
     description:
-      'Explore our customized marketing frameworks for Hyderabad restaurants, clinics, real estate, education, and retail businesses.',
+      'Explore our customized marketing frameworks for Hyderabad restaurants, clinics, salons, spas, education, and retail businesses.',
     url: 'https://idm-inky.vercel.app/industries',
   },
 };

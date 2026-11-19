@@ -235,7 +235,7 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                       <option value="Retail & E-Commerce">Retail & D2C E-Commerce</option>
                       <option value="Healthcare & Clinics">Healthcare, Doctors & Clinics</option>
                       <option value="Restaurants & Hospitality">Restaurants, Cafes & Food</option>
-                      <option value="Real Estate & Construction">Real Estate & Construction</option>
+                      <option value="Salons & Spas">Salons, Spas & Aesthetic Clinics</option>
                       <option value="Education & Coaching">Education, Colleges & Coaching</option>
                       <option value="Fitness & Wellness">Fitness, Gyms & Wellness</option>
                       <option value="B2B & IT Services">B2B, SaaS & IT Services</option>
