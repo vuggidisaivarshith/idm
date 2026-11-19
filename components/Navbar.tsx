@@ -82,14 +82,11 @@ export default function Navbar() {
             <span className="text-white font-heading font-extrabold text-base tracking-tighter">IDM</span>
           </div>
           <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-heading font-bold tracking-tight text-textprimary flex items-center gap-1.5">
+            <span className="text-base sm:text-lg font-heading font-extrabold tracking-tight text-textprimary">
               IDM SMART TECH
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-sectionsoft text-primarypurple font-bold border border-primarypurple/20">
-                AGENCY
-              </span>
             </span>
             <span className="text-[10px] tracking-wider text-textsecondary uppercase font-medium">
-              Creative & Tech • Hyderabad
+              Creative Marketing & Technology • Hyderabad
             </span>
           </div>
         </Link>

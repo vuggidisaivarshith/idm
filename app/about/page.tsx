@@ -71,7 +71,7 @@ export default function AboutPage() {
           <Breadcrumb items={[{ label: 'About Us' }]} />
 
           <div className="max-w-3xl">
-            <span className="badge-aurora mb-4">Our Agency Story</span>
+            <span className="badge-aurora mb-4">Our Company Story</span>
             <h1 className="text-4xl sm:text-6xl font-heading font-light tracking-tight text-textprimary leading-tight">
               We Help Ambitious Brands <br />
               <span className="font-extrabold text-gradient-aurora">

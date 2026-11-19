@@ -103,7 +103,7 @@ export default function Footer() {
               Company & Work
             </h4>
             <ul className="space-y-2 text-xs text-textsecondary">
-              <li><Link href="/about" className="hover:text-primarypurple transition-colors">About Agency</Link></li>
+              <li><Link href="/about" className="hover:text-primarypurple transition-colors">About IDM Smart Tech</Link></li>
               <li><Link href="/portfolio" className="hover:text-primarypurple transition-colors">Creative Portfolio</Link></li>
               <li><Link href="/pricing" className="hover:text-primarypurple transition-colors">Growth Packages</Link></li>
               <li><Link href="/blog" className="hover:text-primarypurple transition-colors">Marketing Insights</Link></li>
@@ -140,7 +140,7 @@ export default function Footer() {
 
         {/* Bottom Strip */}
         <div className="pt-8 border-t border-bordercolor/80 flex flex-col sm:flex-row items-center justify-between text-xs text-textsecondary gap-4">
-          <p>© {new Date().getFullYear()} IDM Smart Tech. All rights reserved. Creative Marketing & Intelligent Technology Agency — Shamshabad, Hyderabad.</p>
+          <p>© {new Date().getFullYear()} IDM Smart Tech. All rights reserved. Creative Marketing & Intelligent Technology Company — Shamshabad, Hyderabad.</p>
           <div className="flex space-x-6">
             <Link href="/privacy-policy" className="hover:text-primarypurple transition-colors">Privacy</Link>
             <Link href="/terms-and-conditions" className="hover:text-primarypurple transition-colors">Terms</Link>

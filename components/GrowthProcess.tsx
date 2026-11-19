@@ -36,6 +36,7 @@ const steps = [
 export default function GrowthProcess() {
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeStep, setActiveStep] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,40 +109,98 @@ export default function GrowthProcess() {
         </div>
 
         {/* 4 Connected Process Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {steps.map((s, idx) => (
-            <div
-              key={s.step}
-              className="aurora-card p-7 flex flex-col justify-between relative group hover:border-primarypurple/40 card-3d-tilt"
-            >
-              <div>
-                {/* Header with Step Number & Icon */}
-                <div className="flex items-center justify-between mb-5">
-                  <span className="text-3xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
-                    {s.step}
-                  </span>
-                  <span className="text-2xl p-2.5 rounded-xl bg-sectionsoft border border-primarypurple/15 text-primarypurple" aria-hidden="true">
-                    {s.icon}
-                  </span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative items-start">
+          {steps.map((s, idx) => {
+            const isHovered = activeStep === idx;
+            return (
+              <div
+                key={s.step}
+                onMouseEnter={() => setActiveStep(idx)}
+                onMouseLeave={() => setActiveStep(null)}
+                onClick={() => setActiveStep(activeStep === idx ? null : idx)}
+                className={`aurora-card p-7 flex flex-col justify-between relative group cursor-pointer transition-all duration-300 card-3d-tilt overflow-hidden ${
+                  isHovered
+                    ? 'border-primarypurple/50 shadow-[0_16px_36px_-6px_rgba(105,87,245,0.14),inset_0_1px_1px_rgba(255,255,255,1)] -translate-y-1.5 ring-1 ring-primarypurple/20'
+                    : 'hover:border-primarypurple/30 hover:shadow-card-hover'
+                }`}
+              >
+                {/* Subtle top indicator bar */}
+                <div
+                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-opacity duration-300 ${
+                    isHovered ? 'opacity-100' : 'opacity-0'
+                  }`}
+                />
+
+                <div>
+                  {/* Header with Step Number & Icon */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-3xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                      {s.step}
+                    </span>
+                    <span
+                      className={`text-2xl p-2.5 rounded-xl border transition-all duration-300 ${
+                        isHovered
+                          ? 'bg-primarypurple/15 border-primarypurple/40 scale-110 shadow-xs'
+                          : 'bg-sectionsoft border-primarypurple/15 text-primarypurple'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {s.icon}
+                    </span>
+                  </div>
+
+                  {/* Heading 1st (Always visible) */}
+                  <h3
+                    className={`text-xl font-heading font-bold transition-colors duration-200 mb-1 ${
+                      isHovered ? 'text-primarypurple' : 'text-textprimary'
+                    }`}
+                  >
+                    {s.title}
+                  </h3>
+                  <p className="text-xs uppercase font-semibold text-royalblue tracking-wider mb-2">
+                    {s.tagline}
+                  </p>
+
+                  {/* Details and Description (Revealed while mouse moves on it) */}
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-out ${
+                      isHovered
+                        ? 'max-h-48 opacity-100 mt-3 pt-3 border-t border-bordercolor/70'
+                        : 'max-h-0 opacity-0 mt-0 pt-0'
+                    }`}
+                  >
+                    <p className="text-xs sm:text-sm text-textsecondary leading-relaxed">
+                      {s.description}
+                    </p>
+                  </div>
+
+                  {/* Hover prompt when idle */}
+                  <div
+                    className={`transition-opacity duration-200 mt-2 ${
+                      isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
+                    }`}
+                  >
+                    <span className="text-[10px] text-textsecondary/80 font-medium flex items-center gap-1">
+                      <span>Hover to reveal phase details</span>
+                      <span>&rarr;</span>
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="text-xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors mb-1">
-                  {s.title}
-                </h3>
-                <p className="text-xs uppercase font-semibold text-royalblue tracking-wider mb-4">
-                  {s.tagline}
-                </p>
-                <p className="text-xs sm:text-sm text-textsecondary leading-relaxed">
-                  {s.description}
-                </p>
+                <div className="pt-5 mt-5 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
+                  <span>Phase 0{idx + 1}</span>
+                  <span
+                    className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
+                      isHovered ? 'text-primarypurple translate-x-1' : 'text-primarypurple'
+                    }`}
+                  >
+                    <span>Step {idx + 1}</span>
+                    <span>&rarr;</span>
+                  </span>
+                </div>
               </div>
-
-              <div className="pt-6 mt-6 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
-                <span>Phase 0{idx + 1}</span>
-                <span className="text-primarypurple font-bold">Step {idx + 1} &rarr;</span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
