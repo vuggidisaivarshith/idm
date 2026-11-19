@@ -18,7 +18,7 @@ export default function GrowthPackages() {
             </span>
           </h2>
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            Select the growth tier designed for your business stage. Clean, predictable monthly pricing with direct WhatsApp communication.
+            Select the growth package engineered for your business stage. Clear monthly pricing with direct WhatsApp communication and active agency support.
           </p>
         </div>
 
@@ -27,10 +27,10 @@ export default function GrowthPackages() {
           {MONTHLY_PACKAGES.map((pkg) => (
             <div
               key={pkg.id}
-              className={`aurora-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative ${
+              className={`aurora-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 relative card-3d-tilt ${
                 pkg.highlight
-                  ? 'border-primarypurple/50 ring-2 ring-primarypurple/20 shadow-soft-lg scale-[1.02] bg-gradient-to-b from-sectionsoft/40 to-white'
-                  : 'hover:border-primarypurple/30'
+                  ? 'border-primarypurple/50 ring-2 ring-primarypurple/20 shadow-soft-lg scale-[1.02] bg-gradient-to-b from-sectionsoft/60 to-white'
+                  : 'bg-white hover:border-primarypurple/30'
               }`}
             >
               {pkg.highlight && (
@@ -54,29 +54,20 @@ export default function GrowthPackages() {
                   {pkg.description}
                 </p>
 
-                {/* Inclusions Area */}
+                {/* Inclusions Notice (No Invented Inclusions) */}
                 <div className="space-y-2.5 pt-5 border-t border-bordercolor">
                   <p className="text-[11px] font-semibold uppercase tracking-wider text-textsecondary">
                     Package Inclusions:
                   </p>
                   
-                  {pkg.inclusions ? (
-                    pkg.inclusions.map((feat, i) => (
-                      <div key={i} className="flex items-start space-x-2 text-xs text-textsecondary">
-                        <span className="text-brandmint font-bold mt-0.5" aria-hidden="true">✓</span>
-                        <span className="text-textprimary/90">{feat}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="p-4 rounded-xl bg-sectionsoft/60 border border-bordercolor text-center">
-                      <p className="text-xs text-textprimary font-medium">
-                        {pkg.inclusionsNotice || 'Contact us for package inclusions.'}
-                      </p>
-                      <p className="text-[10px] text-textsecondary mt-1">
-                        Tailored directly to your business requirements.
-                      </p>
-                    </div>
-                  )}
+                  <div className="p-4 rounded-xl bg-sectionsoft/70 border border-bordercolor/80 text-center">
+                    <p className="text-xs text-textprimary font-medium">
+                      {pkg.inclusionsNotice || 'Contact us for package inclusions.'}
+                    </p>
+                    <p className="text-[10px] text-textsecondary mt-1">
+                      Customized directly to your brand&apos;s goals.
+                    </p>
+                  </div>
                 </div>
               </div>
 

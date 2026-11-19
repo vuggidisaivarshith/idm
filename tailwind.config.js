@@ -10,14 +10,14 @@ module.exports = {
         // Creative Aurora Palette
         auroraBg: '#F8FAFF',
         auroraWhite: '#FFFFFF',
+        auroraLavender: '#EEEAFE',
         auroraPurple: '#6957F5',
-        auroraBlue: '#4285F4',
-        auroraPink: '#F18BB5',
+        auroraBlue: '#4385F4',
         auroraCyan: '#39BBD5',
+        auroraPink: '#F18BB5',
         auroraText: '#171B2C',
         auroraMuted: '#667085',
         auroraBorder: '#E8ECF5',
-        auroraLavender: '#F0EEFF',
         auroraMint: '#22B98A',
 
         // Standard aliases for ease of use
@@ -26,7 +26,7 @@ module.exports = {
         textprimary: '#171B2C',
         textsecondary: '#667085',
         bordercolor: '#E8ECF5',
-        sectionsoft: '#F0EEFF',
+        sectionsoft: '#EEEAFE',
         primarypurple: '#6957F5',
         royalblue: '#4285F4',
         brandcyan: '#39BBD5',

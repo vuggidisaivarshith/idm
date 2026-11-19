@@ -27,7 +27,7 @@ export default function GMBPricingSection() {
           {GMB_SERVICES.map((gmb) => (
             <div
               key={gmb.id}
-              className={`aurora-card p-6 flex flex-col justify-between transition-all duration-300 relative ${
+              className={`aurora-card p-6 flex flex-col justify-between transition-all duration-300 relative card-3d-tilt ${
                 gmb.highlight
                   ? 'border-primarypurple/40 ring-2 ring-primarypurple/15 shadow-soft-lg scale-[1.02]'
                   : 'hover:border-primarypurple/30'

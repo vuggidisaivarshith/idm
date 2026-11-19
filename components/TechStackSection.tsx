@@ -37,7 +37,7 @@ export default function TechStackSection() {
           {technologies.map((t) => (
             <div
               key={t.name}
-              className="aurora-card p-6 hover:-translate-y-1 group"
+              className="aurora-card p-6 card-3d-tilt group"
             >
               <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block">
                 {t.category}

@@ -11,10 +11,14 @@ import TechStackSection from '@/components/TechStackSection';
 import ContactLocationSection from '@/components/ContactLocationSection';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import Footer from '@/components/Footer';
+import ScrollProgress from '@/components/ScrollProgress';
+import CursorFollower from '@/components/CursorFollower';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-pagebg text-textprimary selection:bg-primarypurple/20 selection:text-primarypurple">
+    <main className="min-h-screen bg-pagebg text-textprimary selection:bg-primarypurple/20 selection:text-primarypurple relative">
+      <ScrollProgress />
+      <CursorFollower />
       <Navbar />
       <Hero />
       <SocialProofSection />

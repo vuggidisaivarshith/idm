@@ -1,45 +1,72 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const steps = [
   {
     step: '01',
     title: 'Discover',
-    tagline: 'Deep Dive & Audience Mapping',
-    description: 'We analyze your brand DNA, existing social footprint, competitive landscape, and highest-value customer personas to identify untapped growth opportunities.',
+    tagline: 'Brand DNA & Audience Mapping',
+    description: 'We analyze your business, current social media presence, competitors, and target audience in Hyderabad and pan-India to identify genuine growth opportunities.',
     icon: '🔍',
   },
   {
     step: '02',
     title: 'Strategize',
     tagline: 'Content Pillars & Funnel Architecture',
-    description: 'We develop a bespoke social media content calendar, visual aesthetics guide, Reels concept hooks, and paid acquisition funnel mapped to clear revenue targets.',
+    description: 'We construct a strategic content calendar, aesthetic guidelines, Reel concepts, and targeted ad funnels aligned with your specific business goals.',
     icon: '📐',
   },
   {
     step: '03',
     title: 'Create',
-    tagline: 'Production, Design & Campaign Launch',
-    description: 'Our creative team produces eye-catching graphics, edits dynamic short-form video reels, writes engaging copy, and launches targeted campaigns on Instagram and Google.',
+    tagline: 'High-Retention Design & Production',
+    description: 'Our creative team produces eye-catching graphics, edits dynamic short-form Reels, writes high-converting copy, and launches targeted campaigns.',
     icon: '🎨',
   },
   {
     step: '04',
     title: 'Optimize',
-    tagline: 'Data Review & Scaling Strategy',
-    description: 'We analyze real engagement and conversion metrics weekly, doubling down on top-performing creative formats and refining audience targeting to maximize ROI.',
+    tagline: 'Review, Refine & Scale',
+    description: 'We continuously evaluate real engagement and lead data, doubling down on top-performing creative formats and refining audience targeting for maximum ROI.',
     icon: '📈',
   },
 ];
 
 export default function GrowthProcess() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Calculate how far the section has progressed through the viewport
+      const start = windowHeight;
+      const end = -rect.height;
+      const current = rect.top;
+      
+      const progress = Math.min(Math.max((start - current) / (start - end), 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="process" className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor">
+    <section
+      id="process"
+      ref={sectionRef}
+      className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <div className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-            How We Work
+            Structured Execution
           </div>
           <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
             Our 4-Step Method for <br />
@@ -48,8 +75,36 @@ export default function GrowthProcess() {
             </span>
           </h2>
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            A structured, creative process that turns casual social media scrollers into paying, long-term brand advocates.
+            A transparent, disciplined creative process that turns casual social media scrollers into paying, long-term brand advocates.
           </p>
+        </div>
+
+        {/* Animated Connecting Line on Desktop */}
+        <div className="hidden lg:block relative w-full mb-10 px-8">
+          <div className="w-full h-1 bg-white/80 rounded-full overflow-hidden shadow-2xs border border-bordercolor/60">
+            <div
+              className="h-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-all duration-300 ease-out rounded-full"
+              style={{ width: `${Math.min(Math.max(scrollProgress * 115, 8), 100)}%` }}
+            />
+          </div>
+          {/* Milestone Dots */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-8 pointer-events-none">
+            {steps.map((_, i) => {
+              const reached = scrollProgress > (i * 0.25);
+              return (
+                <div
+                  key={i}
+                  className={`w-5 h-5 rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+                    reached
+                      ? 'bg-primarypurple border-white shadow-sm shadow-primarypurple/50 scale-110'
+                      : 'bg-white border-bordercolor'
+                  }`}
+                >
+                  <div className={`w-1.5 h-1.5 rounded-full ${reached ? 'bg-white' : 'bg-bordercolor'}`} />
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         {/* 4 Connected Process Cards */}
@@ -57,7 +112,7 @@ export default function GrowthProcess() {
           {steps.map((s, idx) => (
             <div
               key={s.step}
-              className="aurora-card p-7 flex flex-col justify-between relative group hover:border-primarypurple/40"
+              className="aurora-card p-7 flex flex-col justify-between relative group hover:border-primarypurple/40 card-3d-tilt"
             >
               <div>
                 {/* Header with Step Number & Icon */}
@@ -83,7 +138,7 @@ export default function GrowthProcess() {
 
               <div className="pt-6 mt-6 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
                 <span>Phase 0{idx + 1}</span>
-                <span className="text-primarypurple font-bold">Step Complete &rarr;</span>
+                <span className="text-primarypurple font-bold">Step {idx + 1} &rarr;</span>
               </div>
             </div>
           ))}
