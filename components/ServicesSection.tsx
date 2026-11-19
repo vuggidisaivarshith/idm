@@ -69,11 +69,11 @@ const serviceCategories: ServiceCategory[] = [
     badge: 'Engineering & Scale',
     tagline: 'High-Performance Web Platforms & Custom Systems',
     overview:
-      'Strengthen your digital foundation with sub-second Next.js web applications, mobile platforms, custom CRM tools, and scalable e-commerce systems engineered for conversion.',
+      'Strengthen your digital foundation with high-performance Next.js web applications, mobile platforms, custom CRM tools, and scalable e-commerce systems engineered for conversion.',
     coreServices: [
       {
         name: 'Website Development',
-        desc: 'Sub-second page speeds, mobile-first Next.js 14 architecture, and conversion funnels.',
+        desc: 'Optimized page load speeds, mobile-first Next.js 14 architecture, and conversion funnels.',
       },
       {
         name: 'Mobile Applications',
@@ -161,7 +161,7 @@ function CategoryIllustration({ type }: { type: ServiceCategory['illustrationTyp
             <div className="rounded-xl bg-white border border-bordercolor/80 p-2 text-center shadow-xs">
               <span className="text-base block mb-0.5">📍</span>
               <span className="text-[9px] font-bold text-brandcyan block leading-tight">Maps 3-Pack</span>
-              <span className="text-[8px] text-textsecondary font-semibold">Rank #1</span>
+              <span className="text-[8px] text-textsecondary font-semibold">Local SEO</span>
             </div>
           </div>
 

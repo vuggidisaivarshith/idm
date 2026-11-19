@@ -102,7 +102,7 @@ const partnershipBenefits: PartnershipBenefit[] = [
     overview:
       'Strengthen your business foundation with high-speed Next.js web applications, mobile platforms, and customized management tools.',
     measurableOutcomes: [
-      'Sub-second page load times that prevent prospective customer bounce',
+      'Optimized high-speed page performance that reduces visitor bounce rates',
       '100% mobile-responsive layout for seamless smartphone usage',
       'Clean, secure code architectures with zero bloated templates',
       'Centralized lead capture endpoints and CRM webhook integrations',
@@ -128,7 +128,7 @@ const partnershipBenefits: PartnershipBenefit[] = [
       'Streamline day-to-day operations and accelerate customer response times with automated workflows and intelligent business solutions.',
     measurableOutcomes: [
       'Instant automated responses to common customer inquiries 24/7',
-      'Zero lost customer inquiries during off-hours or peak ad traffic',
+      'Automated prompt response routing during off-hours and peak ad traffic',
       'Automated lead routing directly to your sales or WhatsApp team',
       'Significant reduction in repetitive manual administrative tasks',
     ],

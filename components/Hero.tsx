@@ -21,10 +21,13 @@ const TechCanvas = dynamic(() => import('@/components/TechCanvas'), {
 export default function Hero() {
   return (
     <section className="relative w-full min-h-[94vh] bg-gradient-to-b from-pagebg via-sectionsoft/40 to-pagebg text-textprimary overflow-hidden flex flex-col justify-center pt-28 pb-16">
-      {/* Soft Aurora Ambient Glows */}
+      {/* Soft Aurora Ambient Glows & Seamless Section Blending */}
       <div className="absolute top-12 left-1/4 w-[480px] h-[480px] bg-primarypurple/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[480px] h-[480px] bg-brandcyan/10 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 w-[380px] h-[380px] bg-softpink/10 rounded-full blur-[130px] pointer-events-none" />
+
+      {/* Seamless bottom transition into the partnership section */}
+      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-pagebg via-pagebg/60 to-transparent pointer-events-none z-10" />
 
       <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-10 w-full my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -101,8 +104,8 @@ export default function Hero() {
 
           {/* Right Column: Layered Cinematic 3D Scene + Social Media Showcase */}
           <div className="lg:col-span-6 relative flex justify-center items-center min-h-[460px] sm:min-h-[520px]">
-            {/* 3D WebGL Canvas Layer: Liquid Aurora 3D Environment */}
-            <div className="absolute -inset-6 sm:-inset-12 w-[calc(100%+3rem)] sm:w-[calc(100%+6rem)] h-[calc(100%+3rem)] sm:h-[calc(100%+6rem)] z-10 flex items-center justify-center pointer-events-none sm:pointer-events-auto overflow-visible">
+            {/* 3D WebGL Canvas Layer: Liquid Aurora 3D Environment with generous safe frame */}
+            <div className="absolute -inset-8 sm:-inset-14 w-[calc(100%+4rem)] sm:w-[calc(100%+7rem)] h-[calc(100%+4rem)] sm:h-[calc(100%+7rem)] z-10 flex items-center justify-center pointer-events-none">
               <Suspense fallback={null}>
                 <TechCanvas />
               </Suspense>

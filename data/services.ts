@@ -246,10 +246,10 @@ export const SERVICES_LIST: ServiceDetail[] = [
     metaDescription: 'High-speed, modern website development company in Hyderabad. Mobile-first business websites, landing pages, Next.js frameworks, and WhatsApp lead integration.',
     targetKeyword: 'Website development company in Hyderabad',
     heroHeading: 'High-Performance Websites Engineered for Conversion.',
-    heroDescription: 'Sub-second load times, responsive mobile UI, clean modern architecture, and direct WhatsApp conversion flows built on Next.js 14.',
+    heroDescription: 'Optimized high-speed load times, responsive mobile UI, clean modern architecture, and direct WhatsApp conversion flows built on Next.js 14.',
     overview: 'Slow, outdated template websites cost businesses thousands in lost inquiries. We build custom, lightweight web applications engineered for speed, search indexing, and high conversion rates.',
     coreDeliverables: [
-      { title: 'Custom Next.js & React Engineering', desc: 'Server-rendered web platforms that load in under 1 second and rank effortlessly on search engines.' },
+      { title: 'Custom Next.js & React Engineering', desc: 'Server-rendered web platforms that load rapidly and rank effortlessly on search engines.' },
       { title: 'High-Converting Campaign Landing Pages', desc: 'Distraction-free landing pages structured specifically for Meta and Google Ad lead generation.' },
       { title: 'Mobile-First Responsive Layouts', desc: 'Flawless UI/UX across all device sizes from 360px smartphones to 4K desktop screens.' },
       { title: 'Direct WhatsApp & CRM Integration', desc: 'Instant click-to-chat triggers, lead notification webhooks, and secure inquiry forms.' },
@@ -257,7 +257,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
     process: [
       { step: '01', title: 'Wireframing & Conversion Flow', desc: 'Map page hierarchy, CTA placements, and customer conversion paths.' },
       { step: '02', title: 'UI/UX Design in Glossy Aurora Style', desc: 'Design clean white surfaces, soft gradients, and modern typography.' },
-      { step: '03', title: 'Next.js Frontend & Backend Code', desc: 'Write clean TypeScript code, configure meta tags, and test sub-second performance.' },
+      { step: '03', title: 'Next.js Frontend & Backend Code', desc: 'Write clean TypeScript code, configure meta tags, and test Core Web Vitals performance.' },
       { step: '04', title: 'Testing, Security & Deployment', desc: 'Deploy on high-reliability cloud infrastructure with SSL, edge caching, and mobile testing.' },
     ],
     whyItMatters: 'A 1-second delay in page load reduces conversions by up to 20%. Our modern engineering ensures your site loads instantly on mid-range mobile networks.',
@@ -322,7 +322,7 @@ export const SERVICES_LIST: ServiceDetail[] = [
       { step: '03', title: 'Integration & Sandbox Testing', desc: 'Test response accuracy, latency, and notification delivery across edge-case scenarios.' },
       { step: '04', title: 'Live Deployment & Staff Onboarding', desc: 'Deploy live automations and train your team on managing incoming automated leads.' },
     ],
-    whyItMatters: 'Responding to a customer inquiry within the first 5 minutes increases conversion rates by up to 391%. Automation guarantees instantaneous response around the clock.',
+    whyItMatters: 'Industry studies show that responding to a customer inquiry promptly increases conversion rates substantially. Automation enables structured, rapid customer engagement around the clock.',
     faqs: [
       { q: 'Is official WhatsApp Business API required?', a: 'Depending on your message volume, we can implement either standard WhatsApp Business automation or official Meta Cloud API solutions.' },
       { q: 'Can automation connect with Google Sheets?', a: 'Yes, every inquiry can automatically append to a live Google Sheet and trigger instant team alerts.' },

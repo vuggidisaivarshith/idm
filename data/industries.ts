@@ -163,7 +163,7 @@ export const INDUSTRIES_LIST: IndustryDetail[] = [
       'Direct consultation calendar and WhatsApp inquiry flows.',
     ],
     suggestedApproach: [
-      { phase: 'Corporate Digital Identity', strategy: 'Upgrade website to a clean, authoritative modern platform with sub-second page speed.' },
+      { phase: 'Corporate Digital Identity', strategy: 'Upgrade website to a clean, authoritative modern platform with high-performance page speed.' },
       { phase: 'Targeted Search PPC', strategy: 'Capture exact corporate search queries (e.g., "tax consultant Hyderabad", "commercial architect").' },
       { phase: 'Consultation Pipeline', strategy: 'Direct prospective corporate clients straight into structured introductory strategy meetings.' },
     ],

@@ -75,7 +75,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     title: 'Modern High-Speed Digital Agency Websites',
     category: 'Websites',
     format: 'Next.js 14 Production Web Platform',
-    description: 'Sub-second page speeds, interactive responsive UI, smooth scroll animations, and integrated direct WhatsApp lead capture pipelines.',
+    description: 'Fast-loading page performance, interactive responsive UI, smooth scroll animations, and integrated direct WhatsApp lead capture pipelines.',
     tags: ['Next.js 14', 'Mobile-First', 'Lead Generation'],
     image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
     isDemoFormat: true,

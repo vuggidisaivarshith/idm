@@ -108,9 +108,9 @@ export default function GrowthPackages() {
             <div className="flex items-center gap-3">
               <span className="text-2xl p-2 rounded-xl bg-white border border-bordercolor shrink-0">📋</span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-primarypurple">Clear Deliverable Scoping</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-primarypurple">Clear Deliverable Scoping &amp; Transparent Ad Spend</p>
                 <p className="text-xs text-textsecondary mt-0.5">
-                  Package deliverables, posting schedule, creative counts, and ad management scope are formalized transparently during onboarding based on your specific business goals.
+                  Package deliverables, posting schedules, and agency retainers are formalized transparently during onboarding. <strong>Platform advertising spend (paid directly to Meta or Google) is separate from agency management fees</strong>, ensuring 100% financial clarity and client account ownership.
                 </p>
               </div>
             </div>

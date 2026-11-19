@@ -48,6 +48,6 @@ export const FAQ_LIST: FAQItem[] = [
   {
     category: 'Services',
     question: 'What technologies do you use for website and software development?',
-    answer: 'We engineer websites using Next.js 14, React, TypeScript, and Tailwind CSS for sub-second load times and high search visibility. For mobile applications, we utilize cross-platform Flutter and React Native toolchains.',
+    answer: 'We engineer websites using Next.js 14, React, TypeScript, and Tailwind CSS for rapid load times and high search visibility. For mobile applications, we utilize cross-platform Flutter and React Native toolchains.',
   },
 ];

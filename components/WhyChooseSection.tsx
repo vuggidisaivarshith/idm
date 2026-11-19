@@ -93,7 +93,7 @@ const advantageCards: AdvantageCard[] = [
     summary:
       'We build high-speed Next.js 14, React, and TypeScript applications instead of sluggish, security-vulnerable WordPress or generic template builders.',
     operationalDetails: [
-      'Sub-second page loads optimizing ad Quality Scores and bounce rates',
+      'High-speed page load performance optimizing ad Quality Scores and user retention',
       'Clean, modular codebases with custom WhatsApp and CRM webhooks',
       'Server-rendered metadata for superior local SEO indexing',
       'Future-proof architectures ready for custom automation and tools',
