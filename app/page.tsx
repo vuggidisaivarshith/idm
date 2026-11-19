@@ -1,25 +1,25 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import IntegratedModel from '@/components/IntegratedModel';
-import Portfolio from '@/components/Portfolio';
-import FloorPlanExplorer from '@/components/FloorPlanExplorer';
-import RegionalPresence from '@/components/RegionalPresence';
-import CultureSection from '@/components/CultureSection';
-import ContactSection from '@/components/ContactSection';
+import ServicesSection from '@/components/ServicesSection';
+import GMBPricingSection from '@/components/GMBPricingSection';
+import GrowthPackages from '@/components/GrowthPackages';
+import TechStackSection from '@/components/TechStackSection';
+import ContactLocationSection from '@/components/ContactLocationSection';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-obsidian text-white selection:bg-copper selection:text-black">
+    <main className="min-h-screen bg-darkbg text-white selection:bg-cyan-500 selection:text-black">
       <Navbar />
       <Hero />
-      <IntegratedModel />
-      <Portfolio />
-      <FloorPlanExplorer />
-      <RegionalPresence />
-      <CultureSection />
-      <ContactSection />
+      <ServicesSection />
+      <GMBPricingSection />
+      <GrowthPackages />
+      <TechStackSection />
+      <ContactLocationSection />
+      <FloatingWhatsApp />
       <Footer />
     </main>
   );

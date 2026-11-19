@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -6,12 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        obsidian: '#0B0E14',
-        copper: '#D4AF37',
-        slate: '#2C3E50',
-        mist: '#4A6572',
+        darkbg: '#06080F',
+        darkcard: '#0D111E',
+        cyanGlow: '#00F2FE',
+        purpleGlow: '#8A2BE2',
+        emeraldGlow: '#10B981',
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [],
 };

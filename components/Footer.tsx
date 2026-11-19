@@ -4,77 +4,75 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#07090E] text-white border-t border-white/10 py-16">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <footer className="bg-[#04060A] text-white border-t border-white/10 py-16">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
-          {/* Brand Info */}
+          {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-lg bg-copper flex items-center justify-center font-black text-black text-lg">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 flex items-center justify-center font-black text-white text-base">
                 IDM
               </div>
-              <span className="font-bold text-xl tracking-wider text-white">IDM COMPANIES</span>
+              <span className="font-bold text-xl tracking-tight text-white">IDM SMART TECH</span>
             </div>
-            <p className="text-sm text-white/50 max-w-sm leading-relaxed">
-              A premier real estate development, in-house construction, and residential property management company founded in 1993. Building communities that elevate lives.
+            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+              Hyderabad’s premier AI-powered digital marketing and modern technology agency. Delivering measurable ROI through local SEO, Google Ads, custom web/app development, and business automations.
             </p>
-            <div className="pt-2">
-              <span className="text-xs text-copper font-medium tracking-wide">
-                Dual Corporate Headquarters: Scottsdale, AZ & Vancouver, WA
-              </span>
+            <div className="pt-2 text-xs text-cyan-400 font-medium">
+              📍 Shamshabad, Hyderabad, Telangana — 501218
             </div>
           </div>
 
-          {/* Nav links */}
+          {/* Core Services */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-copper mb-4">Architecture & Living</h4>
-            <ul className="space-y-2.5 text-sm text-white/60">
-              <li><a href="#portfolio" className="hover:text-white transition">Acero Communities</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition">Meritum Living</a></li>
-              <li><a href="#portfolio" className="hover:text-white transition">Commercial Spaces</a></li>
-              <li><a href="#floorplans" className="hover:text-white transition">Residence Floorplans</a></li>
-              <li><a href="https://liveidm.com" target="_blank" rel="noreferrer" className="hover:text-copper transition">Resident Portal</a></li>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">GMB & Local SEO</h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-400">
+              <li><a href="#gmb" className="hover:text-white transition">New GMB Creation (₹4,000)</a></li>
+              <li><a href="#gmb" className="hover:text-white transition">Profile Reinstatement (₹2,999)</a></li>
+              <li><a href="#gmb" className="hover:text-white transition">Video Verification (₹2,999)</a></li>
+              <li><a href="#gmb" className="hover:text-white transition">Phone Number Fixes (₹2,999)</a></li>
+              <li><a href="#gmb" className="hover:text-white transition">Google Maps 3-Pack Ranking</a></li>
             </ul>
           </div>
 
-          {/* Capabilities */}
+          {/* Marketing & Tech */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-copper mb-4">Capabilities</h4>
-            <ul className="space-y-2.5 text-sm text-white/60">
-              <li><a href="#model" className="hover:text-white transition">Land Acquisition</a></li>
-              <li><a href="#model" className="hover:text-white transition">In-House Construction</a></li>
-              <li><a href="#model" className="hover:text-white transition">Asset Management</a></li>
-              <li><a href="#model" className="hover:text-white transition">Capital Partnerships</a></li>
-              <li><a href="#culture" className="hover:text-white transition">IDM Cares</a></li>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">Tech & Marketing</h4>
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-400">
+              <li><a href="#pricing" className="hover:text-white transition">Starter Growth (₹4,999/mo)</a></li>
+              <li><a href="#services" className="hover:text-white transition">Google & Meta Ads (PPC)</a></li>
+              <li><a href="#tech" className="hover:text-white transition">Web & App Development</a></li>
+              <li><a href="#tech" className="hover:text-white transition">Custom CRM / ERP Software</a></li>
+              <li><a href="#services" className="hover:text-white transition">AI WhatsApp Automation</a></li>
             </ul>
           </div>
 
-          {/* Offices */}
+          {/* Direct Contact */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-copper mb-4">Direct Contact</h4>
-            <div className="space-y-3 text-xs text-white/60 leading-relaxed">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-cyan-400 mb-4">Connect Directly</h4>
+            <div className="space-y-3 text-xs text-slate-400 leading-relaxed">
               <p>
-                <strong className="text-white block">Scottsdale, AZ:</strong>
-                (480) 977-3477
+                <strong className="text-white block">Call / WhatsApp:</strong>
+                <a href="tel:+918519837818" className="text-cyan-400 hover:underline">+91 85198 37818</a>
               </p>
               <p>
-                <strong className="text-white block">Vancouver, WA:</strong>
-                (360) 903-0283
+                <strong className="text-white block">Email:</strong>
+                info@idmsmarttech.com
               </p>
               <p>
-                <strong className="text-white block">Inquiries:</strong>
-                info@idmcompanies.com
+                <strong className="text-white block">Instagram:</strong>
+                <a href="https://www.instagram.com/idmsmarttech/" target="_blank" rel="noreferrer" className="text-purple-400 hover:underline">@idmsmarttech</a>
               </p>
             </div>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-white/40 gap-4">
-          <p>© {new Date().getFullYear()} IDM Companies. All Rights Reserved. Equal Housing Opportunity.</p>
+        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <p>© {new Date().getFullYear()} IDM Smart Tech. All Rights Reserved. Based in Shamshabad, Hyderabad.</p>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-white transition">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition">Terms of Service</a>
-            <a href="#" className="hover:text-white transition">Accessibility</a>
+            <a href="https://www.idmsmarttech.com/" target="_blank" rel="noreferrer" className="hover:text-white transition">Official Domain</a>
+            <a href="https://www.instagram.com/idmsmarttech/" target="_blank" rel="noreferrer" className="hover:text-white transition">Instagram</a>
+            <a href="#contact" className="hover:text-white transition">Request Audit</a>
           </div>
         </div>
       </div>
