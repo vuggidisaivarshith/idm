@@ -146,7 +146,7 @@ export default function Navbar() {
                         className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[560px] p-4 bg-white/95 backdrop-blur-2xl rounded-2xl border border-white/80 shadow-[0_12px_36px_rgba(16,28,50,0.12),inset_0_1px_1px_rgba(255,255,255,1)] grid grid-cols-2 gap-2 z-50 ring-1 ring-bordercolor/80"
                       >
                         <div className="col-span-2 pb-2 mb-1 border-b border-bordercolor/70 flex items-center justify-between text-[11px] font-bold text-textsecondary uppercase tracking-wider">
-                          <span>Our Agency Capabilities</span>
+                          <span>Our Capabilities</span>
                           <Link
                             href="/services"
                             className="text-primarypurple hover:underline lowercase font-normal"

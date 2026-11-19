@@ -18,24 +18,29 @@ export const COMPANY_INFO = {
   websiteAlt: 'https://www.idmsmarttech.com/',
   differentiators: [
     {
-      title: 'Creative Content & Performance Marketing',
-      desc: 'High-hook video reels, branded aesthetic post design, and laser-targeted Meta & Google Ad campaigns engineered for return on ad spend.',
+      title: 'Brand Building & Identity',
+      desc: 'Create a memorable, cohesive brand identity with professional creative direction, consistent brand messaging, and aesthetic multi-platform assets.',
+      icon: '🎨',
+    },
+    {
+      title: 'Audience Reach & Visibility',
+      desc: 'Expand your reach to active prospective customers through targeted Meta & Google Ad campaigns and strategic local search engine presence.',
       icon: '🎯',
     },
     {
-      title: 'Social Media & Search Visibility',
-      desc: 'Instagram community management and strategic Google Maps 3-Pack SEO that capture nearby customers right when they are searching.',
-      icon: '📍',
+      title: 'Lead Generation & Conversions',
+      desc: 'Turn digital attention into genuine customer conversations with conversion-focused funnels, persuasive copywriting, and direct WhatsApp response channels.',
+      icon: '⚡',
     },
     {
-      title: 'Marketing & Technology Under One Roof',
-      desc: 'Modern Next.js web applications, custom CRM platforms, and conversion-focused landing pages built with clean code and sub-second speed.',
+      title: 'Digital Infrastructure & Development',
+      desc: 'Strengthen your business foundation with high-speed Next.js web applications, mobile platforms, and customized management tools.',
       icon: '💻',
     },
     {
-      title: 'Lead Generation & Business Automation',
-      desc: 'Automated 24/7 WhatsApp response pipelines, instant lead notifications, and smart routing that eliminate lost customer inquiries.',
-      icon: '⚡',
+      title: 'AI Automation & Business Efficiency',
+      desc: 'Streamline day-to-day operations and accelerate customer response times with automated workflows and intelligent business solutions.',
+      icon: '🤖',
     },
   ],
 };

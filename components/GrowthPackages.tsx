@@ -101,6 +101,29 @@ export default function GrowthPackages() {
             </motion.div>
           ))}
         </StaggerContainer>
+
+        {/* Retainer Scope Clarity Card */}
+        <ScrollReveal variant="fadeUp" delay={0.2} className="mt-12">
+          <div className="aurora-card p-6 bg-sectionsoft/50 border border-bordercolor flex flex-col md:flex-row items-center justify-between gap-4 max-w-4xl mx-auto">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl p-2 rounded-xl bg-white border border-bordercolor shrink-0">📋</span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-primarypurple">Clear Deliverable Scoping</p>
+                <p className="text-xs text-textsecondary mt-0.5">
+                  Package deliverables, posting schedule, creative counts, and ad management scope are formalized transparently during onboarding based on your specific business goals.
+                </p>
+              </div>
+            </div>
+            <a
+              href={getWhatsAppUrl('Hi IDM Smart Tech, I would like to get a customized scope and inclusions breakdown for your monthly growth packages.')}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-aurora-secondary py-2.5 px-5 text-xs whitespace-nowrap shrink-0"
+            >
+              Request Package Details &rarr;
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

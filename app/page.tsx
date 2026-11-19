@@ -1,9 +1,8 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import AgencyPartnershipSection from '@/components/AgencyPartnershipSection';
-import ServicesSection from '@/components/ServicesSection';
 import WhyChooseSection from '@/components/WhyChooseSection';
+import ServicesSection from '@/components/ServicesSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import GrowthProcess from '@/components/GrowthProcess';
 import IndustriesSection from '@/components/IndustriesSection';
@@ -28,14 +27,11 @@ export default function Home() {
       {/* 2. Cinematic 3D Hero */}
       <Hero />
 
-      {/* 2.5 Five Premium Agency Partnership Value Cards */}
-      <AgencyPartnershipSection />
-
-      {/* 3. Service Categories */}
-      <ServicesSection />
-
-      {/* 4. Why Choose IDM Smart Tech */}
+      {/* 3. Why Choose IDM Smart Tech — Five Partnership Value Cards */}
       <WhyChooseSection />
+
+      {/* 4. Service Categories */}
+      <ServicesSection />
 
       {/* 5. Creative Portfolio */}
       <PortfolioSection />

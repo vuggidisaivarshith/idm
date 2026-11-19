@@ -1,35 +1,62 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import ScrollReveal from '@/components/animations/ScrollReveal';
 
-const steps = [
+const journeySteps = [
   {
     step: '01',
-    title: 'Discover',
-    tagline: 'Brand DNA & Audience Mapping',
-    description: 'We analyze your business, current social media presence, competitors, and target audience in Hyderabad and pan-India to identify genuine growth opportunities.',
+    title: 'Audit',
+    tagline: 'Discovery & Current State Analysis',
+    description:
+      'We evaluate your current social channels, local search footprint, competitors, and audience behavior to pinpoint precise growth opportunities.',
+    deliverables: ['Competitor benchmarking', 'Audience profiling', 'Channel health check'],
     icon: '🔍',
   },
   {
     step: '02',
-    title: 'Strategize',
-    tagline: 'Content Pillars & Funnel Architecture',
-    description: 'We construct a strategic content calendar, aesthetic guidelines, Reel concepts, and targeted ad funnels aligned with your specific business goals.',
+    title: 'Strategy',
+    tagline: 'Campaign & Funnel Roadmap',
+    description:
+      'We architect your monthly content pillars, high-hook creative angles, paid ad funnels, and target demographic segments tailored to your industry.',
+    deliverables: ['Monthly content calendar', 'Paid ads funnel architecture', 'Brand guidelines'],
     icon: '📐',
   },
   {
     step: '03',
-    title: 'Create',
-    tagline: 'High-Retention Design & Production',
-    description: 'Our creative team produces eye-catching graphics, edits dynamic short-form Reels, writes high-converting copy, and launches targeted campaigns.',
+    title: 'Creation',
+    tagline: 'High-Retention Asset Production',
+    description:
+      'Our design and video team produces scroll-stopping Reels, aesthetic post carousels, ad visual variations, and persuasive copywriting.',
+    deliverables: ['9:16 short-form video hooks', 'Aesthetic feed & carousel posts', 'High-intent ad copy'],
     icon: '🎨',
   },
   {
     step: '04',
-    title: 'Optimize',
-    tagline: 'Review, Refine & Scale',
-    description: 'We continuously evaluate real engagement and lead data, doubling down on top-performing creative formats and refining audience targeting for maximum ROI.',
-    icon: '📈',
+    title: 'Launch',
+    tagline: 'Multi-Channel Activation',
+    description:
+      'Campaigns go live with structured scheduling, verified Meta & Google tracking pixels, local SEO citations, and instant WhatsApp inquiry routing.',
+    deliverables: ['Pixel & conversion API setup', 'Scheduled grid deployment', 'WhatsApp lead workflow'],
+    icon: '🚀',
+  },
+  {
+    step: '05',
+    title: 'Optimization',
+    tagline: 'Data-Driven Performance Tuning',
+    description:
+      'We analyze real engagement and conversion telemetry, conducting continuous A/B tests on creative hooks, audience segments, and budget allocation.',
+    deliverables: ['Creative A/B testing', 'Audience bid optimization', 'Cost-per-lead refinement'],
+    icon: '⚡',
+  },
+  {
+    step: '06',
+    title: 'Reporting',
+    tagline: 'Transparent Review & Scaling',
+    description:
+      'You receive clear performance reports covering reach, engagement, inquiries generated, and actionable recommendations for subsequent growth stages.',
+    deliverables: ['Bi-weekly performance data', 'Inquiry volume tracking', 'Scaling recommendations'],
+    icon: '📊',
   },
 ];
 
@@ -43,12 +70,11 @@ export default function GrowthProcess() {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
-      // Calculate how far the section has progressed through the viewport
+
       const start = windowHeight;
       const end = -rect.height;
       const current = rect.top;
-      
+
       const progress = Math.min(Math.max((start - current) / (start - end), 0), 1);
       setScrollProgress(progress);
     };
@@ -65,33 +91,33 @@ export default function GrowthProcess() {
       className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-        <div className="max-w-3xl mb-16">
+        <ScrollReveal variant="fadeUp" className="max-w-3xl mb-16">
           <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-            Structured Execution
+            Structured Client Journey
           </div>
           <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
-            Our 4-Step Method for <br />
+            Our 6-Step Method for <br />
             <span className="font-extrabold text-gradient-aurora">
               Predictable Brand Acceleration.
             </span>
           </h2>
           <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            A transparent, disciplined creative process that turns casual social media scrollers into paying, long-term brand advocates.
+            A transparent, disciplined six-stage journey: Audit → Strategy → Creation → Launch → Optimization → Reporting. Turning casual scrollers into paying, long-term brand advocates.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Animated Connecting Line on Desktop */}
         <div className="hidden lg:block relative w-full mb-10 px-8">
           <div className="w-full h-1 bg-white/80 rounded-full overflow-hidden shadow-2xs border border-bordercolor/60">
             <div
               className="h-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-all duration-300 ease-out rounded-full"
-              style={{ width: `${Math.min(Math.max(scrollProgress * 115, 8), 100)}%` }}
+              style={{ width: `${Math.min(Math.max(scrollProgress * 115, 6), 100)}%` }}
             />
           </div>
           {/* Milestone Dots */}
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-8 pointer-events-none">
-            {steps.map((_, i) => {
-              const reached = scrollProgress > (i * 0.25);
+            {journeySteps.map((_, i) => {
+              const reached = scrollProgress > i * (1 / 6);
               return (
                 <div
                   key={i}
@@ -108,9 +134,9 @@ export default function GrowthProcess() {
           </div>
         </div>
 
-        {/* 4 Connected Process Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative items-start">
-          {steps.map((s, idx) => {
+        {/* 6 Connected Process Cards (3 Columns on Desktop, 2 on Tablet, 1 on Mobile) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative items-start">
+          {journeySteps.map((s, idx) => {
             const isHovered = activeStep === idx;
             return (
               <div
@@ -165,13 +191,21 @@ export default function GrowthProcess() {
                   <div
                     className={`overflow-hidden transition-all duration-300 ease-out ${
                       isHovered
-                        ? 'max-h-48 opacity-100 mt-3 pt-3 border-t border-bordercolor/70'
+                        ? 'max-h-56 opacity-100 mt-3 pt-3 border-t border-bordercolor/70'
                         : 'max-h-0 opacity-0 mt-0 pt-0'
                     }`}
                   >
-                    <p className="text-xs sm:text-sm text-textsecondary leading-relaxed">
+                    <p className="text-xs sm:text-sm text-textsecondary leading-relaxed mb-3">
                       {s.description}
                     </p>
+                    <div className="space-y-1.5 pt-2 border-t border-bordercolor/60">
+                      {s.deliverables.map((item, dIdx) => (
+                        <div key={dIdx} className="flex items-center space-x-1.5 text-[11px] text-textsecondary">
+                          <span className="text-brandmint font-bold">✓</span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Hover prompt when idle */}
@@ -187,14 +221,14 @@ export default function GrowthProcess() {
                   </div>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
-                  <span>Phase 0{idx + 1}</span>
+                <div className="pt-4 mt-5 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
+                  <span>Step 0{idx + 1} of 06</span>
                   <span
                     className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
                       isHovered ? 'text-primarypurple translate-x-1' : 'text-primarypurple'
                     }`}
                   >
-                    <span>Step {idx + 1}</span>
+                    <span>{s.title}</span>
                     <span>&rarr;</span>
                   </span>
                 </div>

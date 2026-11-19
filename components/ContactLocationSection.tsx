@@ -15,11 +15,29 @@ export default function ContactLocationSection() {
     budget: '₹10,000 - ₹25,000 / month',
     message: '',
   });
+  const [errors, setErrors] = useState<{ name?: string; phone?: string; businessName?: string }>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const validate = () => {
+    const newErrors: { name?: string; phone?: string; businessName?: string } = {};
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      newErrors.name = 'Please provide your full name (at least 2 characters).';
+    }
+    const cleanPhone = formData.phone.replace(/[^0-9]/g, '');
+    if (!cleanPhone || cleanPhone.length < 10) {
+      newErrors.phone = 'Please enter a valid 10-digit WhatsApp phone number.';
+    }
+    if (!formData.businessName.trim()) {
+      newErrors.businessName = 'Please enter your business or brand name.';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
     setIsSubmitting(true);
 
     setTimeout(() => {
@@ -121,11 +139,21 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                       id="contact-name"
                       required
                       type="text"
+                      aria-invalid={!!errors.name}
+                      aria-describedby={errors.name ? 'contact-name-error' : undefined}
                       value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (errors.name) setErrors({ ...errors, name: undefined });
+                      }}
                       placeholder="e.g. Rahul Sharma"
-                      className="aurora-input w-full text-sm"
+                      className={`aurora-input w-full text-sm ${errors.name ? 'border-red-400 focus:border-red-500' : ''}`}
                     />
+                    {errors.name && (
+                      <p id="contact-name-error" className="text-[11px] text-red-500 mt-1 font-medium">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="contact-phone" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">
@@ -135,11 +163,21 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                       id="contact-phone"
                       required
                       type="tel"
+                      aria-invalid={!!errors.phone}
+                      aria-describedby={errors.phone ? 'contact-phone-error' : undefined}
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, phone: e.target.value });
+                        if (errors.phone) setErrors({ ...errors, phone: undefined });
+                      }}
                       placeholder="+91 98765 43210"
-                      className="aurora-input w-full text-sm"
+                      className={`aurora-input w-full text-sm ${errors.phone ? 'border-red-400 focus:border-red-500' : ''}`}
                     />
+                    {errors.phone && (
+                      <p id="contact-phone-error" className="text-[11px] text-red-500 mt-1 font-medium">
+                        {errors.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -152,11 +190,21 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
                       id="contact-business"
                       required
                       type="text"
+                      aria-invalid={!!errors.businessName}
+                      aria-describedby={errors.businessName ? 'contact-business-error' : undefined}
                       value={formData.businessName}
-                      onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, businessName: e.target.value });
+                        if (errors.businessName) setErrors({ ...errors, businessName: undefined });
+                      }}
                       placeholder="e.g. Zen Lifestyle Cafe"
-                      className="aurora-input w-full text-sm"
+                      className={`aurora-input w-full text-sm ${errors.businessName ? 'border-red-400 focus:border-red-500' : ''}`}
                     />
+                    {errors.businessName && (
+                      <p id="contact-business-error" className="text-[11px] text-red-500 mt-1 font-medium">
+                        {errors.businessName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="contact-email" className="block text-xs uppercase tracking-wider text-textsecondary mb-1.5 font-semibold">

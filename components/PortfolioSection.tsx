@@ -64,8 +64,8 @@ export default function PortfolioSection() {
             {/* Desktop Carousel Controls & Notice */}
             <div className="flex flex-col sm:items-end gap-3">
               <div className="text-xs text-textsecondary bg-white p-3.5 rounded-xl border border-bordercolor shadow-2xs max-w-sm">
-                <span className="font-semibold text-primarypurple block mb-0.5">📁 Agency Work Showcase:</span>
-                Demonstration formats. Confidential client handles and live campaigns are presented during one-on-one consultation.
+                <span className="font-semibold text-primarypurple block mb-0.5">📁 Deliverable Showcase:</span>
+                Demonstration samples illustrating format and creative direction. Client proprietary campaign assets and metrics are shared during one-on-one consultation.
               </div>
 
               <div className="hidden lg:flex items-center gap-2">
