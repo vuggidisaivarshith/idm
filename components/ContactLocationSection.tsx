@@ -97,7 +97,7 @@ Message: ${formData.message || 'I would like to discuss my marketing strategy.'}
               Request Your Marketing Consultation
             </h3>
             <p className="text-sm text-textsecondary mb-8">
-              Share details about your brand. We will formulate a tailored strategy and reach out on WhatsApp within 30 minutes.
+              Share details about your brand. We will formulate a tailored strategy and connect with you directly on WhatsApp.
             </p>
 
             {submitted ? (

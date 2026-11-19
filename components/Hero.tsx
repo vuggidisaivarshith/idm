@@ -68,85 +68,86 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right Column: Creative Campaign Visual Showcase */}
+          {/* Right Column: Authentic Agency Showcase */}
           <div className="lg:col-span-5 relative flex justify-center items-center">
             {/* Ambient Background Aura */}
             <div className="absolute inset-0 bg-gradient-to-tr from-primarypurple/20 via-royalblue/15 to-softpink/20 rounded-3xl blur-2xl -z-10" />
 
-            {/* Main Instagram Reel / Creative Post Mockup Card */}
-            <div className="w-full max-w-[340px] sm:max-w-[360px] aurora-card overflow-hidden shadow-card-hover border-bordercolor bg-white relative">
-              {/* Mockup Header */}
-              <div className="px-4 py-3 border-b border-bordercolor flex items-center justify-between bg-white">
-                <div className="flex items-center space-x-2.5">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-primarypurple via-royalblue to-softpink p-0.5 flex items-center justify-center">
-                    <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
-                      <span className="text-[10px] font-bold text-primarypurple">IDM</span>
-                    </div>
+            {/* Agency Focus Card */}
+            <div className="w-full max-w-[360px] aurora-card p-6 shadow-card-hover border-bordercolor bg-white relative space-y-5">
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-bordercolor">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center text-white font-heading font-extrabold text-sm shadow-sm">
+                    IDM
                   </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-xs font-bold text-textprimary">idmsmarttech</span>
-                    <span className="text-royalblue text-[10px]">✓</span>
+                  <div>
+                    <h3 className="text-sm font-heading font-bold text-textprimary">IDM Smart Tech</h3>
+                    <p className="text-[11px] text-textsecondary">Digital Marketing & Tech Agency</p>
                   </div>
                 </div>
-                <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sectionsoft text-primarypurple">
-                  Viral Campaign
+                <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sectionsoft text-primarypurple border border-primarypurple/20">
+                  Hyderabad
                 </span>
               </div>
 
-              {/* Creative Visual Container */}
-              <div className="relative h-[320px] overflow-hidden bg-slate-900 group">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80"
-                  alt="Campaign Creative Preview"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                
-                {/* Reel Metric Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
-                  <div>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/20 backdrop-blur-md border border-white/25 inline-flex items-center gap-1">
-                      <span>▶</span> 1.2M Plays
+              {/* Core Offerings List */}
+              <div className="space-y-2.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-textsecondary">
+                  Core Expertise & Channels
+                </p>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-pagebg border border-bordercolor/60 text-xs">
+                    <span className="font-semibold text-textprimary flex items-center gap-2">
+                      <span>📸</span> Social Media & Reels
                     </span>
-                    <p className="text-xs font-medium text-white/90 mt-2 line-clamp-1">
-                      Viral Recipe Launch Reel • Food & Hospitality
-                    </p>
+                    <span className="text-[10px] text-primarypurple font-bold">Instagram & Meta</span>
                   </div>
-                  <span className="text-xs font-bold bg-brandmint/90 text-white px-2 py-0.5 rounded-md">
-                    +420% Leads
-                  </span>
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-pagebg border border-bordercolor/60 text-xs">
+                    <span className="font-semibold text-textprimary flex items-center gap-2">
+                      <span>🎯</span> Performance Advertising
+                    </span>
+                    <span className="text-[10px] text-royalblue font-bold">Google & Meta Ads</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-pagebg border border-bordercolor/60 text-xs">
+                    <span className="font-semibold text-textprimary flex items-center gap-2">
+                      <span>📍</span> Local SEO & GMB
+                    </span>
+                    <span className="text-[10px] text-brandmint font-bold">Maps & Local Search</span>
+                  </div>
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-pagebg border border-bordercolor/60 text-xs">
+                    <span className="font-semibold text-textprimary flex items-center gap-2">
+                      <span>💻</span> Web, Apps & AI Tech
+                    </span>
+                    <span className="text-[10px] text-softpink font-bold">Next.js & Automation</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Engagement Stats Strip */}
-              <div className="px-4 py-3 bg-pagebg/60 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary">
-                <span className="font-semibold text-textprimary">❤️ 84.2K Likes</span>
-                <span className="font-semibold text-textprimary">💬 1,480 Comments</span>
-                <span className="font-semibold text-textprimary">🚀 12.6K Shares</span>
+              {/* Tagline Footer */}
+              <div className="pt-3 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary">
+                <span className="italic text-[11px] text-textsecondary">
+                  &ldquo;Creative Strategies. Smarter Marketing.&rdquo;
+                </span>
+                <a
+                  href="#contact"
+                  className="text-[11px] font-bold text-primarypurple hover:underline"
+                >
+                  Consult Now &rarr;
+                </a>
               </div>
             </div>
 
-            {/* Floating Card 1: Top Right - Follower Acceleration */}
-            <div className="hidden sm:flex absolute -top-5 -right-6 aurora-card p-3.5 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-3 animate-float">
-              <div className="w-9 h-9 rounded-xl bg-sectionsoft text-primarypurple flex items-center justify-center font-bold text-sm">
-                📈
-              </div>
-              <div>
-                <p className="text-[11px] text-textsecondary uppercase font-semibold">Weekly Growth</p>
-                <p className="text-sm font-heading font-extrabold text-textprimary">+4,820 Followers</p>
-              </div>
+            {/* Floating Badge 1: Top Right */}
+            <div className="hidden sm:flex absolute -top-4 -right-4 aurora-card px-3.5 py-2 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-brandmint inline-block" />
+              <span className="text-xs font-semibold text-textprimary">Active Agency Support</span>
             </div>
 
-            {/* Floating Card 2: Bottom Left - ROAS Metric */}
-            <div className="hidden sm:flex absolute -bottom-5 -left-6 aurora-card p-3.5 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-sectionsoft text-brandmint flex items-center justify-center font-bold text-sm">
-                🎯
-              </div>
-              <div>
-                <p className="text-[11px] text-textsecondary uppercase font-semibold">Meta Ads Return</p>
-                <p className="text-sm font-heading font-extrabold text-brandmint">8.4x Verified ROAS</p>
-              </div>
+            {/* Floating Badge 2: Bottom Left */}
+            <div className="hidden sm:flex absolute -bottom-4 -left-4 aurora-card px-3.5 py-2 bg-white/95 backdrop-blur-md shadow-card border-bordercolor items-center gap-2">
+              <span className="text-sm">📍</span>
+              <span className="text-xs font-semibold text-textprimary">Shamshabad, Hyderabad</span>
             </div>
           </div>
         </div>

@@ -1,90 +1,69 @@
-export interface PortfolioProject {
+export interface CreativeDeliverable {
   id: string;
   title: string;
-  category: 'Social Media Posts' | 'Instagram Campaigns' | 'Reels & Videos' | 'Paid Advertising' | 'Branding' | 'Website Projects';
-  clientIndustry: string;
+  category: 'Social Media' | 'Reels & Videos' | 'Paid Ads' | 'Local SEO & GMB' | 'Web Development' | 'AI & Automation';
+  format: string;
   description: string;
-  highlightMetric: string;
-  image: string;
   tags: string[];
-  isDemo: boolean;
 }
 
-export const PORTFOLIO_CATEGORIES = [
-  'All Work',
-  'Social Media Posts',
-  'Instagram Campaigns',
+export const DELIVERABLE_CATEGORIES = [
+  'All Deliverables',
+  'Social Media',
   'Reels & Videos',
-  'Paid Advertising',
-  'Branding',
-  'Website Projects',
+  'Paid Ads',
+  'Local SEO & GMB',
+  'Web Development',
+  'AI & Automation',
 ] as const;
 
-export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
+export const CREATIVE_DELIVERABLES: CreativeDeliverable[] = [
   {
-    id: 'campaign-urban-brew',
-    title: 'The Urban Cafe & Roastery',
-    category: 'Instagram Campaigns',
-    clientIndustry: 'Food & Beverage / Hospitality',
-    description: 'A 30-day viral local launch campaign featuring aesthetic reel hooks, foodie giveaways, and micro-influencer collaborations in Hyderabad.',
-    highlightMetric: '1.2M+ Organic Views',
-    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80',
-    tags: ['Reels Production', 'Instagram Growth', 'Local Footfall'],
-    isDemo: true,
+    id: 'deliverable-social-feed',
+    title: 'Brand Visual Identity & Carousel Posts',
+    category: 'Social Media',
+    format: 'Static & Multi-Slide Informational Carousels',
+    description: 'Custom graphic designs, cohesive brand color schemes, high-readability typography, and educational carousels formatted for Instagram and Facebook.',
+    tags: ['Grid Architecture', 'Brand Consistency', 'Multi-Slide Posts'],
   },
   {
-    id: 'campaign-zenith-realty',
-    title: 'Zenith Luxury Living',
-    category: 'Paid Advertising',
-    clientIndustry: 'Real Estate & Construction',
-    description: 'High-intent Meta Ads & Google Search funnel targeting NRI investors for luxury 3BHK villas, generating qualified site visit appointments.',
-    highlightMetric: '8.4x Verified ROAS',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-    tags: ['Meta Lead Ads', 'Google PPC', 'Conversion Funnel'],
-    isDemo: true,
-  },
-  {
-    id: 'campaign-aurora-glow',
-    title: 'Aura Skin & Aesthetics Clinic',
-    category: 'Social Media Posts',
-    clientIndustry: 'Healthcare & Dermatology',
-    description: 'Clean medical aesthetic grid overhaul, educational doctor bite-sized carousels, and client transformation reels building trusted authority.',
-    highlightMetric: '+320% WhatsApp Inquiries',
-    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
-    tags: ['Content Calendar', 'Carousel Strategy', 'WhatsApp CTA'],
-    isDemo: true,
-  },
-  {
-    id: 'campaign-pulse-fitness',
-    title: 'Pulse Iron Athletic Club',
+    id: 'deliverable-reels-video',
+    title: 'Short-Form Reels & Video Production',
     category: 'Reels & Videos',
-    clientIndustry: 'Fitness & Wellness',
-    description: 'High-octane gym transformation reels, trainer spotlight series, and seasonal member sign-up video campaigns crafted for Instagram & YouTube Shorts.',
-    highlightMetric: '450K+ Engagement',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
-    tags: ['Short-Form Video', 'Cinematic Edits', 'Community Building'],
-    isDemo: true,
+    format: 'Vertical Video (9:16) for Instagram & YouTube Shorts',
+    description: 'High-hook video concepts, dynamic captions, sound design, and pacing optimized for audience retention on Instagram Reels and YouTube Shorts.',
+    tags: ['Hook Scripting', 'Reels Editing', 'Trending Audio'],
   },
   {
-    id: 'campaign-novatech-brand',
-    title: 'NovaCloud Enterprise Suite',
-    category: 'Branding',
-    clientIndustry: 'B2B Software & SaaS',
-    description: 'Complete brand identity refresh including typography guidelines, executive LinkedIn social kits, custom iconography, and sales pitch decks.',
-    highlightMetric: 'Full Brand Overhaul',
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80',
-    tags: ['Brand Guidelines', 'LinkedIn Kits', 'Visual Identity'],
-    isDemo: true,
+    id: 'deliverable-performance-ads',
+    title: 'High-Intent Paid Ad Creative Sets',
+    category: 'Paid Ads',
+    format: 'Direct-Response Ad Creatives for Meta & Google',
+    description: 'Targeted visual ads, carousel variations, and compelling call-to-action copy designed to reduce cost-per-lead across Meta Ads and Google Search.',
+    tags: ['Lead Generation Ads', 'Creative Testing', 'Conversion Copy'],
   },
   {
-    id: 'campaign-velox-ecommerce',
-    title: 'Velox Apparel & Streetwear',
-    category: 'Website Projects',
-    clientIndustry: 'D2C Fashion & E-Commerce',
-    description: 'Lightning-fast Next.js shopping storefront with mobile-first checkout, integrated Meta catalog sync, and WhatsApp purchase support.',
-    highlightMetric: '<1s Load Speed',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
-    tags: ['Next.js 14', 'Shopify Sync', 'Mobile-First CRO'],
-    isDemo: true,
+    id: 'deliverable-local-gmb',
+    title: 'Google Business Profile & Local Search Setup',
+    category: 'Local SEO & GMB',
+    format: 'Google Maps Presence & Profile Architecture',
+    description: 'Full profile creation, geo-targeted category configuration, business attribute mapping, and compliance alignment for local search presence.',
+    tags: ['GMB Optimization', 'Google Maps', 'Local Footfall'],
+  },
+  {
+    id: 'deliverable-web-landing',
+    title: 'Conversion-Focused Websites & Landing Pages',
+    category: 'Web Development',
+    format: 'Modern Mobile-First Web Experiences',
+    description: 'Clean Next.js websites and campaign landing pages optimized for speed, mobile responsiveness, and direct WhatsApp lead conversion.',
+    tags: ['Next.js Framework', 'Mobile-First', 'Fast Loading'],
+  },
+  {
+    id: 'deliverable-ai-automation',
+    title: 'AI Chatbots & WhatsApp Automation Flows',
+    category: 'AI & Automation',
+    format: 'Automated Lead Notification & Response Systems',
+    description: 'Automated 24/7 inquiry responders, lead notification alerts, and webhook integrations to streamline customer communication.',
+    tags: ['WhatsApp Automation', 'Instant Alerts', 'Process Automation'],
   },
 ];

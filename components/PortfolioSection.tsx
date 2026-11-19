@@ -1,16 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PORTFOLIO_CATEGORIES, PORTFOLIO_PROJECTS, PortfolioProject } from '@/data/portfolio';
+import { DELIVERABLE_CATEGORIES, CREATIVE_DELIVERABLES, CreativeDeliverable } from '@/data/portfolio';
 import { getWhatsAppUrl } from '@/lib/constants';
 
 export default function PortfolioSection() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All Work');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All Deliverables');
 
-  const filteredProjects: PortfolioProject[] =
-    selectedCategory === 'All Work'
-      ? PORTFOLIO_PROJECTS
-      : PORTFOLIO_PROJECTS.filter((p) => p.category === selectedCategory);
+  const filteredDeliverables: CreativeDeliverable[] =
+    selectedCategory === 'All Deliverables'
+      ? CREATIVE_DELIVERABLES
+      : CREATIVE_DELIVERABLES.filter((d) => d.category === selectedCategory);
 
   return (
     <section id="portfolio" className="py-24 bg-pagebg text-textprimary relative border-t border-bordercolor">
@@ -19,29 +19,29 @@ export default function PortfolioSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
             <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-              Creative Portfolio
+              Creative Deliverables
             </div>
             <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
-              Campaigns Engineered to <br />
+              What We Create for <br />
               <span className="font-extrabold text-gradient-aurora">
-                Capture Attention & Convert.
+                Your Brand&apos;s Growth.
               </span>
             </h2>
             <p className="text-textsecondary text-base mt-3 leading-relaxed">
-              Explore our creative work across social media reels, high-ROAS paid ads, aesthetic branding, and conversion web experiences.
+              Explore the core creative formats, campaign assets, and technology solutions we produce for businesses across Hyderabad and India.
             </p>
           </div>
 
-          {/* Industry Showcase Notice */}
-          <div className="text-xs text-textsecondary bg-white p-3.5 rounded-xl border border-bordercolor shadow-2xs max-w-xs">
-            <span className="font-semibold text-primarypurple block mb-0.5">💡 Creative Showcase:</span>
-            Demonstration campaign formats. Reach out on WhatsApp for customized sample creatives for your specific industry.
+          {/* Client Work Notice */}
+          <div className="text-xs text-textsecondary bg-white p-4 rounded-xl border border-bordercolor shadow-2xs max-w-sm">
+            <span className="font-semibold text-primarypurple block mb-1">📁 Client Portfolios & Live Samples:</span>
+            We respect client confidentiality. Live account handles, campaign recordings, and industry-specific work samples are presented during your one-on-one consultation.
           </div>
         </div>
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap gap-2.5 mb-12">
-          {PORTFOLIO_CATEGORIES.map((cat) => (
+          {DELIVERABLE_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -56,75 +56,58 @@ export default function PortfolioSection() {
           ))}
         </div>
 
-        {/* Portfolio Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
+        {/* Deliverables Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDeliverables.map((item) => (
             <div
-              key={project.id}
-              className="aurora-card overflow-hidden flex flex-col justify-between group"
+              key={item.id}
+              className="aurora-card p-6 sm:p-7 flex flex-col justify-between group hover:border-primarypurple/40"
             >
               <div>
-                {/* Visual Preview Container */}
-                <div className="relative h-60 w-full overflow-hidden bg-slate-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-90" />
-
-                  {/* Category Pill */}
-                  <div className="absolute top-4 left-4">
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-textprimary border border-white/40 shadow-xs">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  {/* Key Metric Pill */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
-                    <span className="text-xs font-extrabold bg-primarypurple/90 backdrop-blur-md px-2.5 py-0.5 rounded-md">
-                      {project.highlightMetric}
-                    </span>
-                    <span className="text-[11px] text-white/80 font-medium">
-                      {project.clientIndustry}
-                    </span>
-                  </div>
+                {/* Header: Category Badge & Format */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-sectionsoft text-primarypurple border border-primarypurple/15">
+                    {item.category}
+                  </span>
+                  <span className="text-[11px] text-textsecondary font-medium">
+                    Deliverable
+                  </span>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-textsecondary leading-relaxed mb-4">
-                    {project.description}
-                  </p>
+                <h3 className="text-lg font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors mb-2">
+                  {item.title}
+                </h3>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-medium text-textsecondary bg-pagebg px-2 py-0.5 rounded-md border border-bordercolor/80"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
+                <p className="text-xs font-semibold text-royalblue mb-3">
+                  {item.format}
+                </p>
+
+                <p className="text-xs text-textsecondary leading-relaxed mb-5">
+                  {item.description}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-1.5 pt-4 border-t border-bordercolor">
+                  {item.tags.map((t, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-pagebg text-textsecondary border border-bordercolor/80"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              {/* Card Footer Action */}
-              <div className="px-6 pb-6 pt-3 border-t border-bordercolor flex items-center justify-between">
+              {/* Action Button */}
+              <div className="pt-6 mt-6 border-t border-bordercolor">
                 <a
-                  href={getWhatsAppUrl(`Hello IDM Smart Tech, I saw your ${project.category} campaign for "${project.title}" and would like to discuss a similar creative campaign for my business.`)}
+                  href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to see recent samples and discuss: ${item.title}.`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs font-bold uppercase tracking-wider text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1.5"
+                  className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-pagebg border border-bordercolor text-textprimary hover:bg-primarypurple hover:text-white hover:border-primarypurple transition-all"
                 >
-                  Discuss Similar Campaign &rarr;
+                  Request Samples on WhatsApp &rarr;
                 </a>
               </div>
             </div>
