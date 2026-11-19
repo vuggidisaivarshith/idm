@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
+import { getWhatsAppUrl } from '@/lib/constants';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import StaggerContainer from '@/components/animations/StaggerContainer';
 import MagneticButton from '@/components/animations/MagneticButton';
@@ -15,7 +15,7 @@ interface AdvantageCard {
   badge: string;
   title: string;
   summary: string;
-  operationalDetails: string[];
+  keyPoints: string[];
   gradient: string;
   iconBg: string;
   icon: React.ReactNode;
@@ -28,17 +28,16 @@ const advantageCards: AdvantageCard[] = [
     badge: 'Direct Access',
     title: 'Direct Founder Communication',
     summary:
-      'You collaborate directly with our lead campaign strategists and technical developers — never through layers of junior account executives or slow support tickets.',
-    operationalDetails: [
+      'Collaborate directly with lead campaign strategists and senior engineers. No junior account managers, relay delays, or diluted creative briefs.',
+    keyPoints: [
       'Zero message relay delays or communication distortion',
-      'Direct strategy syncs with experienced operators',
+      'Direct strategy syncs with experienced agency operators',
       'Agile same-day creative revisions and campaign adjustments',
-      'Full accountability across creative, ad spend, and technical deliverables',
     ],
     gradient: 'from-primarypurple via-royalblue to-brandcyan',
     iconBg: 'bg-primarypurple/10 text-primarypurple border-primarypurple/25',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
     ),
@@ -50,16 +49,15 @@ const advantageCards: AdvantageCard[] = [
     title: 'Transparent Fixed Retainers',
     summary:
       'Predictable, flat monthly pricing with itemized deliverables. Zero hidden agency markups, unexpected billables, or restrictive lock-in contracts.',
-    operationalDetails: [
+    keyPoints: [
       'Pre-agreed monthly deliverable schedules and milestones',
       '100% client ownership of all ad accounts, domains, and assets',
-      'Itemized bi-weekly activity logs and transparent ad spend tracking',
-      'Flexible month-to-month contracts with no penalty lock-ins',
+      'Itemized activity logs with direct ad account billing transparency',
     ],
     gradient: 'from-royalblue via-brandcyan to-brandmint',
     iconBg: 'bg-royalblue/10 text-royalblue border-royalblue/25',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
@@ -68,19 +66,18 @@ const advantageCards: AdvantageCard[] = [
     id: 'unified-creative-media',
     number: '03',
     badge: 'Full-Funnel',
-    title: 'Unified Creative & Paid Acquisition',
+    title: 'Unified Creative & Paid Advertising',
     summary:
-      'We eliminate the disconnect between content creation and media buying. High-hook video producers and ad specialists collaborate under one unified workflow.',
-    operationalDetails: [
-      'Real-time creative iteration based on live cost-per-inquiry feedback',
-      'Native 9:16 vertical short-form reels engineered specifically for ad hooks',
-      'Synchronized landing page copy matching ad visual styles',
-      'Single accountable team for creative engagement and lead volume',
+      'Content production and media buying executed by one synchronized team. High-hook video producers and ad specialists collaborate in real time.',
+    keyPoints: [
+      'Rapid creative iteration based on cost-per-inquiry ad telemetry',
+      'Native 9:16 vertical reels engineered specifically for ad hooks',
+      'Landing page copywriting aligned with campaign visual styles',
     ],
     gradient: 'from-brandcyan via-brandmint to-royalblue',
     iconBg: 'bg-brandcyan/10 text-brandcyan border-brandcyan/25',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
       </svg>
     ),
@@ -89,19 +86,18 @@ const advantageCards: AdvantageCard[] = [
     id: 'production-engineering',
     number: '04',
     badge: 'Modern Tech',
-    title: 'Production-Grade Modern Engineering',
+    title: 'Modern Technology Capabilities',
     summary:
-      'We build high-speed Next.js 14, React, and TypeScript applications instead of sluggish, security-vulnerable WordPress or generic template builders.',
-    operationalDetails: [
-      'High-speed page load performance optimizing ad Quality Scores and user retention',
-      'Clean, modular codebases with custom WhatsApp and CRM webhooks',
-      'Server-rendered metadata for superior local SEO indexing',
-      'Future-proof architectures ready for custom automation and tools',
+      'High-performance Next.js 14, React, and TypeScript engineering. Custom webhooks, automated WhatsApp flows, and scalable digital infrastructure.',
+    keyPoints: [
+      'High-performance page speed optimizing ad Quality Scores',
+      'Clean modular architectures with automated lead integrations',
+      'Server-rendered metadata for local SEO discovery',
     ],
     gradient: 'from-softpink via-primarypurple to-royalblue',
     iconBg: 'bg-softpink/10 text-softpink border-softpink/25',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
       </svg>
     ),
@@ -109,22 +105,6 @@ const advantageCards: AdvantageCard[] = [
 ];
 
 export default function WhyChooseSection() {
-  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
-
-  const toggleFlip = (idx: number) => {
-    setFlippedCards((prev) => ({
-      ...prev,
-      [idx]: !prev[idx],
-    }));
-  };
-
-  const handleHover = (idx: number, isHovered: boolean) => {
-    setFlippedCards((prev) => ({
-      ...prev,
-      [idx]: isHovered,
-    }));
-  };
-
   const whatsappConsultationUrl = getWhatsAppUrl(
     'Hello IDM Smart Tech, I would like to learn more about your operational approach and grow my business.'
   );
@@ -154,209 +134,108 @@ export default function WhyChooseSection() {
           </h2>
 
           <p className="text-textsecondary text-base sm:text-lg mt-5 leading-relaxed max-w-2xl mx-auto font-normal">
-            We operate as an agile, high-standard digital growth unit. Hover or tap any card to flip and explore our verified operational proof points.
+            We operate as an agile, accountable growth unit. Direct communication, transparent retainers, and integrated execution designed to move your business forward.
           </p>
         </ScrollReveal>
 
-        {/* 4 3D Flippable Cards: All 4 in a Single Row on Desktop */}
+        {/* Compact, Premium 4-Column Advantages Strip */}
         <StaggerContainer staggerDelay={0.08}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 xl:gap-5 items-stretch max-w-7xl mx-auto">
-            {advantageCards.map((card, idx) => {
-              const isFlipped = !!flippedCards[idx];
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch max-w-7xl mx-auto">
+            {advantageCards.map((card) => (
+              <motion.div
+                key={card.id}
+                variants={fadeUpVariants}
+                className="group relative rounded-3xl bg-white/95 backdrop-blur-md border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_8px_24px_-4px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 p-6 flex flex-col justify-between overflow-hidden hover:-translate-y-1.5 hover:shadow-card-hover hover:border-primarypurple/40 transition-all duration-300"
+              >
+                {/* Top gradient reflective accent bar */}
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
 
-              return (
-                <motion.div
-                  key={card.id}
-                  variants={fadeUpVariants}
-                  className="h-[430px] sm:h-[420px] lg:h-[430px] w-full [perspective:1200px]"
-                  onMouseEnter={() => handleHover(idx, true)}
-                  onMouseLeave={() => handleHover(idx, false)}
-                >
-                  <motion.div
-                    className="relative w-full h-full cursor-pointer"
-                    style={{ transformStyle: 'preserve-3d' }}
-                    animate={{ rotateY: isFlipped ? 180 : 0 }}
-                    transition={{ duration: 0.65, ease: [0.23, 1, 0.32, 1] }}
-                    onClick={() => toggleFlip(idx)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`${card.title} - Click or press Enter to flip card`}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleFlip(idx);
-                      }
-                    }}
-                  >
-                    {/* ==================== FRONT FACE ==================== */}
+                <div>
+                  {/* Step Number & Icon Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                      {card.number}
+                    </span>
+
                     <div
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                      }}
-                      className="absolute inset-0 w-full h-full rounded-3xl bg-white/95 backdrop-blur-md border border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 p-5 sm:p-6 flex flex-col justify-between overflow-hidden group hover:border-primarypurple/40 hover:shadow-soft-lg transition-colors"
+                      className={`w-11 h-11 rounded-2xl ${card.iconBg} border flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
                     >
-                      {/* Top gradient reflective highlight bar */}
-                      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
-
-                      <div>
-                        {/* Step Number & Emblem */}
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-xl sm:text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
-                            {card.number}
-                          </span>
-
-                          <div
-                            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${card.iconBg} border flex items-center justify-center shadow-2xs group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
-                          >
-                            {card.icon}
-                          </div>
-                        </div>
-
-                        {/* Badge */}
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-0.5 rounded-full border border-primarypurple/15 inline-block mb-2.5">
-                          {card.badge}
-                        </span>
-
-                        {/* Heading 1st (Always visible) */}
-                        <h3 className="text-base sm:text-lg font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors duration-200 mb-2 leading-snug">
-                          {card.title}
-                        </h3>
-
-                        {/* Summary */}
-                        <p className="text-xs text-textsecondary leading-relaxed line-clamp-4">
-                          {card.summary}
-                        </p>
-                      </div>
-
-                      {/* Footer with Flip Action Indicator */}
-                      <div className="pt-3.5 border-t border-bordercolor/80 flex items-center justify-between text-xs">
-                        <span className="text-textsecondary text-[11px] font-medium">Advantage</span>
-                        <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-sectionsoft/80 border border-primarypurple/20 text-primarypurple font-bold text-[10px] shadow-2xs group-hover:bg-primarypurple group-hover:text-white transition-all duration-200">
-                          <span>Flip Details</span>
-                          <span className="text-xs leading-none animate-spin-slow">↻</span>
-                        </div>
-                      </div>
+                      {card.icon}
                     </div>
+                  </div>
 
-                    {/* ==================== BACK FACE ==================== */}
-                    <div
-                      style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg)',
-                      }}
-                      className="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-white via-sectionsoft/40 to-white backdrop-blur-md border border-primarypurple/40 shadow-soft-xl ring-1 ring-primarypurple/20 p-5 sm:p-6 flex flex-col justify-between overflow-hidden"
-                    >
-                      {/* Top gradient reflective highlight bar */}
-                      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.gradient}`} />
+                  {/* Badge */}
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-0.5 rounded-full border border-primarypurple/15 inline-block mb-3">
+                    {card.badge}
+                  </span>
 
-                      <div>
-                        {/* Header Row: Badge & Flip Back cue */}
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="text-[9px] font-extrabold uppercase tracking-wider text-primarypurple bg-white px-2 py-0.5 rounded-full border border-primarypurple/25 shadow-2xs">
-                            Verified Points
-                          </span>
+                  {/* Title */}
+                  <h3 className="text-lg font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors duration-200 mb-2.5 leading-snug">
+                    {card.title}
+                  </h3>
 
-                          <span className="text-[10px] font-semibold text-textsecondary/80 flex items-center gap-0.5 hover:text-primarypurple transition-colors">
-                            <span>↺ Flip</span>
-                          </span>
-                        </div>
+                  {/* Summary */}
+                  <p className="text-xs text-textsecondary leading-relaxed mb-5 font-normal">
+                    {card.summary}
+                  </p>
 
-                        {/* Title */}
-                        <h4 className="text-sm sm:text-base font-heading font-bold text-textprimary mb-3 leading-snug">
-                          {card.title}
-                        </h4>
-
-                        {/* Operational Advantages List */}
-                        <div className="space-y-2">
-                          {card.operationalDetails.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-[11px] text-textsecondary">
-                              <span
-                                className="w-3.5 h-3.5 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5"
-                                aria-hidden="true"
-                              >
-                                ✓
-                              </span>
-                              <span className="leading-tight text-textprimary font-medium">{point}</span>
-                            </div>
-                          ))}
-                        </div>
+                  {/* Key Operational Points */}
+                  <div className="space-y-2 pt-3 border-t border-bordercolor/70">
+                    {card.keyPoints.map((point, pIdx) => (
+                      <div key={pIdx} className="flex items-start gap-2 text-[11px] text-textprimary leading-relaxed">
+                        <span className="text-brandmint font-bold mt-0.5 shrink-0">✓</span>
+                        <span>{point}</span>
                       </div>
+                    ))}
+                  </div>
+                </div>
 
-                      {/* Footer on Back */}
-                      <div className="pt-3 border-t border-bordercolor flex items-center justify-between text-xs">
-                        <a
-                          href={whatsappConsultationUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="font-bold text-primarypurple hover:text-royalblue transition-colors flex items-center gap-1 text-[11px]"
-                        >
-                          <span>Consult</span>
-                          <span>&rarr;</span>
-                        </a>
-
-                        <span className="text-[10px] text-textsecondary/70">Tap to return</span>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
+                {/* Card Footer */}
+                <div className="mt-6 pt-4 border-t border-bordercolor/60 flex items-center justify-between">
+                  <span className="text-[10px] font-semibold text-textsecondary uppercase tracking-wider">
+                    Core Standard
+                  </span>
+                  <span className="text-xs font-bold text-primarypurple group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                    Verified <span>&rarr;</span>
+                  </span>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </StaggerContainer>
 
-        {/* Strategic Partnership Callout Box */}
-        <ScrollReveal variant="scaleIn" className="mt-16">
-          <div className="rounded-3xl bg-white/95 backdrop-blur-xl border border-white/90 p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_16px_40px_-10px_rgba(105,87,245,0.08),0_1px_4px_rgba(0,0,0,0.03)] ring-1 ring-bordercolor/70 relative overflow-hidden">
-            <div className="absolute top-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan rounded-full" />
+        {/* Bottom CTA Banner */}
+        <ScrollReveal variant="fadeUp" delay={0.3} className="mt-16 text-center">
+          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-white via-sectionsoft/50 to-white border border-white/90 shadow-card max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan`} />
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sectionsoft text-[11px] font-bold text-primarypurple uppercase tracking-wider mb-4 border border-primarypurple/20 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-brandmint animate-pulse" />
-              <span>Dedicated Strategic Growth</span>
+            <div className="text-left">
+              <h4 className="text-xl sm:text-2xl font-heading font-bold text-textprimary">
+                Ready for straightforward growth marketing?
+              </h4>
+              <p className="text-sm text-textsecondary mt-1">
+                Direct strategy discussions, clear deliverables, and no long-term lock-ins.
+              </p>
             </div>
 
-            <h3 className="text-2xl sm:text-4xl font-heading font-extrabold text-textprimary tracking-tight leading-tight">
-              Ready to Upgrade Your Brand&apos;s Trajectory?
-            </h3>
-
-            <p className="text-sm sm:text-base text-textsecondary max-w-xl mx-auto mt-3 leading-relaxed">
-              Experience the clarity of direct founder communication, creative execution, and production-grade technology built for measurable business growth.
-            </p>
-
-            {/* Action CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-              <MagneticButton maxDistance={6}>
-                <a
-                  href={whatsappConsultationUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-aurora-primary py-3.5 px-8 text-xs font-heading font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
-                >
-                  💬 Chat With Our Strategists
-                </a>
-              </MagneticButton>
-
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
               <MagneticButton maxDistance={6}>
                 <Link
-                  href="/services"
-                  className="btn-aurora-secondary py-3.5 px-8 text-xs font-heading font-bold uppercase tracking-wider"
+                  href="/contact"
+                  className="btn-aurora-primary text-xs px-5 py-2.5"
                 >
-                  Explore Capabilities &rarr;
+                  Book Strategy Call
                 </Link>
               </MagneticButton>
-            </div>
-
-            <p className="text-[11px] text-textsecondary mt-5">
-              Direct line to our strategic team in {COMPANY_INFO.city}:{' '}
               <a
-                href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="font-semibold text-primarypurple hover:underline"
+                href={whatsappConsultationUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-aurora-secondary text-xs px-4 py-2.5 inline-flex items-center gap-1.5"
               >
-                {COMPANY_INFO.phone}
+                <span>💬 WhatsApp Us</span>
               </a>
-            </p>
+            </div>
           </div>
         </ScrollReveal>
       </div>

@@ -2,35 +2,34 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { COMPANY_INFO, MONTHLY_PACKAGES, getWhatsAppUrl } from '@/lib/constants';
+import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
+import { CHATBOT_IDENTITY, QUICK_ACTIONS } from '@/lib/chatbotKnowledge';
 
 interface Message {
   id: string;
   sender: 'bot' | 'user';
   text: string;
   time: string;
-  action?: {
+  suggestedActions?: { label: string; prompt: string }[];
+  whatsappHandoff?: {
     label: string;
-    url: string;
-    isExternal?: boolean;
+    prefilledText: string;
   };
 }
 
 const INITIAL_MESSAGES: Message[] = [
   {
-    id: 'msg-1',
+    id: 'msg-welcome',
     sender: 'bot',
-    text: `Hello! 👋 I'm your IDM Smart Tech growth assistant. Ask me anything about our monthly retainers, social media reels, Meta & Google ads, or web engineering in Hyderabad!`,
+    text: CHATBOT_IDENTITY.greeting,
     time: 'Just now',
+    suggestedActions: [
+      { label: '🚀 Grow My Business', prompt: 'I want to grow my business. What do you recommend?' },
+      { label: '💰 View Pricing', prompt: 'What are your monthly package prices?' },
+      { label: '📱 Social Media & Reels', prompt: 'Tell me about social media marketing and reels.' },
+      { label: '📍 GMB Services', prompt: 'What are your Google Business Profile prices?' },
+    ],
   },
-];
-
-const SUGGESTED_QUERIES = [
-  { label: '💰 Retainer Pricing', query: 'What are your monthly package prices?' },
-  { label: '🚀 Core Services', query: 'What services does IDM Smart Tech provide?' },
-  { label: '📈 5-Stage Process', query: 'How does your 5-stage client process work?' },
-  { label: '✂️ Salons & Clinics', query: 'Do you offer marketing for salons and clinics?' },
-  { label: '📍 Hyderabad Office', query: 'Where is your office located and how can I contact you?' },
 ];
 
 export default function QueryChatbot({
@@ -40,10 +39,23 @@ export default function QueryChatbot({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('idm_chatbot_messages');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {
+        // Fall back to initial messages
+      }
+    }
+    return INITIAL_MESSAGES;
+  });
+
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -52,218 +64,230 @@ export default function QueryChatbot({
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
+      setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [messages, isOpen]);
 
-  const generateBotReply = (userQuery: string): Message => {
-    const q = userQuery.toLowerCase();
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    // Pricing & Packages
-    if (q.includes('price') || q.includes('package') || q.includes('cost') || q.includes('retainer') || q.includes('fee')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `We offer 4 transparent, company-approved monthly growth packages:\n\n• Starter Growth: ₹4,999/mo (Social & Local Visibility)\n• Growth: ₹6,999/mo (Brand Acceleration)\n• Ultimate Growth: ₹9,999/mo (Multi-Channel Growth)\n• Pro Plan: ₹16,999/mo (Growth & Leads Generation)\n\nDeliverables are customized directly to your business goals with zero hidden fees.`,
-        time,
-        action: {
-          label: '💬 Discuss Package on WhatsApp',
-          url: getWhatsAppUrl('Hello IDM Smart Tech, I would like to inquire about your monthly growth packages.'),
-          isExternal: true,
-        },
-      };
+  // Persist conversation to localStorage
+  useEffect(() => {
+    if (typeof window !== 'undefined' && messages.length > 0) {
+      try {
+        localStorage.setItem('idm_chatbot_messages', JSON.stringify(messages.slice(-20)));
+      } catch (e) {
+        // Ignore quota errors
+      }
     }
+  }, [messages]);
 
-    // Services
-    if (q.includes('service') || q.includes('what do you do') || q.includes('offer') || q.includes('capabilities')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `IDM Smart Tech provides end-to-end creative marketing and intelligent technology services:\n\n1. Social Media Marketing & Management\n2. 9:16 Vertical Video & Reels Production\n3. Meta (Instagram & Facebook) Lead Ads\n4. Google Search & Display PPC Ads\n5. Local SEO & Google Business Profile (GMB)\n6. Modern Next.js 14 Web Development\n7. AI Business Automation & WhatsApp Flows`,
-        time,
-        action: {
-          label: 'Explore Services Page →',
-          url: '/services',
-          isExternal: false,
-        },
-      };
+  const handleResetConversation = () => {
+    setMessages(INITIAL_MESSAGES);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('idm_chatbot_messages');
     }
-
-    // Process & Workflow
-    if (q.includes('process') || q.includes('stage') || q.includes('how it works') || q.includes('method') || q.includes('step')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `Our disciplined 5-Stage Growth Journey:\n\n01. Discover — Brand & competitor audit\n02. Strategize — Funnel architecture & content pillars\n03. Create — 9:16 Reels & carousel production\n04. Launch & Optimize — Live ads & continuous A/B tests\n05. Report & Improve — Transparent bi-weekly telemetry`,
-        time,
-        action: {
-          label: '💬 Chat With a Strategist',
-          url: getWhatsAppUrl('Hello IDM Smart Tech, I would like to understand your 5-stage client process.'),
-          isExternal: true,
-        },
-      };
-    }
-
-    // Salons, Spas & Healthcare Clinics
-    if (q.includes('salon') || q.includes('spa') || q.includes('clinic') || q.includes('doctor') || q.includes('healthcare') || q.includes('wellness')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `Yes! We specialize in local marketing for Salons, Spas, and Aesthetic Clinics in Hyderabad. We produce weekly transformation reels (hair, skin, styling), optimize Google Maps 3-Pack rankings, and deploy one-tap WhatsApp appointment booking ads.`,
-        time,
-        action: {
-          label: 'View Industry Frameworks →',
-          url: '/industries#salons-wellness',
-          isExternal: false,
-        },
-      };
-    }
-
-    // Office Location & Contact Details
-    if (q.includes('location') || q.includes('address') || q.includes('where') || q.includes('office') || q.includes('phone') || q.includes('email') || q.includes('contact')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `Our office is located in ${COMPANY_INFO.city}:\n\n📍 ${COMPANY_INFO.address}\n📞 Phone: ${COMPANY_INFO.phone}\n✉️ Email: ${COMPANY_INFO.email}\n📸 Instagram: @idmsmarttech`,
-        time,
-        action: {
-          label: 'Open Contact Coordinates →',
-          url: '/contact',
-          isExternal: false,
-        },
-      };
-    }
-
-    // Founder Communication & Advantages
-    if (q.includes('founder') || q.includes('why') || q.includes('differentiator') || q.includes('advantage')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'bot',
-        text: `Key IDM Smart Tech Advantages:\n\n• Direct Founder Communication (no junior account managers)\n• Transparent Fixed Retainers (no surprise billing)\n• Unified Creative & Paid Ads (reels producers work directly with ad buyers)\n• Production-Grade Next.js Engineering`,
-        time,
-        action: {
-          label: '💬 Message Founders on WhatsApp',
-          url: getWhatsAppUrl('Hello IDM Smart Tech, I would like to connect with your lead strategist.'),
-          isExternal: true,
-        },
-      };
-    }
-
-    // Default Fallback
-    return {
-      id: `bot-${Date.now()}`,
-      sender: 'bot',
-      text: `Thank you for asking! For specific campaign strategy, custom scopes, or urgent enquiries, you can talk directly with our lead team on WhatsApp or drop us an email at ${COMPANY_INFO.email}.`,
-      time,
-      action: {
-        label: '💬 Connect on WhatsApp Now',
-        url: getWhatsAppUrl(`Hello IDM Smart Tech, I had a question regarding: "${userQuery}".`),
-        isExternal: true,
-      },
-    };
   };
 
-  const handleSend = (textToSend?: string) => {
-    const text = (textToSend || inputText).trim();
-    if (!text) return;
+  const handleCopyText = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
 
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const userMsg: Message = {
+  const handleSendMessage = async (textToSend?: string) => {
+    const text = (textToSend || inputText).trim();
+    if (!text || isTyping) return;
+
+    const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const userMessage: Message = {
       id: `user-${Date.now()}`,
       sender: 'user',
       text,
-      time,
+      time: currentTime,
     };
 
-    setMessages((prev) => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInputText('');
     setIsTyping(true);
 
-    // Simulate natural AI thinking time
-    setTimeout(() => {
-      const reply = generateBotReply(text);
-      setMessages((prev) => [...prev, reply]);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: updatedMessages.map((m) => ({
+            sender: m.sender,
+            text: m.text,
+          })),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const botMessage: Message = {
+        id: `bot-${Date.now()}`,
+        sender: 'bot',
+        text: data.reply,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        suggestedActions: data.suggestedActions,
+        whatsappHandoff: data.whatsappHandoff,
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (err) {
+      // Fallback message
+      const botMessage: Message = {
+        id: `bot-${Date.now()}`,
+        sender: 'bot',
+        text:
+          "I'm here to help you grow your business with our monthly retainers starting at ₹4,999/mo. For direct consultation or custom estimates, you can reach our team directly on WhatsApp (+91 85198 37818).",
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        whatsappHandoff: {
+          label: '💬 Chat on WhatsApp (+91 85198 37818)',
+          prefilledText: `Hello IDM Smart Tech, I would like to inquire about your digital marketing and technology retainers.`,
+        },
+      };
+      setMessages((prev) => [...prev, botMessage]);
+    } finally {
       setIsTyping(false);
-    }, 600);
+    }
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-24 right-4 sm:right-6 w-[360px] sm:w-[400px] max-w-[calc(100vw-2rem)] h-[580px] max-h-[82vh] rounded-3xl bg-white/95 backdrop-blur-2xl border border-white/90 shadow-[0_24px_50px_-12px_rgba(105,87,245,0.22),0_1px_3px_rgba(0,0,0,0.06),inset_0_1px_1px_rgba(255,255,255,1)] ring-1 ring-bordercolor/80 flex flex-col overflow-hidden z-50 font-body"
+          exit={{ opacity: 0, y: 24, scale: 0.95 }}
+          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed bottom-24 right-4 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[410px] max-w-[420px] h-[580px] max-h-[82vh] rounded-3xl bg-white/95 backdrop-blur-xl border border-white/80 shadow-[0_20px_60px_-12px_rgba(16,28,50,0.18),0_0_0_1px_rgba(105,87,245,0.15)] flex flex-col overflow-hidden text-textprimary"
+          role="dialog"
+          aria-label="IDM Smart Assistant Conversation Window"
         >
-          {/* Header */}
-          <div className="bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan p-4 text-white flex items-center justify-between shrink-0 relative overflow-hidden">
-            <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
-
-            <div className="flex items-center space-x-3 relative z-10">
-              {/* Avatar with active pulse */}
+          {/* ================= HEADER ================= */}
+          <div className="px-4 py-3.5 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan text-white flex items-center justify-between shadow-xs select-none">
+            <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-2xl bg-white text-primarypurple font-heading font-extrabold flex items-center justify-center text-sm shadow-md">
-                  ✨
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shadow-inner border border-white/30">
+                  🤖
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-brandmint border-2 border-white animate-pulse" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-brandmint border-2 border-primarypurple" />
               </div>
 
               <div>
-                <h3 className="text-sm font-heading font-bold text-white leading-tight flex items-center gap-1.5">
-                  <span>IDM AI Strategist</span>
-                  <span className="text-[9px] bg-white/20 uppercase tracking-wider px-1.5 py-0.5 rounded-full font-bold">
-                    Online
+                <div className="flex items-center gap-1.5">
+                  <h3 className="font-heading font-bold text-sm leading-tight text-white">
+                    {CHATBOT_IDENTITY.name}
+                  </h3>
+                  <span className="text-[9px] font-extrabold uppercase tracking-wider bg-white/20 text-white px-1.5 py-0.5 rounded-full">
+                    AI Online
                   </span>
-                </h3>
-                <p className="text-[11px] text-white/85 font-medium leading-none mt-1">
-                  Instant Answers &amp; Growth Insights
+                </div>
+                <p className="text-[11px] text-white/80 leading-tight">
+                  {CHATBOT_IDENTITY.positioning}
                 </p>
               </div>
             </div>
 
-            {/* Controls */}
-            <button
-              onClick={onClose}
-              aria-label="Close Chatbot"
-              className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors text-sm font-bold relative z-10"
-            >
-              ✕
-            </button>
+            <div className="flex items-center space-x-1.5">
+              <button
+                onClick={handleResetConversation}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center text-xs"
+                title="Reset conversation"
+                aria-label="Reset conversation"
+              >
+                ↺
+              </button>
+              <button
+                onClick={onClose}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center text-sm font-bold"
+                title="Close chat"
+                aria-label="Close chat"
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 bg-pagebg/50 text-xs">
+          {/* ================= QUICK ACTION PILLS CAROUSEL ================= */}
+          <div className="px-3 py-2 bg-sectionsoft/60 border-b border-bordercolor/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth">
+            {QUICK_ACTIONS.map((action) => (
+              <button
+                key={action.id}
+                onClick={() => handleSendMessage(action.prompt)}
+                className="px-2.5 py-1 rounded-full bg-white hover:bg-primarypurple hover:text-white border border-bordercolor text-[10px] font-semibold text-textsecondary whitespace-nowrap shadow-2xs transition-colors shrink-0 active:scale-95"
+              >
+                {action.label}
+              </button>
+            ))}
+          </div>
+
+          {/* ================= MESSAGES FEED ================= */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs">
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl p-3.5 text-xs leading-relaxed whitespace-pre-line shadow-2xs ${
+                  className={`relative max-w-[86%] rounded-2xl p-3.5 leading-relaxed shadow-2xs group ${
                     msg.sender === 'user'
-                      ? 'bg-gradient-to-r from-primarypurple to-royalblue text-white rounded-br-xs'
-                      : 'bg-white text-textprimary border border-bordercolor/80 rounded-bl-xs'
+                      ? 'bg-gradient-to-r from-primarypurple to-royalblue text-white rounded-tr-xs'
+                      : 'bg-white border border-bordercolor/90 text-textprimary rounded-tl-xs shadow-[0_2px_8px_rgba(16,28,50,0.04)]'
                   }`}
                 >
-                  {msg.text}
+                  {/* Message Prose with newline support */}
+                  <div className="whitespace-pre-wrap font-normal select-text">
+                    {msg.text}
+                  </div>
 
-                  {msg.action && (
+                  {/* WhatsApp Direct Handoff Action Pill */}
+                  {msg.whatsappHandoff && (
                     <div className="mt-3 pt-2.5 border-t border-bordercolor/60">
                       <a
-                        href={msg.action.url}
-                        target={msg.action.isExternal ? '_blank' : '_self'}
+                        href={getWhatsAppUrl(msg.whatsappHandoff.prefilledText)}
+                        target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-primarypurple hover:text-royalblue transition-colors bg-sectionsoft px-2.5 py-1 rounded-lg border border-primarypurple/20"
+                        className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-brandmint to-royalblue text-white font-bold text-[11px] shadow-sm hover:scale-[1.02] active:scale-98 transition-all"
                       >
-                        {msg.action.label}
+                        <span>{msg.whatsappHandoff.label}</span>
+                        <span>&rarr;</span>
                       </a>
                     </div>
                   )}
+
+                  {/* Contextual Follow-up Suggestion Chips */}
+                  {msg.suggestedActions && msg.suggestedActions.length > 0 && (
+                    <div className="mt-2.5 pt-2 border-t border-bordercolor/60 flex flex-wrap gap-1.5">
+                      {msg.suggestedActions.map((action, aIdx) => (
+                        <button
+                          key={aIdx}
+                          onClick={() => handleSendMessage(action.prompt)}
+                          className="px-2 py-1 rounded-lg bg-sectionsoft hover:bg-primarypurple hover:text-white border border-bordercolor/80 text-[10px] font-semibold text-textprimary transition-colors text-left"
+                        >
+                          {action.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Copy Button on Hover */}
+                  <button
+                    onClick={() => handleCopyText(msg.id, msg.text)}
+                    className="absolute -top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity px-1.5 py-0.5 rounded bg-white/95 border border-bordercolor text-[9px] text-textsecondary shadow-2xs"
+                    title="Copy text"
+                  >
+                    {copiedId === msg.id ? '✓ Copied' : 'Copy'}
+                  </button>
                 </div>
 
-                <span className="text-[9px] text-textsecondary/70 mt-1 px-1">
+                {/* Message Timestamp */}
+                <span className="text-[9px] text-textsecondary/60 mt-1 px-1">
                   {msg.time}
                 </span>
               </div>
@@ -271,53 +295,69 @@ export default function QueryChatbot({
 
             {/* Typing Indicator */}
             {isTyping && (
-              <div className="flex items-center space-x-1.5 p-3 rounded-2xl bg-white border border-bordercolor/80 w-fit text-textsecondary">
-                <span className="w-1.5 h-1.5 rounded-full bg-primarypurple animate-bounce" />
-                <span className="w-1.5 h-1.5 rounded-full bg-royalblue animate-bounce [animation-delay:0.15s]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-brandcyan animate-bounce [animation-delay:0.3s]" />
+              <div className="flex items-center space-x-2 text-textsecondary text-xs">
+                <div className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-sm shadow-2xs">
+                  🤖
+                </div>
+                <div className="px-3.5 py-2.5 rounded-2xl rounded-tl-xs bg-white border border-bordercolor shadow-2xs flex items-center space-x-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primarypurple animate-bounce" />
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-royalblue animate-bounce"
+                    style={{ animationDelay: '0.15s' }}
+                  />
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-brandcyan animate-bounce"
+                    style={{ animationDelay: '0.3s' }}
+                  />
+                </div>
               </div>
             )}
 
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Queries Suggestions */}
-          <div className="p-2.5 bg-white border-t border-bordercolor/70 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
-            {SUGGESTED_QUERIES.map((sq, i) => (
-              <button
-                key={i}
-                onClick={() => handleSend(sq.query)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full text-[10px] font-semibold bg-sectionsoft hover:bg-primarypurple/10 text-primarypurple border border-primarypurple/20 transition-colors shrink-0"
-              >
-                {sq.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Input Box */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSend();
-            }}
-            className="p-3 bg-white border-t border-bordercolor/80 flex items-center gap-2 shrink-0"
-          >
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder="Ask about pricing, services, reels..."
-              className="flex-1 px-3.5 py-2 text-xs rounded-xl bg-pagebg border border-bordercolor/90 focus:outline-none focus:border-primarypurple text-textprimary placeholder:text-textsecondary/60"
-            />
-            <button
-              type="submit"
-              disabled={!inputText.trim()}
-              className="w-9 h-9 rounded-xl bg-gradient-to-r from-primarypurple to-royalblue text-white flex items-center justify-center transition-opacity disabled:opacity-40 disabled:cursor-not-allowed shadow-xs"
-              aria-label="Send Message"
+          {/* ================= INPUT FOOTER ================= */}
+          <div className="p-3 bg-white border-t border-bordercolor flex flex-col gap-2">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSendMessage();
+              }}
+              className="flex items-center gap-2"
             >
-              ➤
-            </button>
-          </form>
+              <input
+                ref={inputRef}
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder="Ask about pricing, reels, SEO, tech..."
+                className="flex-1 px-3.5 py-2 rounded-full bg-sectionsoft/60 border border-bordercolor text-textprimary text-xs placeholder:text-textsecondary/60 focus:outline-none focus:border-primarypurple focus:ring-1 focus:ring-primarypurple/30 transition-all"
+                disabled={isTyping}
+              />
+              <button
+                type="submit"
+                disabled={!inputText.trim() || isTyping}
+                className="w-9 h-9 rounded-full bg-gradient-to-tr from-primarypurple to-royalblue text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95 transition-all shadow-md shadow-primarypurple/20 shrink-0"
+                aria-label="Send message"
+              >
+                <svg className="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </form>
+
+            <div className="flex items-center justify-between text-[10px] text-textsecondary/70 px-1">
+              <span>Supports English • తెలుగు • हिंदी</span>
+              <a
+                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to speak with a human strategist.')}
+                target="_blank"
+                rel="noreferrer"
+                className="text-primarypurple font-semibold hover:underline"
+              >
+                Talk to Human &rarr;
+              </a>
+            </div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
