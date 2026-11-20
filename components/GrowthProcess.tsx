@@ -43,8 +43,8 @@ const journeySteps = [
   },
   {
     step: '05',
-    title: 'Report & Improve',
-    tagline: 'Transparent Review & Strategic Scaling',
+    title: 'Report & Scale',
+    tagline: 'Transparent Review & Strategic Expansion',
     description:
       'You receive transparent bi-weekly reports covering impressions, cost-per-inquiry, engagement rates, and strategic scaling recommendations.',
     deliverables: ['Bi-weekly performance data', 'Inquiry volume tracking', 'Continuous scale roadmap'],
@@ -84,64 +84,49 @@ export default function GrowthProcess() {
         onMouseEnter={() => setActiveStep(idx)}
         onMouseLeave={() => setActiveStep(null)}
         onClick={() => setActiveStep(activeStep === idx ? null : idx)}
-        className={`aurora-card p-7 flex flex-col justify-between relative group cursor-pointer transition-all duration-300 card-3d-tilt overflow-hidden h-full ${
+        className={`bg-white border-2 p-7 flex flex-col justify-between relative group cursor-pointer transition-all duration-200 shadow-xs h-full ${
           isHovered
-            ? 'border-primarypurple/50 shadow-[0_16px_36px_-6px_rgba(105,87,245,0.14),inset_0_1px_1px_rgba(255,255,255,1)] -translate-y-1.5 ring-1 ring-primarypurple/20'
-            : 'hover:border-primarypurple/30 hover:shadow-card-hover'
+            ? 'border-[#0F172A] shadow-md -translate-y-1'
+            : 'border-slate-200 hover:border-slate-400'
         }`}
       >
-        {/* Subtle top indicator bar */}
-        <div
-          className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-opacity duration-300 ${
-            isHovered ? 'opacity-100' : 'opacity-0'
-          }`}
-        />
-
         <div>
           {/* Header with Step Number & Icon */}
           <div className="flex items-center justify-between mb-5">
-            <span className="text-3xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+            <span className="font-mono text-2xl font-bold text-[#0F172A]">
               {s.step}
             </span>
             <span
-              className={`text-2xl p-2.5 rounded-xl border transition-all duration-300 ${
-                isHovered
-                  ? 'bg-primarypurple/15 border-primarypurple/40 scale-110 shadow-xs'
-                  : 'bg-sectionsoft border-primarypurple/15 text-primarypurple'
-              }`}
+              className="text-xl p-2 bg-slate-50 border border-slate-200"
               aria-hidden="true"
             >
               {s.icon}
             </span>
           </div>
 
-          {/* Heading 1st (Always visible) */}
-          <h3
-            className={`text-xl font-heading font-bold transition-colors duration-200 mb-1 ${
-              isHovered ? 'text-primarypurple' : 'text-textprimary'
-            }`}
-          >
+          {/* Heading */}
+          <h3 className="font-serif text-xl font-bold text-[#0F172A] mb-1">
             {s.title}
           </h3>
-          <p className="text-xs uppercase font-semibold text-royalblue tracking-wider mb-2">
+          <p className="font-mono text-[10px] uppercase font-bold text-[#365679] tracking-wider mb-3">
             {s.tagline}
           </p>
 
-          {/* Details and Description (Revealed while mouse moves on it) */}
+          {/* Details and Description */}
           <div
             className={`overflow-hidden transition-all duration-300 ease-out ${
               isHovered
-                ? 'max-h-64 opacity-100 mt-3 pt-3 border-t border-bordercolor/70'
+                ? 'max-h-64 opacity-100 mt-3 pt-3 border-t border-slate-200'
                 : 'max-h-0 opacity-0 mt-0 pt-0'
             }`}
           >
-            <p className="text-xs sm:text-sm text-textsecondary leading-relaxed mb-3">
+            <p className="text-xs text-slate-600 leading-relaxed mb-3 font-medium">
               {s.description}
             </p>
-            <div className="space-y-1.5 pt-2 border-t border-bordercolor/60">
+            <div className="space-y-1.5 pt-2 border-t border-slate-200">
               {s.deliverables.map((item, dIdx) => (
-                <div key={dIdx} className="flex items-center space-x-1.5 text-[11px] text-textsecondary">
-                  <span className="text-brandmint font-bold">✓</span>
+                <div key={dIdx} className="flex items-center space-x-1.5 text-[11px] text-slate-700 font-medium">
+                  <span className="text-emerald-600 font-bold">✓</span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -154,22 +139,17 @@ export default function GrowthProcess() {
               isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
             }`}
           >
-            <span className="text-[10px] text-textsecondary/80 font-medium flex items-center gap-1">
-              <span>Hover to reveal phase details</span>
+            <span className="font-mono text-[10px] text-slate-500 font-medium flex items-center gap-1">
+              <span>Inspect phase deliverables</span>
               <span>&rarr;</span>
             </span>
           </div>
         </div>
 
-        <div className="pt-4 mt-5 border-t border-bordercolor flex items-center justify-between text-xs text-textsecondary font-medium">
+        <div className="pt-4 mt-5 border-t border-slate-200 flex items-center justify-between font-mono text-[10px] text-slate-500 uppercase font-bold">
           <span>Stage 0{idx + 1} of 05</span>
-          <span
-            className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
-              isHovered ? 'text-primarypurple translate-x-1' : 'text-primarypurple'
-            }`}
-          >
-            <span>{s.title}</span>
-            <span>&rarr;</span>
+          <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
+            Phase Details →
           </span>
         </div>
       </div>
@@ -180,29 +160,33 @@ export default function GrowthProcess() {
     <section
       id="process"
       ref={sectionRef}
-      className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor overflow-hidden"
+      className="py-24 bg-[#FAFAF9] text-ink-900 relative border-t-2 border-slate-200 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-        <ScrollReveal variant="fadeUp" className="max-w-3xl mb-16">
-          <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-            Structured Client Journey
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
+        <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" />
+            <div className="inline-flex items-center gap-2 border border-slate-300 bg-white/95 px-3 py-1 shadow-xs">
+              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
+                5-STAGE EXECUTION FRAMEWORK · DISCIPLINED DELIVERY
+              </span>
+            </div>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
-            Our 5-Stage Method for <br />
-            <span className="font-extrabold text-gradient-aurora">
-              Predictable Brand Acceleration.
-            </span>
+
+          <h2 className="font-serif text-[34px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
+            Our 5-Stage Method for <span className="italic text-[#365679] font-medium">Predictable Growth</span>
           </h2>
-          <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            A transparent, disciplined five-stage journey: Discover → Strategize → Create → Launch &amp; Optimize → Report &amp; Improve. Turning casual scrollers into paying, long-term brand advocates.
+
+          <p className="text-[15px] sm:text-[16.5px] text-slate-600 mt-4 leading-relaxed font-medium">
+            A transparent, disciplined five-stage journey: Discover → Strategize → Create → Launch &amp; Optimize → Report &amp; Scale. Turning casual impressions into qualified commercial revenue.
           </p>
         </ScrollReveal>
 
         {/* Live Synchronized Connecting Line on Desktop */}
         <div className="hidden lg:block relative w-full mb-12 px-6">
-          <div className="w-full h-2 bg-white rounded-full overflow-hidden shadow-2xs border border-bordercolor/70 relative">
+          <div className="w-full h-2 bg-slate-200 border border-slate-300 relative">
             <motion.div
-              className="h-full bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan rounded-full origin-left"
+              className="h-full bg-[#0F172A] origin-left"
               style={{ scaleX: smoothProgress }}
             />
           </div>
@@ -214,17 +198,17 @@ export default function GrowthProcess() {
               return (
                 <div
                   key={i}
-                  className={`w-6 h-6 rounded-full border-2 transition-all duration-300 flex items-center justify-center pointer-events-auto cursor-pointer ${
+                  className={`w-6 h-6 border-2 transition-all duration-200 flex items-center justify-center pointer-events-auto cursor-pointer ${
                     reached
-                      ? 'bg-primarypurple border-white shadow-md shadow-primarypurple/40 scale-125'
-                      : 'bg-white border-bordercolor hover:border-primarypurple/50'
+                      ? 'bg-[#0F172A] border-white shadow-md scale-110'
+                      : 'bg-white border-slate-300 hover:border-[#0F172A]'
                   }`}
                   onClick={() => setActiveStep(activeStep === i ? null : i)}
                   title={`Stage 0${i + 1}: ${s.title}`}
                 >
                   <div
-                    className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                      reached ? 'bg-white animate-pulse' : 'bg-bordercolor'
+                    className={`w-2 h-2 transition-colors duration-200 ${
+                      reached ? 'bg-emerald-400' : 'bg-slate-300'
                     }`}
                   />
                 </div>
@@ -233,7 +217,7 @@ export default function GrowthProcess() {
           </div>
         </div>
 
-        {/* 5 Connected Process Cards: 3 on Top Row, 2 Centered on Bottom Row */}
+        {/* 5 Connected Process Cards */}
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {journeySteps.slice(0, 3).map((s, idx) => renderCard(s, idx))}

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
 import ScrollReveal from '@/components/animations/ScrollReveal';
 import StaggerContainer from '@/components/animations/StaggerContainer';
-import MagneticButton from '@/components/animations/MagneticButton';
 import { motion } from 'framer-motion';
 import { fadeUpVariants } from '@/lib/animations/variants';
 
@@ -16,9 +15,6 @@ interface PartnershipBenefit {
   badge: string;
   overview: string;
   measurableOutcomes: string[];
-  gradient: string;
-  iconBg: string;
-  iconGlow: string;
   icon: React.ReactNode;
 }
 
@@ -36,11 +32,8 @@ const partnershipBenefits: PartnershipBenefit[] = [
       'Consistent brand guidelines and design asset libraries',
       'Stronger customer recall and recognition in target markets',
     ],
-    gradient: 'from-primarypurple via-royalblue to-brandcyan',
-    iconBg: 'bg-primarypurple/10 text-primarypurple border-primarypurple/25',
-    iconGlow: 'from-primarypurple/20 to-transparent',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 7v5l3 3" />
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 3.5l1.5 2.5m4.5-2.5l-1.5 2.5" />
@@ -60,11 +53,8 @@ const partnershipBenefits: PartnershipBenefit[] = [
       'Granular demographic, interest, and keyword audience segmentation',
       'Structured re-engagement of past profile visitors and website traffic',
     ],
-    gradient: 'from-royalblue via-brandcyan to-brandmint',
-    iconBg: 'bg-royalblue/10 text-royalblue border-royalblue/25',
-    iconGlow: 'from-royalblue/20 to-transparent',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="9" />
         <circle cx="12" cy="12" r="5" />
         <circle cx="12" cy="12" r="1.5" fill="currentColor" />
@@ -85,11 +75,8 @@ const partnershipBenefits: PartnershipBenefit[] = [
       'Continuous ad creative testing to identify top-performing hooks',
       'Structured lead qualification tracking and follow-up data',
     ],
-    gradient: 'from-brandcyan via-brandmint to-royalblue',
-    iconBg: 'bg-brandcyan/10 text-brandcyan border-brandcyan/25',
-    iconGlow: 'from-brandcyan/20 to-transparent',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
@@ -98,47 +85,37 @@ const partnershipBenefits: PartnershipBenefit[] = [
     id: 'infrastructure',
     step: '04',
     title: 'Digital Infrastructure & Development',
-    badge: 'Modern Engineering',
+    badge: 'Technology Backbone',
     overview:
-      'Strengthen your business foundation with high-speed Next.js web applications, mobile platforms, and customized management tools.',
+      'Power your brand with fast, modern websites, custom mobile applications, and intelligent CRM integrations built for operational reliability.',
     measurableOutcomes: [
-      'Optimized high-speed page performance that reduces visitor bounce rates',
-      '100% mobile-responsive layout for seamless smartphone usage',
-      'Clean, secure code architectures with zero bloated templates',
-      'Centralized lead capture endpoints and CRM webhook integrations',
+      'Sub-second page load times and mobile-first responsive architecture',
+      'Clean lead capture funnels connected directly to your sales workflow',
+      'Secure, scalable codebases with enterprise hosting and SSL',
+      'Custom CRM pipelines for automated customer record management',
     ],
-    gradient: 'from-primarypurple via-softpink to-royalblue',
-    iconBg: 'bg-deepviolet/10 text-primarypurple border-primarypurple/25',
-    iconGlow: 'from-deepviolet/20 to-transparent',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7 8l3 3-3 3m5 0h4" />
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
       </svg>
     ),
   },
   {
-    id: 'ai',
+    id: 'advantage',
     step: '05',
-    title: 'AI Automation & Business Efficiency',
-    badge: 'Intelligent Systems',
+    title: 'Long-Term Strategic Partnership',
+    badge: 'Competitive Edge',
     overview:
-      'Streamline day-to-day operations and accelerate customer response times with automated workflows and intelligent business solutions.',
+      'Stay ahead with continuous strategy optimization, data-backed monthly reporting, and rapid adoption of emerging AI and automation tools.',
     measurableOutcomes: [
-      'Instant automated responses to common customer inquiries 24/7',
-      'Automated prompt response routing during off-hours and peak ad traffic',
-      'Automated lead routing directly to your sales or WhatsApp team',
-      'Significant reduction in repetitive manual administrative tasks',
+      'Transparent monthly performance reports with commercial metrics',
+      'Proactive campaign updates based on real market performance data',
+      'Priority access to new marketing channels and AI automation flows',
+      'Dedicated senior strategist communication with quick turnaround times',
     ],
-    gradient: 'from-softpink via-primarypurple to-brandcyan',
-    iconBg: 'bg-softpink/10 text-softpink border-softpink/25',
-    iconGlow: 'from-softpink/20 to-transparent',
     icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
-        <circle cx="12" cy="12" r="3" />
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
   },
@@ -154,29 +131,26 @@ export default function PartnershipSection() {
   return (
     <section
       id="partnership"
-      className="py-24 bg-gradient-to-b from-pagebg via-sectionsoft/40 to-pagebg text-textprimary relative border-t border-bordercolor overflow-hidden"
+      className="py-24 bg-gradient-to-b from-[#FAFAF9] via-[#F8FAFC] to-[#FAFAF9] text-ink-900 relative border-t-2 border-slate-200 overflow-hidden"
     >
-      {/* Ambient Glossy Glows */}
-      <div className="absolute top-1/4 left-1/4 w-[420px] h-[420px] bg-primarypurple/8 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[420px] h-[420px] bg-brandcyan/8 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
         {/* Section Header */}
-        <ScrollReveal variant="fadeUp" className="max-w-3xl mx-auto text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-primarypurple/20 text-[11px] font-bold text-primarypurple uppercase tracking-wider mb-4 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_2px_8px_rgba(105,87,245,0.06)]">
-            <span className="w-2 h-2 rounded-full bg-primarypurple animate-pulse" />
-            <span>Partnership Benefits</span>
+        <ScrollReveal variant="fade-up" className="max-w-3xl mx-auto text-center mb-16">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" />
+            <div className="inline-flex items-center gap-2 border border-slate-300 bg-white/95 px-3 py-1 shadow-xs">
+              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
+                PARTNERSHIP VALUE · MEASURABLE IMPACT
+              </span>
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary leading-[1.15]">
-            What Happens When You <br />
-            <span className="font-extrabold text-gradient-aurora">
-              Partner With IDM Smart Tech?
-            </span>
+          <h2 className="font-serif text-[34px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
+            What Happens When You Partner With <span className="italic text-[#365679] font-medium">IDM Smart Tech</span>?
           </h2>
 
-          <p className="text-textsecondary text-base sm:text-lg mt-5 leading-relaxed max-w-2xl mx-auto font-normal">
-            More than a service provider. Your growth partner, creative team, marketing strategist and technology partner — working together to move your business forward.
+          <p className="text-[15px] sm:text-[16.5px] text-slate-600 mt-4 leading-relaxed max-w-2xl mx-auto font-medium">
+            More than a service provider. Your growth partner, creative team, performance strategist and technology team — working together to move your business forward.
           </p>
         </ScrollReveal>
 
@@ -192,63 +166,49 @@ export default function PartnershipSection() {
                     onMouseEnter={() => setActiveCard(idx)}
                     onMouseLeave={() => setActiveCard(null)}
                     onClick={() => setActiveCard(activeCard === idx ? null : idx)}
-                    className={`rounded-3xl bg-white/95 backdrop-blur-md border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative cursor-pointer overflow-hidden card-3d-tilt ${
+                    className={`bg-white border-2 p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 relative cursor-pointer shadow-xs ${
                       isHovered
-                        ? 'border-primarypurple/50 shadow-[0_20px_40px_-10px_rgba(105,87,245,0.15),inset_0_1px_1px_rgba(255,255,255,1)] -translate-y-1.5 ring-1 ring-primarypurple/20'
-                        : 'border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 hover:border-primarypurple/30'
+                        ? 'border-[#0F172A] shadow-md -translate-y-1'
+                        : 'border-slate-200 hover:border-slate-400'
                     }`}
                   >
-                    <div
-                      className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-opacity duration-300 ${
-                        isHovered ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    />
-
                     <div>
                       <div className="flex items-center justify-between mb-5">
-                        <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                        <span className="font-mono text-xl font-bold text-[#0F172A]">
                           {card.step}
                         </span>
 
-                        <div
-                          className={`w-12 h-12 rounded-2xl ${card.iconBg} border flex items-center justify-center transition-all duration-300 ${
-                            isHovered ? 'scale-110 rotate-2 shadow-xs' : 'shadow-2xs'
-                          }`}
-                        >
+                        <div className="w-10 h-10 border border-slate-300 bg-slate-50 flex items-center justify-center text-[#0F172A] shadow-2xs">
                           {card.icon}
                         </div>
                       </div>
 
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block mb-2">
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 inline-block mb-3">
                         {card.badge}
                       </span>
 
-                      <h3
-                        className={`text-xl font-heading font-bold transition-colors duration-200 mb-2 leading-snug ${
-                          isHovered ? 'text-primarypurple' : 'text-textprimary'
-                        }`}
-                      >
+                      <h3 className="font-serif text-xl font-bold text-[#0F172A] mb-2 leading-snug">
                         {card.title}
                       </h3>
 
-                      <p className="text-xs text-textsecondary leading-relaxed mb-1">
+                      <p className="text-xs text-slate-600 leading-relaxed mb-3">
                         {card.overview}
                       </p>
 
                       <div
                         className={`overflow-hidden transition-all duration-300 ease-out ${
                           isHovered
-                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-bordercolor/80'
+                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200'
                             : 'max-h-0 opacity-0 mt-0 pt-0'
                         }`}
                       >
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-textprimary mb-2">
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0F172A] mb-2.5">
                           Measurable Outcomes:
                         </p>
                         <div className="space-y-2">
                           {card.measurableOutcomes.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-textsecondary">
-                              <span className="w-3.5 h-3.5 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5" aria-hidden="true">
+                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-slate-700">
+                              <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
                                 ✓
                               </span>
                               <span className="leading-tight">{point}</span>
@@ -258,26 +218,21 @@ export default function PartnershipSection() {
                       </div>
 
                       <div
-                        className={`transition-opacity duration-200 mt-3 ${
+                        className={`transition-opacity duration-200 mt-2 ${
                           isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
                         }`}
                       >
-                        <span className="text-[10px] text-textsecondary/80 font-medium flex items-center gap-1">
-                          <span>Hover to view measurable outcomes</span>
+                        <span className="font-mono text-[10px] text-slate-500 font-medium flex items-center gap-1">
+                          <span>Hover to inspect outcomes</span>
                           <span>&rarr;</span>
                         </span>
                       </div>
                     </div>
 
-                    <div className="pt-4 mt-5 border-t border-bordercolor/80 flex items-center justify-between text-xs font-semibold text-textsecondary">
-                      <span>Outcome-Focused</span>
-                      <span
-                        className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
-                          isHovered ? 'text-primarypurple translate-x-1' : 'text-textsecondary'
-                        }`}
-                      >
-                        <span>Details</span>
-                        <span>&rarr;</span>
+                    <div className="pt-4 mt-5 border-t border-slate-200 flex items-center justify-between font-mono text-[10px] uppercase font-bold text-slate-500">
+                      <span>Commercial Impact</span>
+                      <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
+                        Explore →
                       </span>
                     </div>
                   </div>
@@ -297,63 +252,49 @@ export default function PartnershipSection() {
                     onMouseEnter={() => setActiveCard(actualIdx)}
                     onMouseLeave={() => setActiveCard(null)}
                     onClick={() => setActiveCard(activeCard === actualIdx ? null : actualIdx)}
-                    className={`rounded-3xl bg-white/95 backdrop-blur-md border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 relative cursor-pointer overflow-hidden card-3d-tilt ${
+                    className={`bg-white border-2 p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 relative cursor-pointer shadow-xs ${
                       isHovered
-                        ? 'border-primarypurple/50 shadow-[0_20px_40px_-10px_rgba(105,87,245,0.15),inset_0_1px_1px_rgba(255,255,255,1)] -translate-y-1.5 ring-1 ring-primarypurple/20'
-                        : 'border-white/90 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_10px_30px_-5px_rgba(16,28,50,0.06)] ring-1 ring-bordercolor/70 hover:border-primarypurple/30'
+                        ? 'border-[#0F172A] shadow-md -translate-y-1'
+                        : 'border-slate-200 hover:border-slate-400'
                     }`}
                   >
-                    <div
-                      className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan transition-opacity duration-300 ${
-                        isHovered ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    />
-
                     <div>
                       <div className="flex items-center justify-between mb-5">
-                        <span className="text-2xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primarypurple to-royalblue">
+                        <span className="font-mono text-xl font-bold text-[#0F172A]">
                           {card.step}
                         </span>
 
-                        <div
-                          className={`w-12 h-12 rounded-2xl ${card.iconBg} border flex items-center justify-center transition-all duration-300 ${
-                            isHovered ? 'scale-110 rotate-2 shadow-xs' : 'shadow-2xs'
-                          }`}
-                        >
+                        <div className="w-10 h-10 border border-slate-300 bg-slate-50 flex items-center justify-center text-[#0F172A] shadow-2xs">
                           {card.icon}
                         </div>
                       </div>
 
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block mb-2">
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 inline-block mb-3">
                         {card.badge}
                       </span>
 
-                      <h3
-                        className={`text-xl font-heading font-bold transition-colors duration-200 mb-2 leading-snug ${
-                          isHovered ? 'text-primarypurple' : 'text-textprimary'
-                        }`}
-                      >
+                      <h3 className="font-serif text-xl font-bold text-[#0F172A] mb-2 leading-snug">
                         {card.title}
                       </h3>
 
-                      <p className="text-xs text-textsecondary leading-relaxed mb-1">
+                      <p className="text-xs text-slate-600 leading-relaxed mb-3">
                         {card.overview}
                       </p>
 
                       <div
                         className={`overflow-hidden transition-all duration-300 ease-out ${
                           isHovered
-                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-bordercolor/80'
+                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200'
                             : 'max-h-0 opacity-0 mt-0 pt-0'
                         }`}
                       >
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-textprimary mb-2">
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0F172A] mb-2.5">
                           Measurable Outcomes:
                         </p>
                         <div className="space-y-2">
                           {card.measurableOutcomes.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-textsecondary">
-                              <span className="w-3.5 h-3.5 rounded-full bg-brandmint/20 text-brandmint flex items-center justify-center font-bold text-[9px] shrink-0 mt-0.5" aria-hidden="true">
+                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-slate-700">
+                              <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
                                 ✓
                               </span>
                               <span className="leading-tight">{point}</span>
@@ -363,26 +304,21 @@ export default function PartnershipSection() {
                       </div>
 
                       <div
-                        className={`transition-opacity duration-200 mt-3 ${
+                        className={`transition-opacity duration-200 mt-2 ${
                           isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
                         }`}
                       >
-                        <span className="text-[10px] text-textsecondary/80 font-medium flex items-center gap-1">
-                          <span>Hover to view measurable outcomes</span>
+                        <span className="font-mono text-[10px] text-slate-500 font-medium flex items-center gap-1">
+                          <span>Hover to inspect outcomes</span>
                           <span>&rarr;</span>
                         </span>
                       </div>
                     </div>
 
-                    <div className="pt-4 mt-5 border-t border-bordercolor/80 flex items-center justify-between text-xs font-semibold text-textsecondary">
-                      <span>Outcome-Focused</span>
-                      <span
-                        className={`font-bold transition-transform duration-200 flex items-center gap-1 ${
-                          isHovered ? 'text-primarypurple translate-x-1' : 'text-textsecondary'
-                        }`}
-                      >
-                        <span>Details</span>
-                        <span>&rarr;</span>
+                    <div className="pt-4 mt-5 border-t border-slate-200 flex items-center justify-between font-mono text-[10px] uppercase font-bold text-slate-500">
+                      <span>Commercial Impact</span>
+                      <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
+                        Explore →
                       </span>
                     </div>
                   </div>
@@ -392,52 +328,47 @@ export default function PartnershipSection() {
           </div>
         </StaggerContainer>
 
-        {/* Strong Conversion CTA Box directly below the Five Cards */}
-        <ScrollReveal variant="scaleIn" className="mt-16">
-          <div className="rounded-3xl bg-white/95 backdrop-blur-xl border border-white/90 p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-[inset_0_1px_1px_rgba(255,255,255,1),0_16px_40px_-10px_rgba(105,87,245,0.08),0_1px_4px_rgba(0,0,0,0.03)] ring-1 ring-bordercolor/70 relative overflow-hidden">
-            <div className="absolute top-0 left-1/4 right-1/4 h-1 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan rounded-full" />
-
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sectionsoft text-[11px] font-bold text-primarypurple uppercase tracking-wider mb-4 border border-primarypurple/20 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-brandmint animate-pulse" />
-              <span>Dedicated Strategic Partnership</span>
+        {/* Reference High-End Conversion Box */}
+        <ScrollReveal variant="fade-up" className="mt-16">
+          <div className="border-2 border-slate-300 bg-white p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-sm relative overflow-hidden">
+            <div className="inline-flex items-center gap-2 border border-slate-300 bg-slate-100 px-3 py-1 font-mono text-[10px] uppercase font-bold text-[#0F172A] tracking-[0.16em] mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Dedicated Strategic Growth Retainers</span>
             </div>
 
-            <h3 className="text-2xl sm:text-4xl font-heading font-extrabold text-textprimary tracking-tight leading-tight">
-              Ready to Build Your Next Growth Story?
+            <h3 className="font-serif text-2xl sm:text-4xl font-normal text-[#0F172A] tracking-tight leading-tight">
+              Ready to Build Your Next <span className="italic text-[#365679] font-medium">Growth Story</span>?
             </h3>
 
-            <p className="text-sm sm:text-base text-textsecondary max-w-xl mx-auto mt-3 leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-600 max-w-xl mx-auto mt-3 leading-relaxed font-medium">
               Let&apos;s combine creative marketing, intelligent technology and strategic execution to take your business further.
             </p>
 
             {/* Action CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-              <MagneticButton maxDistance={6}>
-                <a
-                  href={whatsappConsultationUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-aurora-primary py-3.5 px-8 text-xs font-heading font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
-                >
-                  💬 Let&apos;s Grow Together
-                </a>
-              </MagneticButton>
+            <div className="flex flex-wrap items-center justify-center gap-3.5 mt-8">
+              <a
+                href={whatsappConsultationUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-emerald-cta"
+              >
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                WHATSAPP STRATEGY CALL
+              </a>
 
-              <MagneticButton maxDistance={6}>
-                <Link
-                  href="/services"
-                  className="btn-aurora-secondary py-3.5 px-8 text-xs font-heading font-bold uppercase tracking-wider"
-                >
-                  Explore Our Services &rarr;
-                </Link>
-              </MagneticButton>
+              <Link
+                href="/services"
+                className="btn-primary-ink"
+              >
+                EXPLORE CAPABILITIES →
+              </Link>
             </div>
 
-            <p className="text-[11px] text-textsecondary mt-5">
+            <p className="font-mono text-[11px] text-slate-500 mt-5">
               Direct line to our strategic team in {COMPANY_INFO.city}:{' '}
               <a
                 href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="font-semibold text-primarypurple hover:underline"
+                className="font-bold text-[#0F172A] hover:underline"
               >
                 {COMPANY_INFO.phone}
               </a>

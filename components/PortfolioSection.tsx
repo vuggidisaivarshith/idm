@@ -41,45 +41,51 @@ export default function PortfolioSection() {
   };
 
   return (
-    <section id="portfolio" className="py-24 bg-pagebg text-textprimary relative border-t border-bordercolor overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+    <section id="portfolio" className="py-24 bg-[#FAFAF9] text-ink-900 relative border-t-2 border-slate-200 overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
         {/* Section Header */}
         <ScrollReveal variant="fade-up">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
             <div className="max-w-2xl">
-              <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-                Creative Portfolio
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[2px] w-7 bg-[#0F172A] shrink-0" />
+                <div className="inline-flex items-center gap-2 border border-slate-300 bg-white/95 px-3 py-1 shadow-xs">
+                  <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-[#0F172A] font-bold">
+                    SELECTED WORK &amp; DELIVERABLES
+                  </span>
+                </div>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
-                Work Crafted to <br />
-                <span className="font-extrabold text-gradient-aurora">
-                  Capture Attention & Convert.
-                </span>
+
+              <h2 className="font-serif text-[34px] sm:text-[46px] font-normal leading-[1.12] tracking-[-0.015em] text-[#0F172A]">
+                Work Crafted to Capture <span className="italic text-[#365679] font-medium">Attention &amp; Convert</span>
               </h2>
-              <p className="text-textsecondary text-base mt-3 leading-relaxed">
-                Explore our creative work across social media campaigns, high-hook reels, paid ads, branding systems, and modern digital platforms.
+
+              <p className="text-[15px] text-slate-600 mt-3 leading-relaxed font-medium">
+                Explore demonstration samples across creative social campaigns, high-hook reels, paid advertising, branding systems, and modern digital platforms.
               </p>
             </div>
 
             {/* Desktop Carousel Controls & Notice */}
             <div className="flex flex-col sm:items-end gap-3">
-              <div className="text-xs text-textsecondary bg-white p-3.5 rounded-xl border border-bordercolor shadow-2xs max-w-sm">
-                <span className="font-semibold text-primarypurple block mb-0.5">📁 Deliverable Showcase:</span>
-                Demonstration samples illustrating format and creative direction. Client proprietary campaign assets and metrics are shared during one-on-one consultation.
+              <div className="text-xs text-slate-600 bg-white p-3.5 border-2 border-slate-200 shadow-xs max-w-sm font-medium">
+                <span className="font-mono text-[10px] uppercase font-bold text-[#0F172A] block mb-0.5 tracking-wider">
+                  📁 Confidential Client Assets:
+                </span>
+                Demonstration formats shown. Full commercial case studies and verified client ROI telemetry are presented during private consultations.
               </div>
 
               <div className="hidden lg:flex items-center gap-2">
                 <button
                   onClick={scrollLeft}
                   aria-label="Scroll Left"
-                  className="w-10 h-10 rounded-full bg-white border border-bordercolor flex items-center justify-center text-textprimary hover:border-primarypurple hover:text-primarypurple transition-all shadow-2xs"
+                  className="w-9 h-9 bg-white border-2 border-slate-300 flex items-center justify-center text-[#0F172A] hover:bg-slate-50 transition-all shadow-xs"
                 >
                   &larr;
                 </button>
                 <button
                   onClick={scrollRight}
                   aria-label="Scroll Right"
-                  className="w-10 h-10 rounded-full bg-white border border-bordercolor flex items-center justify-center text-textprimary hover:border-primarypurple hover:text-primarypurple transition-all shadow-2xs"
+                  className="w-9 h-9 bg-white border-2 border-slate-300 flex items-center justify-center text-[#0F172A] hover:bg-slate-50 transition-all shadow-xs"
                 >
                   &rarr;
                 </button>
@@ -88,16 +94,16 @@ export default function PortfolioSection() {
           </div>
         </ScrollReveal>
 
-        {/* Category Filter Pills */}
+        {/* Category Filter Pills (Reference Precision) */}
         <div className="flex flex-wrap gap-2 mb-10">
           {PORTFOLIO_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+              className={`px-3.5 py-1.5 font-mono text-[10px] tracking-[0.14em] uppercase font-bold transition-all ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm shadow-primarypurple/25 scale-[1.02]'
-                  : 'bg-white border border-bordercolor text-textsecondary hover:text-textprimary hover:border-primarypurple/30'
+                  ? 'bg-[#0F172A] text-white shadow-xs'
+                  : 'bg-white border-2 border-slate-200 text-slate-600 hover:border-slate-400 hover:text-[#0F172A]'
               }`}
             >
               {cat}
@@ -115,12 +121,12 @@ export default function PortfolioSection() {
             {filteredItems.map((item) => (
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.3 }}
                 key={item.id}
-                className="lg:min-w-[370px] lg:max-w-[390px] w-full lg:snap-start aurora-card overflow-hidden flex flex-col justify-between group relative card-3d-tilt"
+                className="lg:min-w-[370px] lg:max-w-[390px] w-full lg:snap-start bg-white border-2 border-slate-200 hover:border-[#0F172A] shadow-xs hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden"
               >
                 <div>
                   {/* Visual Image Container with Zoom & Click to preview */}
@@ -135,21 +141,21 @@ export default function PortfolioSection() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
 
                     {/* Top Badges */}
-                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-textprimary border border-white/40 shadow-xs">
+                    <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between">
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 bg-white text-[#0F172A] border border-slate-300 shadow-xs">
                         {item.category}
                       </span>
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-primarypurple/90 text-white backdrop-blur-md">
-                        Preview 🔍
+                      <span className="font-mono text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 bg-[#0F172A] text-white">
+                        Inspect 🔍
                       </span>
                     </div>
 
                     {/* Format Subtitle on Image */}
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <span className="text-xs font-medium text-white/90 drop-shadow-sm">
+                    <div className="absolute bottom-3.5 left-3.5 right-3.5 text-white">
+                      <span className="font-mono text-[11px] font-bold text-white/90 drop-shadow-sm uppercase">
                         {item.format}
                       </span>
                     </div>
@@ -157,20 +163,20 @@ export default function PortfolioSection() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors mb-2">
+                    <h3 className="font-serif text-xl font-bold text-[#0F172A] group-hover:text-[#365679] transition-colors mb-2 leading-snug">
                       {item.title}
                     </h3>
 
-                    <p className="text-xs text-textsecondary leading-relaxed mb-4">
+                    <p className="text-xs text-slate-600 leading-relaxed mb-4 font-medium">
                       {item.description}
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-bordercolor">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-200">
                       {item.tags.map((t, idx) => (
                         <span
                           key={idx}
-                          className="text-[10px] px-2 py-0.5 rounded-md bg-pagebg text-textsecondary border border-bordercolor/80"
+                          className="font-mono text-[9.5px] uppercase font-bold tracking-wider px-2 py-0.5 bg-slate-100 border border-slate-200 text-slate-600"
                         >
                           {t}
                         </span>
@@ -179,11 +185,11 @@ export default function PortfolioSection() {
                   </div>
                 </div>
 
-                {/* Action Button */}
+                {/* Action Buttons */}
                 <div className="p-6 pt-0 space-y-2">
                   <button
                     onClick={() => setActiveModalItem(item)}
-                    className="w-full py-2 rounded-full text-xs font-semibold text-textsecondary hover:text-primarypurple block text-center border border-bordercolor hover:border-primarypurple/30 bg-white transition-colors"
+                    className="w-full py-2.5 font-mono text-[10px] font-bold uppercase tracking-wider text-[#0F172A] block text-center border-2 border-slate-200 hover:border-slate-400 bg-white transition-colors"
                   >
                     Quick View Sample
                   </button>
@@ -191,9 +197,9 @@ export default function PortfolioSection() {
                     href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to see recent case studies and work samples for: ${item.title}.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center bg-pagebg border border-bordercolor text-textprimary hover:bg-gradient-to-r hover:from-primarypurple hover:to-royalblue hover:text-white hover:border-transparent transition-all duration-300 shadow-2xs"
+                    className="w-full btn-emerald-cta py-2.5 block text-center text-[10px]"
                   >
-                    Request Samples on WhatsApp &rarr;
+                    Request Telemetry on WhatsApp →
                   </a>
                 </div>
               </motion.div>
@@ -202,7 +208,7 @@ export default function PortfolioSection() {
         </motion.div>
       </div>
 
-      {/* Lightbox / Preview Modal with AnimatePresence */}
+      {/* Lightbox / Preview Modal */}
       <AnimatePresence>
         {activeModalItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -213,7 +219,7 @@ export default function PortfolioSection() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={() => setActiveModalItem(null)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm"
             />
 
             {/* Modal Dialog Card */}
@@ -222,13 +228,13 @@ export default function PortfolioSection() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-soft-xl border border-bordercolor overflow-hidden z-10 my-auto"
+              className="relative w-full max-w-2xl bg-white border-2 border-slate-300 shadow-2xl overflow-hidden z-10 my-auto"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveModalItem(null)}
                 aria-label="Close Preview"
-                className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/50 text-white hover:bg-black/80 flex items-center justify-center transition-colors text-lg"
+                className="absolute top-4 right-4 z-20 w-8 h-8 bg-black/70 text-white hover:bg-black flex items-center justify-center transition-colors text-sm font-mono font-bold"
               >
                 ✕
               </button>
@@ -240,48 +246,48 @@ export default function PortfolioSection() {
                   alt={activeModalItem.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                 <div className="absolute bottom-4 left-6 right-6 text-white">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-primarypurple text-white shadow-xs inline-block mb-2">
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 bg-white text-[#0F172A] shadow-xs inline-block mb-2">
                     {activeModalItem.category}
                   </span>
-                  <h3 className="text-2xl font-heading font-extrabold text-white">
+                  <h3 className="font-serif text-2xl font-bold text-white">
                     {activeModalItem.title}
                   </h3>
-                  <p className="text-xs text-white/80 font-medium">
+                  <p className="font-mono text-xs text-white/90">
                     {activeModalItem.format}
                   </p>
                 </div>
               </div>
 
               <div className="p-6 sm:p-8 space-y-5">
-                <p className="text-sm text-textsecondary leading-relaxed">
+                <p className="text-sm text-slate-600 leading-relaxed font-medium">
                   {activeModalItem.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 pt-2 border-t border-bordercolor">
+                <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-200">
                   {activeModalItem.tags.map((t, idx) => (
                     <span
                       key={idx}
-                      className="text-xs px-3 py-1 rounded-full bg-sectionsoft text-primarypurple font-medium border border-primarypurple/20"
+                      className="font-mono text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 bg-slate-100 text-[#0F172A] border border-slate-200"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-bordercolor">
+                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-200">
                   <a
                     href={getWhatsAppUrl(`Hello IDM Smart Tech, I saw your ${activeModalItem.title} sample in portfolio and would like to see live agency results and discuss strategy.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="btn-aurora-primary flex-1 text-center py-3 text-xs"
+                    className="btn-emerald-cta flex-1 text-center py-3 text-[10.5px]"
                   >
-                    Discuss Campaign on WhatsApp &rarr;
+                    Discuss Campaign on WhatsApp →
                   </a>
                   <button
                     onClick={() => setActiveModalItem(null)}
-                    className="btn-aurora-secondary py-3 text-xs"
+                    className="btn-ghost-luxury py-3 text-[10.5px]"
                   >
                     Close Preview
                   </button>

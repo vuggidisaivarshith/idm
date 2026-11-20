@@ -1,6 +1,28 @@
 import './globals.css';
-import { Space_Grotesk, Inter } from 'next/font/google';
+import { Playfair_Display, Plus_Jakarta_Sans, IBM_Plex_Mono, Space_Grotesk, Inter } from 'next/font/google';
 import type { Metadata } from 'next';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-serif',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  weight: ['400', '500', '600', '700'],
+});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -53,8 +75,11 @@ import FloatingContactDock from '@/components/FloatingContactDock';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}>
-      <body className="bg-pagebg text-textprimary antialiased min-h-screen flex flex-col font-body">
+    <html
+      lang="en"
+      className={`${playfair.variable} ${plusJakarta.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
+    >
+      <body className="bg-pagebg text-ink-900 antialiased min-h-screen flex flex-col font-sans selection:bg-primarypurple/15 selection:text-ink-900">
         <SmoothScroll />
         {children}
         <FloatingContactDock />
