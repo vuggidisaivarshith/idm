@@ -19,40 +19,47 @@ const technologies = [
 
 export default function TechStackSection() {
   return (
-    <section id="tech" className="py-24 bg-pagebg text-textprimary relative border-t border-bordercolor">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="tech" className="py-24 bg-white text-[#0F172A] relative border-t-2 border-slate-200">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
-          <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-            Engineering & Infrastructure
+          <div className="flex items-center gap-3 mb-4">
+            <span className="rule-accent" />
+            <span className="badge-mono">ENGINEERING &amp; INFRASTRUCTURE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
+          <h2 className="font-serif text-[34px] sm:text-[46px] font-normal leading-[1.1] text-[#0F172A] tracking-[-0.02em]">
             Built on Modern, <br />
-            <span className="font-extrabold text-gradient-aurora">
-              Production-Grade Technologies
-            </span>
+            <span className="italic text-[#365679] font-medium">Production-Grade Technologies.</span>
           </h2>
-          <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            We avoid slow page builders. We engineer lightweight, conversion-focused websites, robust mobile applications, and reliable business automation systems.
+          <p className="text-[15px] sm:text-[16px] text-[#334155] mt-4 leading-relaxed font-normal">
+            We avoid fragile page builders. We engineer lightweight, conversion-focused websites, robust mobile applications, and reliable business automation systems.
           </p>
         </ScrollReveal>
 
         {/* Tech Grid */}
-        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer staggerDelay={0.06} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {technologies.map((t) => (
             <motion.div
               key={t.name}
               variants={fadeUpVariants}
-              className="aurora-card p-6 card-3d-tilt group"
+              className="h-full"
             >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/15 inline-block">
-                {t.category}
-              </span>
-              <h3 className="text-lg font-heading font-bold text-textprimary mt-3 group-hover:text-primarypurple transition-colors">
-                {t.name}
-              </h3>
-              <p className="text-xs text-textsecondary mt-2 leading-relaxed">
-                {t.desc}
-              </p>
+              <div className="glossy-card glossy-card-hover p-6 sm:p-7 border-2 border-slate-200/90 bg-white h-full flex flex-col justify-between group">
+                <div>
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#0F172A] bg-slate-100 px-2.5 py-1 border border-slate-200 inline-block mb-3">
+                    {t.category}
+                  </span>
+                  <h3 className="font-serif text-[19px] font-normal text-[#0F172A] group-hover:text-[#365679] transition-colors mb-2">
+                    {t.name}
+                  </h3>
+                  <p className="text-[12.5px] text-[#334155] leading-relaxed font-normal">
+                    {t.desc}
+                  </p>
+                </div>
+                <div className="pt-4 mt-4 border-t border-slate-200 flex items-center justify-between">
+                  <span className="font-mono text-[9px] text-[#64748B] tracking-wider uppercase">PRODUCTION READY</span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                </div>
+              </div>
             </motion.div>
           ))}
         </StaggerContainer>

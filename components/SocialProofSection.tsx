@@ -3,7 +3,6 @@
 import React from 'react';
 import { getWhatsAppUrl, COMPANY_INFO } from '@/lib/constants';
 import ScrollReveal from '@/components/animations/ScrollReveal';
-import MagneticButton from '@/components/animations/MagneticButton';
 
 const platforms = [
   { name: 'Instagram', label: 'Reels, Carousels & Grid Strategy', icon: '📸' },
@@ -15,12 +14,17 @@ const platforms = [
 
 export default function SocialProofSection() {
   return (
-    <section className="py-20 bg-white text-textprimary border-t border-bordercolor relative">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section className="py-20 bg-white text-[#0F172A] border-t-2 border-slate-200 relative">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         {/* Platform Ecosystem Strip */}
         <ScrollReveal variant="fade-up" className="text-center max-w-xl mx-auto mb-10">
-          <p className="text-xs uppercase font-bold tracking-widest text-textsecondary">
-            Platforms & Growth Channels We Specialize In
+          <div className="inline-flex items-center gap-2.5 mb-2">
+            <span className="rule-accent" />
+            <span className="badge-mono">CORE PLATFORM ECOSYSTEM</span>
+            <span className="rule-accent" />
+          </div>
+          <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[#64748B] font-bold">
+            CHANNELS WE ENGINEER &amp; SCALE FOR CLIENTS
           </p>
         </ScrollReveal>
 
@@ -28,51 +32,49 @@ export default function SocialProofSection() {
           {platforms.map((p) => (
             <div
               key={p.name}
-              className="aurora-card p-4 flex flex-col items-center text-center hover:border-primarypurple/30 group"
+              className="glossy-card glossy-card-hover p-4 sm:p-5 flex flex-col items-center text-center border-2 border-slate-200/90 group"
             >
-              <span className="text-2xl mb-1.5" aria-hidden="true">{p.icon}</span>
-              <span className="text-xs font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors">
+              <span className="text-2xl mb-2" aria-hidden="true">{p.icon}</span>
+              <span className="font-serif text-[16px] font-normal text-[#0F172A] group-hover:text-[#365679] transition-colors">
                 {p.name}
               </span>
-              <span className="text-[10px] text-textsecondary mt-0.5">{p.label}</span>
+              <span className="font-mono text-[9px] uppercase tracking-wider text-[#64748B] mt-1">{p.label}</span>
             </div>
           ))}
         </div>
 
         {/* Agency Consultation Card (Genuine & Transparent) */}
         <ScrollReveal variant="scale">
-          <div className="aurora-card p-8 sm:p-10 bg-sectionsoft/40 border border-primarypurple/20 text-center max-w-3xl mx-auto shadow-sm">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-primarypurple/20 text-[11px] font-bold text-primarypurple mb-4">
-              Direct Agency Partnership
+          <div className="glossy-card p-8 sm:p-12 border-2 border-slate-300 bg-white text-center max-w-3xl mx-auto shadow-md">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="badge-mono">DIRECT FOUNDER PARTNERSHIP</span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-heading font-bold text-textprimary mb-3">
-              Looking for a Tailored Marketing Strategy?
+            <h3 className="font-serif text-[26px] sm:text-[34px] font-normal text-[#0F172A] mb-3">
+              Ready for a Custom <span className="italic text-[#365679] font-medium">Growth Blueprint?</span>
             </h3>
 
-            <p className="text-sm text-textsecondary max-w-xl mx-auto leading-relaxed mb-6">
-              Every business has unique goals and target audiences. Connect directly with our agency team in Shamshabad, Hyderabad to review your existing digital footprint and explore growth opportunities.
+            <p className="text-[14.5px] sm:text-[15.5px] text-[#334155] max-w-xl mx-auto leading-relaxed mb-8 font-normal">
+              Every business has unique economics and growth bottlenecks. Connect directly with our core team in Shamshabad, Hyderabad to audit your digital footprint and architect an actionable expansion roadmap.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <MagneticButton maxDistance={6}>
-                <a
-                  href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule an introductory marketing consultation for my business.')}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-aurora-primary py-2.5 px-6 text-xs"
-                >
-                  Chat on WhatsApp &rarr;
-                </a>
-              </MagneticButton>
-              <MagneticButton maxDistance={6}>
-                <a
-                  href={`tel:${COMPANY_INFO.phoneClean}`}
-                  className="btn-aurora-secondary py-2.5 px-6 text-xs"
-                >
-                  Call {COMPANY_INFO.phone}
-                </a>
-              </MagneticButton>
+              <a
+                href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to schedule an introductory marketing consultation for my business.')}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-emerald-cta"
+              >
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                CHAT ON WHATSAPP &rarr;
+              </a>
+              <a
+                href={`tel:${COMPANY_INFO.phoneClean}`}
+                className="btn-glossy-secondary py-3 px-6 text-[11px]"
+              >
+                CALL {COMPANY_INFO.phone}
+              </a>
             </div>
           </div>
         </ScrollReveal>

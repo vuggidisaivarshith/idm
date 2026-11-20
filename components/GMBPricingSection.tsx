@@ -9,74 +9,77 @@ import { fadeUpVariants } from '@/lib/animations/variants';
 
 export default function GMBPricingSection() {
   return (
-    <section id="gmb" className="py-24 bg-sectionsoft text-textprimary relative border-t border-bordercolor">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="gmb" className="py-24 bg-[#FAFAF9] text-[#0F172A] relative border-t-2 border-slate-200">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <ScrollReveal variant="fade-up" className="max-w-3xl mb-16">
-          <div className="badge-aurora mb-4 bg-white border-primarypurple/20">
-            Specialized GMB Services
+          <div className="flex items-center gap-3 mb-4">
+            <span className="rule-accent" />
+            <span className="badge-mono">LOCAL ACQUISITION INFRASTRUCTURE</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary">
+          <h2 className="font-serif text-[34px] sm:text-[46px] font-normal leading-[1.1] text-[#0F172A] tracking-[-0.02em]">
             Google Business Profile <br />
-            <span className="font-extrabold text-gradient-aurora">
-              Fixes & Local SEO Solutions
-            </span>
+            <span className="italic text-[#365679] font-medium">Compliance &amp; Local SEO Solutions.</span>
           </h2>
-          <p className="text-textsecondary text-base sm:text-lg mt-4 leading-relaxed">
-            Protect and optimize your most valuable local acquisition asset. We provide structured compliance guidance, reinstatement support, and verified map setup at transparent rates.
+          <p className="text-[15px] sm:text-[16px] text-[#334155] mt-4 leading-relaxed font-normal">
+            Protect and optimize your core local discovery asset. We deliver structured policy compliance, reinstatement documentation support, and map optimization at transparent flat rates.
           </p>
         </ScrollReveal>
 
         {/* 4 GMB Packages Grid */}
-        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {GMB_SERVICES.map((gmb) => (
             <motion.div
               key={gmb.id}
               variants={fadeUpVariants}
-              className={`aurora-card p-6 flex flex-col justify-between transition-all duration-300 relative card-3d-tilt ${
-                gmb.highlight
-                  ? 'border-primarypurple/40 ring-2 ring-primarypurple/15 shadow-soft-lg scale-[1.02]'
-                  : 'hover:border-primarypurple/30'
-              }`}
+              className="h-full"
             >
-              {gmb.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-0.5 rounded-full bg-gradient-to-r from-primarypurple to-royalblue text-white text-[10px] font-extrabold uppercase tracking-widest shadow-sm">
-                  Most Requested
-                </div>
-              )}
+              <div
+                className={`glossy-card glossy-card-hover p-6 sm:p-7 flex flex-col justify-between h-full border-2 transition-all relative ${
+                  gmb.highlight
+                    ? 'border-[#0F172A] bg-white ring-2 ring-slate-900/10 shadow-md'
+                    : 'border-slate-200/90 bg-white'
+                }`}
+              >
+                {gmb.highlight && (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[#0F172A] text-white font-mono text-[9px] font-bold uppercase tracking-[0.18em] shadow-xs whitespace-nowrap">
+                    HIGH DEMAND
+                  </div>
+                )}
 
-              <div>
-                <h3 className="text-lg font-heading font-bold text-textprimary mb-2">{gmb.title}</h3>
-                <div className="mb-4">
-                  <span className="text-3xl font-heading font-extrabold text-primarypurple">{gmb.price}</span>
-                  <span className="text-xs text-textsecondary block mt-0.5">{gmb.frequency}</span>
-                </div>
-                <p className="text-xs text-textsecondary leading-relaxed mb-6">
-                  {gmb.description}
-                </p>
+                <div>
+                  <h3 className="font-serif text-[20px] font-normal text-[#0F172A] mb-2">{gmb.title}</h3>
+                  <div className="mb-4">
+                    <span className="font-mono text-[28px] sm:text-[32px] font-bold text-[#0F172A] tracking-tight">{gmb.price}</span>
+                    <span className="font-mono text-[10.5px] uppercase tracking-wider text-[#64748B] block mt-0.5">{gmb.frequency}</span>
+                  </div>
+                  <p className="text-[12.5px] text-[#334155] leading-relaxed mb-6 font-normal">
+                    {gmb.description}
+                  </p>
 
-                <div className="space-y-2 border-t border-bordercolor pt-4">
-                  {gmb.features.map((f, fIdx) => (
-                    <div key={fIdx} className="flex items-start space-x-2 text-xs text-textsecondary">
-                      <span className="text-brandmint mt-0.5 font-bold" aria-hidden="true">✓</span>
-                      <span>{f}</span>
-                    </div>
-                  ))}
+                  <div className="space-y-2 border-t border-slate-200 pt-4">
+                    {gmb.features.map((f, fIdx) => (
+                      <div key={fIdx} className="flex items-start space-x-2 text-[12px] text-[#334155]">
+                        <span className="text-emerald-600 font-bold font-mono mt-0.5" aria-hidden="true">✓</span>
+                        <span className="leading-snug">{f}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="pt-6 mt-6 border-t border-bordercolor">
-                <a
-                  href={getWhatsAppUrl(`Hello IDM Smart Tech, I need assistance with ${gmb.title} (${gmb.price}).`)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`w-full py-2.5 rounded-full text-xs font-bold uppercase tracking-wider block text-center transition-all ${
-                    gmb.highlight
-                      ? 'bg-gradient-to-r from-primarypurple to-royalblue text-white shadow-sm hover:opacity-90'
-                      : 'bg-pagebg border border-bordercolor text-textprimary hover:bg-sectionsoft hover:text-primarypurple hover:border-primarypurple/30'
-                  }`}
-                >
-                  {gmb.ctaText}
-                </a>
+                <div className="pt-6 mt-6 border-t border-slate-200">
+                  <a
+                    href={getWhatsAppUrl(`Hello IDM Smart Tech, I need assistance with ${gmb.title} (${gmb.price}).`)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`w-full py-2.5 text-center font-mono text-[10px] font-bold uppercase tracking-[0.16em] block transition-all ${
+                      gmb.highlight
+                        ? 'bg-[#0F172A] text-white hover:bg-slate-800 shadow-xs'
+                        : 'bg-white border-2 border-slate-300 text-[#0F172A] hover:bg-slate-50'
+                    }`}
+                  >
+                    {gmb.ctaText}
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}

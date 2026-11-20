@@ -2,8 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Card from '@/components/ui/Card';
-import SectionHeading from '@/components/ui/SectionHeading';
 import { INDUSTRIES_LIST } from '@/data/industries';
 import { getWhatsAppUrl } from '@/lib/constants';
 import ScrollReveal from '@/components/animations/ScrollReveal';
@@ -13,84 +11,87 @@ import { fadeUpVariants } from '@/lib/animations/variants';
 
 export default function IndustriesSection() {
   return (
-    <section id="industries" className="py-24 bg-white text-textprimary relative border-t border-bordercolor">
-      <div className="max-w-7xl mx-auto px-6 md:px-10">
+    <section id="industries" className="py-24 bg-[#FAFAF9] text-[#0F172A] relative border-t-2 border-slate-200">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <ScrollReveal variant="fade-up">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <SectionHeading
-              badge="Tailored By Sector"
-              title="Strategic Marketing Approaches for"
-              highlightText="High-Growth Industries."
-              description="We understand that a dental clinic requires patient education, while a restaurant needs weekend dining footfall. Explore our tailored frameworks."
-              className="mb-0"
-            />
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="rule-accent" />
+                <span className="badge-mono">TAILORED BY SECTOR</span>
+              </div>
+              <h2 className="font-serif text-[32px] sm:text-[42px] font-normal leading-[1.12] text-[#0F172A] tracking-[-0.02em]">
+                Strategic Frameworks for <span className="italic text-[#365679] font-medium">High-Growth Industries.</span>
+              </h2>
+              <p className="mt-3 text-[15px] sm:text-[16px] text-[#334155] leading-relaxed max-w-2xl font-normal">
+                Dental clinics require patient education and local trust, while restaurants need footfall surges. We architect custom marketing playbooks tailored to sector economics.
+              </p>
+            </div>
 
             <Link
               href="/industries"
-              className="btn-aurora-secondary py-2.5 px-6 text-xs whitespace-nowrap shrink-0 self-start md:self-auto"
+              className="btn-glossy-secondary py-2.5 px-5 text-[11px] whitespace-nowrap shrink-0 self-start md:self-auto"
             >
-              View All Industry Guides &rarr;
+              VIEW ALL INDUSTRY GUIDES &rarr;
             </Link>
           </div>
         </ScrollReveal>
 
-        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {INDUSTRIES_LIST.map((ind) => (
             <motion.div key={ind.slug} variants={fadeUpVariants} className="h-full">
-              <Card
-                className="p-7 flex flex-col justify-between group hover:border-primarypurple/40 h-full"
-              >
+              <div className="glossy-card glossy-card-hover p-7 rounded-none flex flex-col justify-between h-full border-2 border-slate-200/90 group">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl p-2 rounded-xl bg-sectionsoft border border-bordercolor/60 inline-block">
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="text-2xl p-2.5 bg-slate-100 border border-slate-200 inline-flex items-center justify-center">
                       {ind.icon}
                     </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-primarypurple bg-sectionsoft px-2.5 py-1 rounded-full border border-primarypurple/20">
-                      Sector Solution
+                    <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#0F172A] bg-slate-100 px-2.5 py-1 border border-slate-200">
+                      SECTOR BLUEPRINT
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-heading font-bold text-textprimary group-hover:text-primarypurple transition-colors mb-2">
+                  <h3 className="font-serif text-[21px] font-normal text-[#0F172A] group-hover:text-[#365679] transition-colors mb-2">
                     {ind.title}
                   </h3>
 
-                  <p className="text-xs font-semibold text-royalblue mb-3">
+                  <p className="font-mono text-[11px] font-semibold tracking-wider uppercase text-[#365679] mb-3">
                     {ind.tagline}
                   </p>
 
-                  <p className="text-xs text-textsecondary leading-relaxed mb-5">
+                  <p className="text-[13.5px] text-[#334155] leading-[1.65] mb-5 font-normal">
                     {ind.overview}
                   </p>
 
                   {/* Common Challenge Callout */}
-                  <div className="p-3 rounded-xl bg-pagebg border border-bordercolor/80 mb-5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-textsecondary block mb-1">
-                      Primary Challenge We Solve:
+                  <div className="p-3.5 bg-slate-50 border border-slate-200 mb-6">
+                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#64748B] block mb-1">
+                      PRIMARY CHALLENGE WE SOLVE:
                     </span>
-                    <p className="text-[11px] text-textprimary leading-normal">
+                    <p className="text-[12px] text-[#0F172A] leading-relaxed font-medium">
                       {ind.commonChallenges[0]}
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-5 border-t border-bordercolor flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
                   <Link
                     href={`/industries#${ind.slug}`}
-                    className="text-xs font-bold text-primarypurple hover:underline"
+                    className="font-mono text-[10.5px] font-bold tracking-[0.12em] uppercase text-[#0F172A] hover:text-[#365679] transition-colors flex items-center gap-1"
                   >
-                    Explore Approach &rarr;
+                    EXPLORE APPROACH &rarr;
                   </Link>
 
                   <a
                     href={getWhatsAppUrl(`Hello IDM Smart Tech, I would like to discuss digital marketing for my business in the ${ind.title} sector.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[11px] text-textsecondary hover:text-brandmint font-medium"
+                    className="font-mono text-[10px] font-bold tracking-wider uppercase text-emerald-700 hover:text-emerald-800 transition-colors"
                   >
-                    WhatsApp Consultation
+                    WHATSAPP CONSULT &rarr;
                   </a>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </StaggerContainer>

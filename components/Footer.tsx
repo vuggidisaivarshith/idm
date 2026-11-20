@@ -6,28 +6,28 @@ import { INDUSTRIES_LIST } from '@/data/industries';
 
 export default function Footer() {
   return (
-    <footer className="bg-sectionsoft/80 text-textprimary border-t border-bordercolor pt-16 pb-12 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-14">
+    <footer className="bg-[#0F172A] text-slate-300 border-t-2 border-slate-800 pt-20 pb-14 relative overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
           {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-primarypurple via-royalblue to-softpink flex items-center justify-center font-heading font-black text-white text-base shadow-sm">
-                IDM
-              </div>
-              <span className="font-heading font-bold text-xl tracking-tight text-textprimary">
+          <div className="lg:col-span-4 space-y-5">
+            <Link href="/" className="inline-flex items-center space-x-3 group">
+              <span className="w-8 h-8 bg-white text-[#0F172A] flex items-center justify-center font-serif text-sm font-bold shadow-xs">
+                &#9670;
+              </span>
+              <span className="font-serif text-[20px] font-normal tracking-tight text-white group-hover:text-slate-200 transition-colors">
                 IDM SMART TECH
               </span>
             </Link>
 
-            <p className="text-sm text-textsecondary max-w-sm leading-relaxed">
+            <p className="text-[13.5px] text-slate-400 max-w-sm leading-relaxed font-normal">
               {COMPANY_INFO.brandStatement}
             </p>
-            <p className="text-xs text-textsecondary max-w-sm leading-relaxed">
+            <p className="text-[12.5px] text-slate-400 max-w-sm leading-relaxed font-normal">
               {COMPANY_INFO.supportingMessage}
             </p>
 
-            <div className="pt-2 text-xs text-primarypurple font-semibold">
+            <div className="pt-2 text-[12.5px] text-slate-300 font-mono">
               📍 {COMPANY_INFO.address}
             </div>
 
@@ -36,7 +36,7 @@ export default function Footer() {
                 href={COMPANY_INFO.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-primarypurple hover:border-primarypurple transition-colors shadow-2xs"
+                className="w-9 h-9 border border-slate-700 bg-slate-800/80 flex items-center justify-center text-xs text-white hover:bg-slate-700 hover:border-slate-500 transition-colors"
                 aria-label="Instagram"
               >
                 📸
@@ -45,14 +45,14 @@ export default function Footer() {
                 href={getWhatsAppUrl('Hello IDM Smart Tech, I would like to inquire about your services.')}
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-brandmint hover:border-brandmint transition-colors shadow-2xs"
+                className="w-9 h-9 border border-emerald-600/40 bg-emerald-950/40 flex items-center justify-center text-xs text-emerald-400 hover:bg-emerald-900/60 transition-colors"
                 aria-label="WhatsApp"
               >
                 💬
               </a>
               <a
                 href={`tel:${COMPANY_INFO.phoneClean}`}
-                className="w-8 h-8 rounded-full bg-white border border-bordercolor flex items-center justify-center text-xs text-textprimary hover:text-royalblue hover:border-royalblue transition-colors shadow-2xs"
+                className="w-9 h-9 border border-slate-700 bg-slate-800/80 flex items-center justify-center text-xs text-white hover:bg-slate-700 hover:border-slate-500 transition-colors"
                 aria-label="Phone"
               >
                 📞
@@ -61,35 +61,35 @@ export default function Footer() {
           </div>
 
           {/* Core Services Col */}
-          <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
-              Core Services
+          <div className="lg:col-span-2">
+            <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white font-bold mb-4">
+              CORE SERVICES
             </h4>
-            <ul className="space-y-2 text-xs text-textsecondary">
+            <ul className="space-y-2.5 text-[12.5px] text-slate-400">
               {SERVICES_LIST.slice(0, 6).map((svc) => (
                 <li key={svc.slug}>
-                  <Link href={`/services/${svc.slug}`} className="hover:text-primarypurple transition-colors">
+                  <Link href={`/services/${svc.slug}`} className="hover:text-white transition-colors">
                     {svc.shortTitle}
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/services" className="text-primarypurple font-semibold hover:underline">
-                  All 10 Services &rarr;
+              <li className="pt-1">
+                <Link href="/services" className="font-mono text-[11px] text-emerald-400 hover:underline tracking-wider uppercase font-bold">
+                  ALL SERVICES &rarr;
                 </Link>
               </li>
             </ul>
           </div>
 
           {/* Industries Served */}
-          <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
-              Industries
+          <div className="lg:col-span-2">
+            <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white font-bold mb-4">
+              SECTORS
             </h4>
-            <ul className="space-y-2 text-xs text-textsecondary">
+            <ul className="space-y-2.5 text-[12.5px] text-slate-400">
               {INDUSTRIES_LIST.map((ind) => (
                 <li key={ind.slug}>
-                  <Link href={`/industries#${ind.slug}`} className="hover:text-primarypurple transition-colors">
+                  <Link href={`/industries#${ind.slug}`} className="hover:text-white transition-colors">
                     {ind.title}
                   </Link>
                 </li>
@@ -98,53 +98,56 @@ export default function Footer() {
           </div>
 
           {/* Agency & Resources */}
-          <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
-              Company & Work
+          <div className="lg:col-span-2">
+            <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white font-bold mb-4">
+              COMPANY
             </h4>
-            <ul className="space-y-2 text-xs text-textsecondary">
-              <li><Link href="/about" className="hover:text-primarypurple transition-colors">About IDM Smart Tech</Link></li>
-              <li><Link href="/portfolio" className="hover:text-primarypurple transition-colors">Creative Portfolio</Link></li>
-              <li><Link href="/pricing" className="hover:text-primarypurple transition-colors">Growth Packages</Link></li>
-              <li><Link href="/blog" className="hover:text-primarypurple transition-colors">Marketing Insights</Link></li>
-              <li><Link href="/faq" className="hover:text-primarypurple transition-colors">Frequently Asked Questions</Link></li>
-              <li><Link href="/contact" className="hover:text-primarypurple transition-colors">Book Strategy Call</Link></li>
+            <ul className="space-y-2.5 text-[12.5px] text-slate-400">
+              <li><Link href="/about" className="hover:text-white transition-colors">About IDM</Link></li>
+              <li><Link href="/portfolio" className="hover:text-white transition-colors">Creative Portfolio</Link></li>
+              <li><Link href="/pricing" className="hover:text-white transition-colors">Growth Packages</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Marketing Insights</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact Strategy</Link></li>
             </ul>
           </div>
 
           {/* Legal & Local Contact */}
-          <div>
-            <h4 className="text-xs font-heading font-bold uppercase tracking-widest text-textprimary mb-4">
-              Direct Contact
+          <div className="lg:col-span-2">
+            <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-white font-bold mb-4">
+              DIRECT CONTACT
             </h4>
-            <div className="space-y-2.5 text-xs text-textsecondary leading-relaxed">
+            <div className="space-y-3 text-[12.5px] text-slate-400 leading-relaxed">
               <p>
-                <strong className="text-textprimary block font-medium">Direct WhatsApp:</strong>
-                <a href={getWhatsAppUrl('Hi IDM Smart Tech')} target="_blank" rel="noreferrer" className="text-primarypurple hover:underline">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-slate-400 block">WhatsApp:</span>
+                <a href={getWhatsAppUrl('Hi IDM Smart Tech')} target="_blank" rel="noreferrer" className="text-white hover:text-emerald-400 font-mono text-[12px] font-bold">
                   {COMPANY_INFO.phone}
                 </a>
               </p>
               <p>
-                <strong className="text-textprimary block font-medium">Official Email:</strong>
-                <a href={`mailto:${COMPANY_INFO.email}`} className="hover:underline">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-slate-400 block">Email:</span>
+                <a href={`mailto:${COMPANY_INFO.email}`} className="text-white hover:underline font-mono text-[12px]">
                   {COMPANY_INFO.email}
                 </a>
               </p>
-              <p className="pt-2">
-                <Link href="/privacy-policy" className="hover:text-primarypurple block">Privacy Policy</Link>
-                <Link href="/terms-and-conditions" className="hover:text-primarypurple block mt-1">Terms & Conditions</Link>
-              </p>
+              <div className="pt-2 font-mono text-[11px] space-y-1">
+                <Link href="/privacy-policy" className="hover:text-white block">PRIVACY POLICY</Link>
+                <Link href="/terms-and-conditions" className="hover:text-white block">TERMS OF SERVICE</Link>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Structural Divider */}
+        <div className="structural-divider my-8 bg-slate-800" />
+
         {/* Bottom Strip */}
-        <div className="pt-8 border-t border-bordercolor/80 flex flex-col sm:flex-row items-center justify-between text-xs text-textsecondary gap-4">
-          <p>© {new Date().getFullYear()} IDM Smart Tech. All rights reserved. Creative Marketing & Intelligent Technology Company — Shamshabad, Hyderabad.</p>
-          <div className="flex space-x-6">
-            <Link href="/privacy-policy" className="hover:text-primarypurple transition-colors">Privacy</Link>
-            <Link href="/terms-and-conditions" className="hover:text-primarypurple transition-colors">Terms</Link>
-            <Link href="/contact" className="hover:text-primarypurple transition-colors">Contact</Link>
+        <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-slate-400 gap-4">
+          <p>© {new Date().getFullYear()} IDM SMART TECH. ALL RIGHTS RESERVED. SHAMSHABAD, HYDERABAD.</p>
+          <div className="flex space-x-6 tracking-wider uppercase">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </div>

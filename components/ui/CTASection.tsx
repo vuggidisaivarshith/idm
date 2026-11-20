@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import Button from './Button';
+import Link from 'next/link';
 import { COMPANY_INFO, getWhatsAppUrl } from '@/lib/constants';
 import ScrollReveal from '@/components/animations/ScrollReveal';
-import MagneticButton from '@/components/animations/MagneticButton';
 
 interface CTASectionProps {
   title?: string;
@@ -19,56 +18,54 @@ export default function CTASection({
   title = 'Ready to Build Your Brand &',
   highlightText = 'Create Real Business Demand?',
   description = 'Connect directly with our strategy team in Shamshabad, Hyderabad to architect your high-converting digital presence.',
-  primaryButtonText = 'Get Your Growth Strategy',
-  secondaryButtonText = 'Chat on WhatsApp',
+  primaryButtonText = 'START A PROJECT',
+  secondaryButtonText = 'WHATSAPP DIRECT',
   whatsappMessage = 'Hello IDM Smart Tech, I would like to schedule a growth consultation for my business.',
 }: CTASectionProps) {
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-sectionsoft/50 to-white relative border-t border-bordercolor overflow-hidden">
-      {/* Soft Ambient Aurora Glows */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-96 h-96 bg-primarypurple/10 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-brandcyan/10 rounded-full blur-[130px] pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto px-6 md:px-10 relative z-10 text-center">
+    <section className="py-24 bg-[#FAFAF9] text-[#0F172A] relative border-t-2 border-slate-200 overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10 relative z-10 text-center">
         <ScrollReveal variant="fade-up">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-primarypurple/20 text-[11px] font-bold text-primarypurple uppercase tracking-wider mb-5 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-primarypurple animate-pulse" />
-            <span>Direct Strategic Partnership</span>
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="rule-accent" />
+            <span className="badge-mono">DIRECT STRATEGIC PARTNERSHIP</span>
+            <span className="rule-accent" />
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-heading font-light tracking-tight text-textprimary leading-tight max-w-3xl mx-auto">
+          <h2 className="font-serif text-[36px] sm:text-[50px] font-normal tracking-[-0.02em] text-[#0F172A] leading-[1.08] max-w-3xl mx-auto">
             {title}{' '}
-            <span className="font-extrabold text-gradient-aurora block sm:inline">
+            <span className="italic text-[#365679] font-medium block sm:inline">
               {highlightText}
             </span>
           </h2>
 
-          <p className="text-textsecondary text-base sm:text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[15px] sm:text-[17px] text-[#334155] mt-4 max-w-2xl mx-auto leading-relaxed font-normal">
             {description}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
-            <MagneticButton maxDistance={6}>
-              <Button href="/contact" variant="primary">
-                {primaryButtonText}
-              </Button>
-            </MagneticButton>
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+            <Link
+              href="/contact"
+              className="btn-primary-ink py-3 px-7 text-[11px]"
+            >
+              {primaryButtonText}
+            </Link>
 
-            <MagneticButton maxDistance={6}>
-              <Button
-                href={getWhatsAppUrl(whatsappMessage)}
-                variant="secondary"
-                isExternal
-              >
-                <span>💬</span> <span className="ml-2">{secondaryButtonText}</span>
-              </Button>
-            </MagneticButton>
+            <a
+              href={getWhatsAppUrl(whatsappMessage)}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-emerald-cta py-3 px-6 text-[11px]"
+            >
+              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+              {secondaryButtonText}
+            </a>
 
             <a
               href={`tel:${COMPANY_INFO.phoneClean}`}
-              className="text-xs font-bold uppercase tracking-wider text-textsecondary hover:text-primarypurple transition-colors px-3 py-3"
+              className="btn-glossy-secondary py-3 px-6 text-[11px]"
             >
-              Or Call {COMPANY_INFO.phone}
+              OR CALL {COMPANY_INFO.phone}
             </a>
           </div>
         </ScrollReveal>
