@@ -29,18 +29,18 @@ export default function FloatingContactDock() {
       >
         {/* ================= 1. EMAIL BUTTON ================= */}
         <div className="relative group">
-          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            ✉️ Email Us
+          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-300 text-[#0F172A] font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] shadow-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            ✉️ EMAIL US
           </span>
 
           <a
             href={emailUrl}
-            className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-tr from-primarypurple to-royalblue text-white flex items-center justify-center shadow-lg shadow-primarypurple/25 hover:scale-110 active:scale-95 transition-all duration-200 border border-white/40 ring-1 ring-bordercolor/50"
+            className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#0F172A] text-white flex items-center justify-center shadow-md shadow-slate-900/20 hover:scale-108 active:scale-95 transition-all duration-200 border-2 border-white ring-1 ring-slate-300"
             aria-label={`Email IDM Smart Tech at ${COMPANY_INFO.email}`}
             title={`Email: ${COMPANY_INFO.email}`}
           >
             <svg
-              className="w-5 h-5 sm:w-6 sm:h-6 fill-none stroke-current"
+              className="w-5 h-5 fill-none stroke-current"
               viewBox="0 0 24 24"
               strokeWidth="2"
               strokeLinecap="round"
@@ -55,19 +55,19 @@ export default function FloatingContactDock() {
 
         {/* ================= 2. WHATSAPP BUTTON ================= */}
         <div className="relative group">
-          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-bordercolor text-textprimary text-[11px] font-semibold shadow-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            💬 WhatsApp Us
+          <span className="hidden sm:inline-block absolute bottom-full mb-2.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-white/95 backdrop-blur-md border border-slate-300 text-[#0F172A] font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] shadow-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            💬 WHATSAPP US
           </span>
 
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-tr from-brandmint to-royalblue text-white flex items-center justify-center shadow-lg shadow-royalblue/25 hover:scale-110 active:scale-95 transition-all duration-200 border border-white/40 ring-1 ring-bordercolor/50"
+            className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#059669] text-white flex items-center justify-center shadow-md shadow-emerald-900/20 hover:scale-108 active:scale-95 transition-all duration-200 border-2 border-white ring-1 ring-slate-300"
             aria-label={`Chat with IDM Smart Tech on WhatsApp (${COMPANY_INFO.phone})`}
             title={`WhatsApp: ${COMPANY_INFO.phone}`}
           >
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.072-1.847-.433-1.442-.602-2.38-2.072-2.452-2.169-.072-.097-.58-0.771-.58-1.47 0-.698.366-1.042.497-1.185.131-.143.286-.179.382-.179.095 0 .191.002.274.006.088.005.205-.033.322.247.118.286.405.992.441 1.063.036.072.06.155.012.25-.048.096-.072.155-.143.239-.072.083-.151.186-.216.25-.072.071-.147.148-.063.292.083.143.37.61.794.987.545.485 1.005.636 1.148.707.143.072.227.06.311-.036.084-.095.358-.417.454-.56.096-.143.191-.119.322-.072.131.048.835.394.978.465.143.072.239.107.274.167.036.06.036.346-.108.751z" />
             </svg>
           </a>
@@ -78,31 +78,31 @@ export default function FloatingContactDock() {
           {/* Callout speech bubble centered directly above avatar with pointer tail */}
           {!chatOpen && (
             <div className="hidden sm:flex flex-col items-center absolute bottom-full mb-3 left-1/2 -translate-x-1/2 pointer-events-none z-10">
-              <span className="px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-primarypurple/30 text-textprimary text-[11px] font-bold shadow-lg shadow-primarypurple/15 whitespace-nowrap">
-                <span className="text-primarypurple">Ask IDM AI</span> 👋
+              <span className="px-3 py-1 bg-white/95 backdrop-blur-md border-2 border-slate-300 text-[#0F172A] font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] shadow-sm whitespace-nowrap">
+                ASK IDM AI 👋
               </span>
-              <span className="w-2 h-2 bg-white border-r border-b border-primarypurple/30 rotate-45 -mt-1 shadow-2xs" />
+              <span className="w-2 h-2 bg-white border-r-2 border-b-2 border-slate-300 rotate-45 -mt-1 shadow-2xs" />
             </div>
           )}
 
           <button
             onClick={() => setChatOpen(!chatOpen)}
-            className={`w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative shadow-xl ${
+            className={`w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-all duration-300 relative shadow-lg ${
               chatOpen
-                ? 'bg-textprimary text-white scale-95 shadow-black/20'
-                : 'bg-gradient-to-tr from-primarypurple via-royalblue to-softpink text-white hover:scale-108 active:scale-95 shadow-primarypurple/30 ring-2 ring-primarypurple/30 ring-offset-2'
+                ? 'bg-[#0F172A] text-white scale-95 shadow-black/20 border-2 border-white ring-1 ring-slate-300'
+                : 'bg-[#0F172A] text-white hover:scale-108 active:scale-95 shadow-slate-900/30 border-2 border-white ring-2 ring-slate-300'
             }`}
             aria-label={chatOpen ? 'Close IDM AI Chatbot' : 'Open IDM AI Query Chatbot'}
             title="Ask IDM AI Strategist"
           >
             {chatOpen ? (
-              <span className="text-lg font-bold">✕</span>
+              <span className="text-base font-bold font-mono">✕</span>
             ) : (
               <div className="relative flex items-center justify-center">
                 {/* Avatar Icon */}
                 <span className="text-2xl filter drop-shadow-sm">🤖</span>
                 {/* Active Online Indicator Pulse */}
-                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-brandmint border-2 border-white animate-pulse" />
+                <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white animate-pulse" />
               </div>
             )}
           </button>

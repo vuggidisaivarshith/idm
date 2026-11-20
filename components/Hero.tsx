@@ -59,7 +59,7 @@ export default function Hero() {
               <br />
               Create <span className="italic text-[#365679] font-medium">Demand.</span>
               <br />
-              Drive <span className="italic text-gradient-aurora font-medium">Growth.</span>
+              Drive <span className="italic text-[#365679] font-medium">Growth.</span>
             </h1>
 
             {/* Supporting Copy */}

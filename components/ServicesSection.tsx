@@ -261,7 +261,7 @@ export default function ServicesSection() {
         </ScrollReveal>
 
         {/* Exactly Three Premium Category Cards */}
-        <StaggerContainer staggerDelay={0.14}>
+        <StaggerContainer staggerDelay={0.12}>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
             {serviceCategories.map((category, index) => {
               const isThirdCard = index === 2;
@@ -274,12 +274,12 @@ export default function ServicesSection() {
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{
                     duration: 0.45,
-                    delay: index * 0.12,
+                    delay: index * 0.1,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className={`h-full ${isThirdCard ? 'md:col-span-2 md:max-w-xl md:mx-auto lg:col-span-1 lg:max-w-none w-full' : ''}`}
                 >
-                  <div className="border-2 border-slate-200 hover:border-[#0F172A] bg-white p-7 sm:p-8 flex flex-col justify-between h-full transition-all duration-200 shadow-xs hover:shadow-md group">
+                  <div className="glossy-card glossy-card-hover border-2 border-slate-200/90 hover:border-[#0F172A] bg-white p-7 sm:p-8 flex flex-col justify-between h-full transition-all group">
                     <div>
                       {/* Illustration Header */}
                       <div className="mb-6">
@@ -291,37 +291,37 @@ export default function ServicesSection() {
                         <span className="font-mono text-xl font-bold text-[#0F172A]">
                           {category.number}
                         </span>
-                        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-0.5">
+                        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#365679] bg-slate-100 border border-slate-200 px-2.5 py-0.5">
                           {category.badge}
                         </span>
                       </div>
 
                       {/* Category Heading */}
-                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#0F172A] group-hover:text-[#365679] transition-colors duration-150 mb-1.5 leading-snug">
+                      <h3 className="font-serif text-[22px] sm:text-[24px] font-normal text-[#0F172A] group-hover:text-[#365679] transition-colors mb-1.5 leading-snug">
                         {category.title}
                       </h3>
 
-                      <p className="font-mono text-xs font-bold text-[#365679] mb-3">
+                      <p className="font-mono text-[11px] font-bold text-[#365679] mb-3">
                         {category.tagline}
                       </p>
 
-                      <p className="text-xs text-slate-600 leading-relaxed mb-6 font-medium">
+                      <p className="text-[13px] text-[#334155] leading-relaxed mb-6 font-normal">
                         {category.overview}
                       </p>
 
                       {/* Included Core Services */}
                       <div className="space-y-3 pt-5 border-t border-slate-200 mb-6">
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-slate-500">
-                          Included Solutions:
+                        <p className="font-mono text-[9.5px] font-bold uppercase tracking-wider text-[#64748B]">
+                          INCLUDED SOLUTIONS:
                         </p>
                         {category.coreServices.map((svc, sIdx) => (
-                          <div key={sIdx} className="flex items-start space-x-2 text-xs">
+                          <div key={sIdx} className="flex items-start space-x-2.5 text-xs">
                             <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5">
                               ✓
                             </span>
                             <div>
                               <span className="font-bold text-[#0F172A] block leading-tight">{svc.name}</span>
-                              <span className="text-[11px] text-slate-600 leading-normal">{svc.desc}</span>
+                              <span className="text-[11.5px] text-[#475569] leading-relaxed font-normal">{svc.desc}</span>
                             </div>
                           </div>
                         ))}
@@ -332,7 +332,7 @@ export default function ServicesSection() {
                         {category.tags.map((tag, tIdx) => (
                           <span
                             key={tIdx}
-                            className="font-mono text-[9.5px] tracking-wider uppercase px-2 py-0.5 bg-slate-50 border border-slate-200 text-slate-600 font-bold"
+                            className="font-mono text-[9px] tracking-wider uppercase px-2 py-0.5 bg-slate-50 border border-slate-200 text-[#475569] font-bold"
                           >
                             {tag}
                           </span>
@@ -346,16 +346,16 @@ export default function ServicesSection() {
                         href={category.ctaHref}
                         className="w-full btn-primary-ink py-3 text-center block text-[10.5px]"
                       >
-                        {category.ctaText} →
+                        {category.ctaText} &rarr;
                       </Link>
 
                       <a
                         href={getWhatsAppUrl(category.whatsappMessage)}
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full py-2 font-mono text-[10.5px] font-bold text-slate-600 hover:text-[#0F172A] text-center block uppercase tracking-wider transition-colors"
+                        className="w-full py-2 font-mono text-[10px] font-bold text-emerald-700 hover:text-emerald-800 text-center block uppercase tracking-wider transition-colors"
                       >
-                        💬 Consult via WhatsApp &rarr;
+                        💬 CONSULT VIA WHATSAPP &rarr;
                       </a>
                     </div>
                   </div>

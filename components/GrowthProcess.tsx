@@ -84,10 +84,10 @@ export default function GrowthProcess() {
         onMouseEnter={() => setActiveStep(idx)}
         onMouseLeave={() => setActiveStep(null)}
         onClick={() => setActiveStep(activeStep === idx ? null : idx)}
-        className={`bg-white border-2 p-7 flex flex-col justify-between relative group cursor-pointer transition-all duration-200 shadow-xs h-full ${
+        className={`glossy-card glossy-card-hover p-7 flex flex-col justify-between relative group cursor-pointer transition-all border-2 bg-white ${
           isHovered
             ? 'border-[#0F172A] shadow-md -translate-y-1'
-            : 'border-slate-200 hover:border-slate-400'
+            : 'border-slate-200/90 hover:border-slate-400'
         }`}
       >
         <div>

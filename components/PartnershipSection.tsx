@@ -154,179 +154,155 @@ export default function PartnershipSection() {
           </p>
         </ScrollReveal>
 
-        {/* 5 Premium Cards: 3 on Top Row, 2 Centered on Bottom Row */}
-        <StaggerContainer staggerDelay={0.1} className="space-y-6">
-          {/* Top Row: 3 Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-            {partnershipBenefits.slice(0, 3).map((card, idx) => {
-              const isHovered = activeCard === idx;
-              return (
-                <motion.div key={card.id} variants={fadeUpVariants} className="h-full">
-                  <div
-                    onMouseEnter={() => setActiveCard(idx)}
-                    onMouseLeave={() => setActiveCard(null)}
-                    onClick={() => setActiveCard(activeCard === idx ? null : idx)}
-                    className={`bg-white border-2 p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 relative cursor-pointer shadow-xs ${
-                      isHovered
-                        ? 'border-[#0F172A] shadow-md -translate-y-1'
-                        : 'border-slate-200 hover:border-slate-400'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="font-mono text-xl font-bold text-[#0F172A]">
-                          {card.step}
-                        </span>
+        {/* ================= ASYMMETRIC ARCHITECTURAL LAYOUT ================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Left Column: Anchor Card 01 (Brand Building & Identity Equity) */}
+          <div className="lg:col-span-5">
+            <ScrollReveal variant="fade-right" className="h-full">
+              <div className="glossy-card border-2 border-[#0F172A] p-8 sm:p-9 bg-white h-full flex flex-col justify-between shadow-md relative overflow-hidden group">
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-[11px] font-bold tracking-[0.18em] uppercase text-[#0F172A] bg-slate-100 px-3 py-1 border border-slate-300">
+                      01 / STRATEGIC ANCHOR
+                    </span>
 
-                        <div className="w-10 h-10 border border-slate-300 bg-slate-50 flex items-center justify-center text-[#0F172A] shadow-2xs">
-                          {card.icon}
-                        </div>
-                      </div>
-
-                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 inline-block mb-3">
-                        {card.badge}
-                      </span>
-
-                      <h3 className="font-serif text-xl font-bold text-[#0F172A] mb-2 leading-snug">
-                        {card.title}
-                      </h3>
-
-                      <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                        {card.overview}
-                      </p>
-
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-out ${
-                          isHovered
-                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200'
-                            : 'max-h-0 opacity-0 mt-0 pt-0'
-                        }`}
-                      >
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0F172A] mb-2.5">
-                          Measurable Outcomes:
-                        </p>
-                        <div className="space-y-2">
-                          {card.measurableOutcomes.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-slate-700">
-                              <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
-                                ✓
-                              </span>
-                              <span className="leading-tight">{point}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div
-                        className={`transition-opacity duration-200 mt-2 ${
-                          isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
-                        }`}
-                      >
-                        <span className="font-mono text-[10px] text-slate-500 font-medium flex items-center gap-1">
-                          <span>Hover to inspect outcomes</span>
-                          <span>&rarr;</span>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 mt-5 border-t border-slate-200 flex items-center justify-between font-mono text-[10px] uppercase font-bold text-slate-500">
-                      <span>Commercial Impact</span>
-                      <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
-                        Explore →
-                      </span>
+                    <div className="w-10 h-10 border border-slate-300 bg-slate-50 flex items-center justify-center text-[#0F172A] shadow-2xs">
+                      {partnershipBenefits[0].icon}
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
 
-          {/* Bottom Row: 2 Cards Centered */}
-          <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-6 items-start">
-            {partnershipBenefits.slice(3, 5).map((card, idx) => {
-              const actualIdx = idx + 3;
-              const isHovered = activeCard === actualIdx;
-              return (
-                <motion.div key={card.id} variants={fadeUpVariants} className="h-full">
-                  <div
-                    onMouseEnter={() => setActiveCard(actualIdx)}
-                    onMouseLeave={() => setActiveCard(null)}
-                    onClick={() => setActiveCard(activeCard === actualIdx ? null : actualIdx)}
-                    className={`bg-white border-2 p-7 sm:p-8 flex flex-col justify-between transition-all duration-200 relative cursor-pointer shadow-xs ${
-                      isHovered
-                        ? 'border-[#0F172A] shadow-md -translate-y-1'
-                        : 'border-slate-200 hover:border-slate-400'
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="font-mono text-xl font-bold text-[#0F172A]">
-                          {card.step}
-                        </span>
+                  <span className="font-mono text-[9.5px] font-bold uppercase tracking-[0.16em] text-[#365679] block mb-2">
+                    {partnershipBenefits[0].badge}
+                  </span>
 
-                        <div className="w-10 h-10 border border-slate-300 bg-slate-50 flex items-center justify-center text-[#0F172A] shadow-2xs">
-                          {card.icon}
+                  <h3 className="font-serif text-[26px] sm:text-[30px] font-normal text-[#0F172A] mb-3 leading-tight">
+                    {partnershipBenefits[0].title}
+                  </h3>
+
+                  <p className="text-[14px] text-[#334155] leading-relaxed mb-6 font-normal">
+                    {partnershipBenefits[0].overview}
+                  </p>
+
+                  <div className="p-4 bg-slate-50 border border-slate-200 mb-6">
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-[#0F172A] mb-3">
+                      PERMANENT MEASURABLE OUTCOMES:
+                    </p>
+                    <div className="space-y-2.5">
+                      {partnershipBenefits[0].measurableOutcomes.map((point, pIdx) => (
+                        <div key={pIdx} className="flex items-start space-x-2.5 text-[12.5px] text-[#334155]">
+                          <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
+                            ✓
+                          </span>
+                          <span className="leading-snug">{point}</span>
                         </div>
-                      </div>
-
-                      <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-slate-600 bg-slate-100 border border-slate-200 px-2.5 py-1 inline-block mb-3">
-                        {card.badge}
-                      </span>
-
-                      <h3 className="font-serif text-xl font-bold text-[#0F172A] mb-2 leading-snug">
-                        {card.title}
-                      </h3>
-
-                      <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                        {card.overview}
-                      </p>
-
-                      <div
-                        className={`overflow-hidden transition-all duration-300 ease-out ${
-                          isHovered
-                            ? 'max-h-64 opacity-100 mt-4 pt-4 border-t border-slate-200'
-                            : 'max-h-0 opacity-0 mt-0 pt-0'
-                        }`}
-                      >
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#0F172A] mb-2.5">
-                          Measurable Outcomes:
-                        </p>
-                        <div className="space-y-2">
-                          {card.measurableOutcomes.map((point, pIdx) => (
-                            <div key={pIdx} className="flex items-start space-x-2 text-xs text-slate-700">
-                              <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
-                                ✓
-                              </span>
-                              <span className="leading-tight">{point}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div
-                        className={`transition-opacity duration-200 mt-2 ${
-                          isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
-                        }`}
-                      >
-                        <span className="font-mono text-[10px] text-slate-500 font-medium flex items-center gap-1">
-                          <span>Hover to inspect outcomes</span>
-                          <span>&rarr;</span>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="pt-4 mt-5 border-t border-slate-200 flex items-center justify-between font-mono text-[10px] uppercase font-bold text-slate-500">
-                      <span>Commercial Impact</span>
-                      <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
-                        Explore →
-                      </span>
+                      ))}
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
+                </div>
+
+                <div className="pt-4 border-t border-slate-200">
+                  <a
+                    href={whatsappConsultationUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full btn-emerald-cta py-3 text-[10.5px] block text-center"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    PARTNER ON BRAND BUILDING &rarr;
+                  </a>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </StaggerContainer>
+
+          {/* Right Column: 2x2 Architectural Grid (Cards 02, 03, 04, 05) */}
+          <div className="lg:col-span-7">
+            <StaggerContainer staggerDelay={0.08} className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
+              {partnershipBenefits.slice(1, 5).map((card, idx) => {
+                const actualIdx = idx + 1;
+                const isHovered = activeCard === actualIdx;
+                return (
+                  <motion.div key={card.id} variants={fadeUpVariants} className="h-full">
+                    <div
+                      onMouseEnter={() => setActiveCard(actualIdx)}
+                      onMouseLeave={() => setActiveCard(null)}
+                      onClick={() => setActiveCard(activeCard === actualIdx ? null : actualIdx)}
+                      className={`glossy-card glossy-card-hover p-6 sm:p-7 flex flex-col justify-between h-full border-2 transition-all cursor-pointer relative bg-white ${
+                        isHovered
+                          ? 'border-[#0F172A] shadow-md -translate-y-1'
+                          : 'border-slate-200/90 hover:border-slate-400'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="font-mono text-xl font-bold text-[#0F172A]">
+                            {card.step}
+                          </span>
+
+                          <div className="w-8 h-8 border border-slate-200 bg-slate-50 flex items-center justify-center text-[#0F172A] text-sm">
+                            {card.icon}
+                          </div>
+                        </div>
+
+                        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-[#365679] bg-slate-100 border border-slate-200 px-2.5 py-0.5 inline-block mb-2">
+                          {card.badge}
+                        </span>
+
+                        <h3 className="font-serif text-[18px] sm:text-[19px] font-normal text-[#0F172A] mb-2 leading-snug">
+                          {card.title}
+                        </h3>
+
+                        <p className="text-[12.5px] text-[#334155] leading-relaxed mb-3 font-normal">
+                          {card.overview}
+                        </p>
+
+                        <div
+                          className={`overflow-hidden transition-all duration-300 ease-out ${
+                            isHovered
+                              ? 'max-h-64 opacity-100 mt-3 pt-3 border-t border-slate-200'
+                              : 'max-h-0 opacity-0 mt-0 pt-0'
+                          }`}
+                        >
+                          <p className="font-mono text-[9.5px] font-bold uppercase tracking-wider text-[#0F172A] mb-2">
+                            Measurable Outcomes:
+                          </p>
+                          <div className="space-y-1.5">
+                            {card.measurableOutcomes.map((point, pIdx) => (
+                              <div key={pIdx} className="flex items-start space-x-2 text-[11.5px] text-[#334155]">
+                                <span className="text-emerald-600 font-bold text-xs shrink-0 mt-0.5" aria-hidden="true">
+                                  ✓
+                                </span>
+                                <span className="leading-tight">{point}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div
+                          className={`transition-opacity duration-200 mt-2 ${
+                            isHovered ? 'opacity-0 h-0 overflow-hidden mt-0' : 'opacity-70'
+                          }`}
+                        >
+                          <span className="font-mono text-[9.5px] text-[#64748B] font-medium flex items-center gap-1">
+                            <span>Hover to inspect outcomes</span>
+                            <span>&rarr;</span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="pt-3 mt-4 border-t border-slate-200 flex items-center justify-between font-mono text-[9.5px] uppercase font-bold text-[#64748B]">
+                        <span>Commercial Impact</span>
+                        <span className={isHovered ? 'text-[#0F172A]' : 'text-slate-400'}>
+                          Explore &rarr;
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </StaggerContainer>
+          </div>
+        </div>
 
         {/* Reference High-End Conversion Box */}
         <ScrollReveal variant="fade-up" className="mt-16">

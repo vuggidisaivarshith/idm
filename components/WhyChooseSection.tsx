@@ -131,7 +131,7 @@ export default function WhyChooseSection() {
               <motion.div
                 key={card.id}
                 variants={fadeUpVariants}
-                className="group relative bg-white border-2 border-slate-200 hover:border-[#0F172A] p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-200"
+                className="glossy-card glossy-card-hover border-2 border-slate-200/90 hover:border-[#0F172A] p-6 flex flex-col justify-between transition-all bg-white group"
               >
                 <div>
                   {/* Step Number & Icon Header */}

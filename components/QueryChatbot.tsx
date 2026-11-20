@@ -406,25 +406,25 @@ export default function QueryChatbot({
           aria-label="IDM Smart Assistant Conversation Window"
         >
           {/* ================= HEADER (FIXED AT TOP) ================= */}
-          <div className="px-4 py-3.5 bg-gradient-to-r from-primarypurple via-royalblue to-brandcyan text-white flex items-center justify-between shadow-xs select-none shrink-0">
+          <div className="px-4 py-3.5 bg-[#0F172A] text-white flex items-center justify-between border-b border-slate-800 shadow-xs select-none shrink-0">
             <div className="flex items-center space-x-3">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shadow-inner border border-white/30">
+                <div className="w-9 h-9 bg-slate-800 border border-slate-700 flex items-center justify-center text-lg shadow-inner">
                   🤖
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-brandmint border-2 border-primarypurple" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#0F172A]" />
               </div>
 
               <div>
-                <div className="flex items-center gap-1.5">
-                  <h3 className="font-heading font-bold text-sm leading-tight text-white">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-serif font-normal text-sm leading-tight text-white">
                     {CHATBOT_IDENTITY.name}
                   </h3>
-                  <span className="text-[9px] font-extrabold uppercase tracking-wider bg-white/20 text-white px-1.5 py-0.5 rounded-full">
-                    AI Online
+                  <span className="font-mono text-[8.5px] font-bold uppercase tracking-[0.16em] bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2">
+                    ACTIVE
                   </span>
                 </div>
-                <p className="text-[11px] text-white/80 leading-tight">
+                <p className="font-mono text-[9.5px] text-slate-400 leading-tight tracking-wider uppercase mt-0.5">
                   {CHATBOT_IDENTITY.positioning}
                 </p>
               </div>
@@ -433,7 +433,7 @@ export default function QueryChatbot({
             <div className="flex items-center space-x-1.5">
               <button
                 onClick={handleResetConversation}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center text-xs"
+                className="w-7 h-7 bg-slate-800 border border-slate-700 hover:bg-slate-700 active:scale-95 transition-all text-slate-300 flex items-center justify-center text-xs"
                 title="Reset conversation"
                 aria-label="Reset conversation"
               >
@@ -441,7 +441,7 @@ export default function QueryChatbot({
               </button>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 transition-all text-white flex items-center justify-center text-sm font-bold"
+                className="w-7 h-7 bg-slate-800 border border-slate-700 hover:bg-slate-700 active:scale-95 transition-all text-slate-300 flex items-center justify-center text-xs font-mono font-bold"
                 title="Close chat"
                 aria-label="Close chat"
               >
